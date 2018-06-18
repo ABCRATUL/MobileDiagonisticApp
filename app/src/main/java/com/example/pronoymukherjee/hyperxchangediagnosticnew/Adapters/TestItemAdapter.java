@@ -37,7 +37,7 @@ public class TestItemAdapter extends RecyclerView.Adapter<TestItemAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return 0;
+        return dataset.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder{
         AppCompatTextView textView;
