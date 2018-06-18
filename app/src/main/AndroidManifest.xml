@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.StartTestScreen">
+        <activity android:name=".Activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,7 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.TestScoreScreen" />
-        <activity android:name=".Activities.AutoTestScreen"/>
+        <activity android:name=".Activities.AutoTestScreen" />
+        <activity android:name=".Activities.TestStatusActivity" />
+        <activity android:name=".Activities.TestStatusDialogActivity"
+            android:theme="@style/dialog"/>
+        <activity android:name=".Activities.StartTestScreen"/>
     </application>
 
 </manifest>

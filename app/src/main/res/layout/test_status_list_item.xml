@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/testStatusListBullet"
+        android:layout_width="21dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/testStatusListTestName"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/testStatusListTestName"
+        android:layout_width="124dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/testStatusListTestImage"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="External Storage" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/testStatusListTestImage"
+        android:layout_width="52dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher_round" />
+
+    <android.support.v4.widget.ContentLoadingProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="337dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:progress="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/testStatusListTestName" />
+</android.support.constraint.ConstraintLayout>
