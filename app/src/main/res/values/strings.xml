@@ -4,4 +4,7 @@
     <string name="imei_number">IMEI Number:</string>
     <string name="start_testing_the_device">Start Testing the device</string>
     <string name="exitapp">ExitApp</string>
+    <string name="ops_we_need_all_the_permissions_to_diagnosis_the_device">Ops! We need all the permissions to diagnosis the device.</string>
+    <string name="okay">Okay</string>
+    <string name="exit_app">Exit App</string>
 </resources>
