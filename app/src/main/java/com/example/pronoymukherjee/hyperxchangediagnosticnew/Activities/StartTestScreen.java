@@ -3,8 +3,11 @@ package com.example.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 import android.Manifest;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -13,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.telephony.TelephonyManager;
+import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
@@ -24,6 +29,7 @@ public class StartTestScreen extends AppCompatActivity {
     String modelName, imeiNumber;
     AppCompatTextView _modelName, _imeiNumber;
     AppCompatButton _marketPlace, _startTest;
+    boolean permissionGranted=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,26 @@ public class StartTestScreen extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermissions();
         }
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if(permissionGranted) {
+            imeiNumber = telephonyManager.getDeviceId(0);
+            _imeiNumber.setText(imeiNumber);
+        }
+        _startTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isNetworkAvailable()){
+                    //TODO: Start the test.
+                }
+                else{
+                    Bundle bundle=new Bundle();
+                    bundle.putString(Constants.DIALOG_MSG,"Please connect the device to the internet.");
+                    Intent dialogIntent=new Intent(StartTestScreen.this,PermissionExplainDialog.class);
+                    dialogIntent.putExtras(bundle);
+                    startActivityForResult(dialogIntent,Constants.DIALOG_INTERNT_CODE);
+                }
+            }
+        });
     }
 
     private void initializeViews() {
@@ -82,6 +108,7 @@ public class StartTestScreen extends AppCompatActivity {
                     break;
                 }
             }
+            permissionGranted=true;
         }
     }
 
@@ -91,5 +118,17 @@ public class StartTestScreen extends AppCompatActivity {
             if (resultCode==RESULT_OK)
                 checkPermissions();
         }
+        else if (requestCode==Constants.DIALOG_INTERNT_CODE){
+            //TODO: Start test after checking internet.
+        }
+    }/**
+     * This is the method to check whether the device is connected to internet or not.
+     *
+     * @return: true if connected else false.
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 }
