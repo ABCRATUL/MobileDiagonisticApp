@@ -15,11 +15,9 @@ public class AutoTestScreen extends AppCompatActivity {
     RecyclerView testList;
     RecyclerView.LayoutManager layoutManager;
 
-    public static String categoryItem[]={
-            "Smart Phones",
-            "Laptops",
-            "Tablets",
-            "Cameras"
+    public static String automatedTests[]={
+            "Ram Test",
+            
     };
 
     public static int imageIDs[]={
@@ -38,9 +36,8 @@ public class AutoTestScreen extends AppCompatActivity {
                 LinearLayoutManager.HORIZONTAL,
                 false);
         ArrayList<TestItem> items=new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            TestItem testItem=new TestItem(imageIDs[i],categoryItem[i]);
-            items.add(testItem);
+        for (int i = 0; i < 9; i++) {
+
         }
         testList.setLayoutManager(layoutManager);
         TestItemAdapter itemAdapter=new TestItemAdapter(items);

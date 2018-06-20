@@ -3,12 +3,12 @@ package com.example.pronoymukherjee.hyperxchangediagnosticnew.Objects;
 public class Test {
     private String testName;
     private int score;
-    private int testSuccessImageID;
+    private int testIconID;
 
-    public Test(String testName, int score, int testSuccessImageID) {
+    public Test(String testName, int score, int testIconID) {
         this.testName = testName;
         this.score = score;
-        this.testSuccessImageID = testSuccessImageID;
+        this.testIconID = testIconID;
     }
 
     public String getTestName() {
@@ -19,7 +19,7 @@ public class Test {
         return score;
     }
 
-    public int getTestSuccessImageID() {
-        return testSuccessImageID;
+    public int getTestIconID() {
+        return testIconID;
     }
 }
