@@ -54,7 +54,7 @@ public class TestStatusActivity extends AppCompatActivity {
 
     private void initializeViews() {
         _statusIcon = findViewById(R.id.testStatusIcon);
-        _successBucket = findViewById(R.id.successTest);
+        _successBucket = findViewById(R.id.successTestSet);
         _failedBucket = findViewById(R.id.failedTestSet);
     }
 }

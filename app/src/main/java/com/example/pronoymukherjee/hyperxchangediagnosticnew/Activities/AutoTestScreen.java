@@ -1,6 +1,7 @@
 package com.example.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -107,6 +108,14 @@ public class AutoTestScreen extends AppCompatActivity {
                     Constants.automatedTestList.remove(currentTest);
                     testItemAdapter.notifyDataSetChanged();
                     performTest();
+                }
+                else{
+                    Intent getResultIntent=new Intent(AutoTestScreen.this,
+                            TestStatusActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putBoolean(Constants.TEST_STATUS_KEY,true);
+                    getResultIntent.putExtras(bundle);
+                    startActivity(getResultIntent);
                 }
             }
         },2000);
