@@ -8,15 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.pronoymukherjee.hyperxchangediagnosticnew.Objects.TestItem;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Objects.Test;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.ArrayList;
 
 public class TestItemAdapter extends RecyclerView.Adapter<TestItemAdapter.ViewHolder> {
-    private ArrayList<TestItem> dataset;
+    private ArrayList<Test> dataset;
 
-    public TestItemAdapter(ArrayList<TestItem> dataset) {
+    public TestItemAdapter(ArrayList<Test> dataset) {
         this.dataset = dataset;
     }
 
@@ -31,7 +31,7 @@ public class TestItemAdapter extends RecyclerView.Adapter<TestItemAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.textView.setText(dataset.get(position).getTestName());
-        holder.imageView.setImageResource(dataset.get(position).getImageID());
+        holder.imageView.setImageResource(dataset.get(position).getTestIconID());
     }
 
 

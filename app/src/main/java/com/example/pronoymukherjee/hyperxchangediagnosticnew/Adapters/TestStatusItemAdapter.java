@@ -11,15 +11,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Objects.Test;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Objects.TestStatusItem;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.ArrayList;
 
 public class TestStatusItemAdapter extends ArrayAdapter {
-    ArrayList<TestStatusItem> dataSet;
+    ArrayList<Test> dataSet;
 
-    public TestStatusItemAdapter(Activity activityContext, ArrayList<TestStatusItem> dataSet) {
+    public TestStatusItemAdapter(Activity activityContext, ArrayList<Test> dataSet) {
         super(activityContext, 0, dataSet);
         this.dataSet = dataSet;
     }
@@ -34,9 +35,9 @@ public class TestStatusItemAdapter extends ArrayAdapter {
         }
         AppCompatTextView textView = view.findViewById(R.id.testStatusListTestName);
         AppCompatImageView imageView = view.findViewById(R.id.testStatusListTestImage);
-        TestStatusItem item = dataSet.get(position);
+        Test item = dataSet.get(position);
         textView.setText(item.getTestName());
-        imageView.setImageResource(item.getTestImageID());
+        imageView.setImageResource(item.getTestIconID());
         return view;
     }
 }

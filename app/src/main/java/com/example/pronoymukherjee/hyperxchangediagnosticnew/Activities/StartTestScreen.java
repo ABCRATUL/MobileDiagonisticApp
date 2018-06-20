@@ -20,16 +20,18 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StartTestScreen extends AppCompatActivity {
+    public String TAG_CLASS=StartTestScreen.class.getSimpleName();
     String modelName, imeiNumber;
     AppCompatTextView _modelName, _imeiNumber;
     AppCompatButton _marketPlace, _startTest;
-    boolean permissionGranted=false;
+    boolean permissionGranted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,26 +42,30 @@ public class StartTestScreen extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermissions();
         }
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if(permissionGranted) {
-            imeiNumber = telephonyManager.getDeviceId(0);
-            _imeiNumber.setText(imeiNumber);
-        }
         _startTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isNetworkAvailable()){
+                Intent startTestIntent = new Intent(StartTestScreen.this, AutoTestScreen.class);
+                startActivity(startTestIntent);
+                if (isNetworkAvailable()) {
                     //TODO: Start the test.
-                }
-                else{
-                    Bundle bundle=new Bundle();
-                    bundle.putString(Constants.DIALOG_MSG,"Please connect the device to the internet.");
-                    Intent dialogIntent=new Intent(StartTestScreen.this,PermissionExplainDialog.class);
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constants.DIALOG_MSG, "Please connect the device to the internet.");
+                    Intent dialogIntent = new Intent(StartTestScreen.this, PermissionExplainDialog.class);
                     dialogIntent.putExtras(bundle);
-                    startActivityForResult(dialogIntent,Constants.DIALOG_INTERNT_CODE);
+                    startActivityForResult(dialogIntent, Constants.DIALOG_INTERNT_CODE);
                 }
             }
         });
+    }
+
+    private void getTelephoneDetials() {
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if (permissionGranted) {
+            imeiNumber = telephonyManager.getDeviceId(0);
+            _imeiNumber.setText(imeiNumber);
+        }
     }
 
     private void initializeViews() {
@@ -92,9 +98,13 @@ public class StartTestScreen extends AppCompatActivity {
     }
 
     private void requestPermission(String[] permissionsNeeded) {
-        ActivityCompat.requestPermissions(this,
-                permissionsNeeded,
-                Constants.PERMISSION_REQUEST_CODE);
+        Message.logMessage(TAG_CLASS,permissionsNeeded.length+"");
+        if(permissionsNeeded.length>0) {
+            ActivityCompat.requestPermissions(this,
+                    permissionsNeeded,
+                    Constants.PERMISSION_REQUEST_CODE);
+        }
+        else getTelephoneDetials();
     }
 
     @Override
@@ -108,20 +118,22 @@ public class StartTestScreen extends AppCompatActivity {
                     break;
                 }
             }
-            permissionGranted=true;
+            permissionGranted = true;
+            getTelephoneDetials();
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==Constants.PERMISSION_REQUEST_CODE){
-            if (resultCode==RESULT_OK)
+        if (requestCode == Constants.PERMISSION_REQUEST_CODE) {
+            if (resultCode == RESULT_OK)
                 checkPermissions();
-        }
-        else if (requestCode==Constants.DIALOG_INTERNT_CODE){
+        } else if (requestCode == Constants.DIALOG_INTERNT_CODE) {
             //TODO: Start test after checking internet.
         }
-    }/**
+    }
+
+    /**
      * This is the method to check whether the device is connected to internet or not.
      *
      * @return: true if connected else false.

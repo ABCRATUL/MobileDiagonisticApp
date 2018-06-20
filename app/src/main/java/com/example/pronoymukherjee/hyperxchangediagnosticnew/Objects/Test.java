@@ -22,4 +22,8 @@ public class Test {
     public int getTestIconID() {
         return testIconID;
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
