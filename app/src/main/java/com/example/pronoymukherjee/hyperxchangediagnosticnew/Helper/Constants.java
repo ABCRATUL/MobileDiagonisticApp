@@ -9,7 +9,7 @@ public class Constants {
     private static String TAG_CLASS=Constants.class.getSimpleName();
     public static int PERMISSION_REQUEST_CODE=69;
     public static String DIALOG_MSG="dialogMsg";
-    public static int DIALOG_INTERNT_CODE=169;
+    public static int DIALOG_INTERNET_CODE =169;
     public static ArrayList<Test> automatedTestList=new ArrayList<>();
     public static ArrayList<Test> successTestList=new ArrayList<>();
     public static ArrayList<Test> failedTestList=new ArrayList<>();

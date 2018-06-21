@@ -1,8 +1,7 @@
 package com.example.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 
 import android.Manifest;
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StartTestScreen extends AppCompatActivity {
-    public String TAG_CLASS=StartTestScreen.class.getSimpleName();
+    public String TAG_CLASS = StartTestScreen.class.getSimpleName();
     String modelName, imeiNumber;
     AppCompatTextView _modelName, _imeiNumber;
     AppCompatButton _marketPlace, _startTest;
@@ -54,13 +53,17 @@ public class StartTestScreen extends AppCompatActivity {
                     bundle.putString(Constants.DIALOG_MSG, "Please connect the device to the internet.");
                     Intent dialogIntent = new Intent(StartTestScreen.this, PermissionExplainDialog.class);
                     dialogIntent.putExtras(bundle);
-                    startActivityForResult(dialogIntent, Constants.DIALOG_INTERNT_CODE);
+                    startActivityForResult(dialogIntent, Constants.DIALOG_INTERNET_CODE);
                 }
             }
         });
     }
 
-    private void getTelephoneDetials() {
+    /**
+     * This is the method to get the IMEI Number of the device.
+     */
+    @TargetApi(23)
+    private void getTelephoneDetials()throws SecurityException {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         if (permissionGranted) {
             imeiNumber = telephonyManager.getDeviceId(0);
@@ -75,6 +78,9 @@ public class StartTestScreen extends AppCompatActivity {
         _marketPlace = findViewById(R.id.marketPlaceButton);
     }
 
+    /**
+     * This is the method to check and request for the app permissions.
+     */
     private void checkPermissions() {
         List<String> permissionsNeeded = new ArrayList<>();
         int cameraPermission = ContextCompat
@@ -98,13 +104,12 @@ public class StartTestScreen extends AppCompatActivity {
     }
 
     private void requestPermission(String[] permissionsNeeded) {
-        Message.logMessage(TAG_CLASS,permissionsNeeded.length+"");
-        if(permissionsNeeded.length>0) {
+        Message.logMessage(TAG_CLASS, permissionsNeeded.length + "");
+        if (permissionsNeeded.length > 0) {
             ActivityCompat.requestPermissions(this,
                     permissionsNeeded,
                     Constants.PERMISSION_REQUEST_CODE);
-        }
-        else getTelephoneDetials();
+        } else getTelephoneDetials();
     }
 
     @Override
@@ -128,7 +133,7 @@ public class StartTestScreen extends AppCompatActivity {
         if (requestCode == Constants.PERMISSION_REQUEST_CODE) {
             if (resultCode == RESULT_OK)
                 checkPermissions();
-        } else if (requestCode == Constants.DIALOG_INTERNT_CODE) {
+        } else if (requestCode == Constants.DIALOG_INTERNET_CODE) {
             //TODO: Start test after checking internet.
         }
     }

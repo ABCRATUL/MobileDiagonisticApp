@@ -1,9 +1,7 @@
 package com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

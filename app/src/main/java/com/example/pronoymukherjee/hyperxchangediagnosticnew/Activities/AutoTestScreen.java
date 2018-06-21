@@ -49,6 +49,9 @@ public class AutoTestScreen extends AppCompatActivity {
         performTest();
     }
 
+    /**
+     * Method to initialize all the views of the widgets.
+     */
     private void initializeViews() {
         testList = findViewById(R.id.pendingTestList);
         _currentTestImage = findViewById(R.id.currentTestImage);
@@ -58,6 +61,10 @@ public class AutoTestScreen extends AppCompatActivity {
         _failedBucket = findViewById(R.id.failedTest);
     }
 
+    /**
+     * This is the method which is used to perform the automated test.
+     * This is a recursive method to perform all the automated tests.
+     */
     private void performTest() {
         score=0;
         new Handler().postDelayed(new Runnable() {
