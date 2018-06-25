@@ -67,8 +67,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_next" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/Manual and others/Others/Next.svg" />
+                            <entry key="outputName" value="ic_test_stop" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/Manual and others/Others/Test Stop.svg" />
                           </map>
                         </option>
                       </PersistentState>

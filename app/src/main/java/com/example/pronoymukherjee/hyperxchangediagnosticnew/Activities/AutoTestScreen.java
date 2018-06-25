@@ -10,6 +10,7 @@ import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ProgressBar;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -19,6 +20,7 @@ import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.TestApi;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Objects.Test;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class AutoTestScreen extends AppCompatActivity {
     public String TAG_CLASS=AutoTestScreen.class.getSimpleName();
@@ -28,6 +30,8 @@ public class AutoTestScreen extends AppCompatActivity {
     AppCompatButton _exitApp;
     AppCompatImageButton _stopTest;
     AppCompatImageView _successBucket, _failedBucket;
+    CircularProgressBar _progressBar;
+
     Context context;
     int score = 0;
     TestItemAdapter testItemAdapter;
@@ -46,6 +50,8 @@ public class AutoTestScreen extends AppCompatActivity {
         testList.setAdapter(testItemAdapter);
         _successBucket.setImageResource(R.drawable.ic_sucess_bucket);
         _failedBucket.setImageResource(R.drawable.ic_failed_bucket);
+        _progressBar.setProgress(0);
+        _progressBar.setProgressWithAnimation(1,1500);
         performTest();
     }
 
@@ -59,6 +65,7 @@ public class AutoTestScreen extends AppCompatActivity {
         _stopTest = findViewById(R.id.stopTestButton);
         _successBucket = findViewById(R.id.successTest);
         _failedBucket = findViewById(R.id.failedTest);
+        _progressBar=findViewById(R.id.circularProgressBar);
     }
 
     /**
@@ -67,13 +74,15 @@ public class AutoTestScreen extends AppCompatActivity {
      */
     private void performTest() {
         score=0;
+        _progressBar.setProgressWithAnimation(40,1500);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (Constants.automatedTestList.size() > 0) {
+                    //_progressBar.setProgress(40);
                     Test currentTest = Constants.automatedTestList.get(0);
                     _currentTestImage.setImageResource(currentTest.getTestIconID());
-                    YoYo.with(Techniques.Bounce).duration(2000).playOn(_currentTestImage);
+                    YoYo.with(Techniques.Bounce).duration(1000).playOn(_currentTestImage);
                     switch (currentTest.getTestName()) {
                         case "Ram Test":
                             score = TestApi.testRam(context);
@@ -104,16 +113,18 @@ public class AutoTestScreen extends AppCompatActivity {
                             break;
                     }
                     Message.logMessage(TAG_CLASS,score+"");
+                    _progressBar.setProgressWithAnimation(90,1500);
                     currentTest.setScore(score);
                     if (score > 0) {
                         Constants.successTestList.add(currentTest);
-                        YoYo.with(Techniques.Shake).duration(2000).playOn(_successBucket);
+                        YoYo.with(Techniques.Shake).duration(1000).playOn(_successBucket);
                     } else if (score == 0) {
                         Constants.failedTestList.add(currentTest);
-                        YoYo.with(Techniques.Shake).duration(2000).playOn(_failedBucket);
+                        YoYo.with(Techniques.Shake).duration(1000).playOn(_failedBucket);
                     }
                     Constants.automatedTestList.remove(currentTest);
                     testItemAdapter.notifyDataSetChanged();
+                    _progressBar.setProgressWithAnimation(100,1500);
                     performTest();
                 }
                 else{
@@ -125,7 +136,12 @@ public class AutoTestScreen extends AppCompatActivity {
                     startActivity(getResultIntent);
                 }
             }
+        },3000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                _progressBar.setProgressWithAnimation(100,1000);
+            }
         },2000);
-
     }
 }
