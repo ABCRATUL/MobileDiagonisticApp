@@ -29,7 +29,7 @@ public class TestStatusItemAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
-        if (view != null) {
+        if (view == null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.test_status_list_item,
                     parent, false);
         }

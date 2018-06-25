@@ -39,6 +39,7 @@ public class TestStatusDialogActivity extends AppCompatActivity {
             }
             testList.setAdapter(statusItemAdapter);
             _testDialogIcon.setImageResource(statusIconID);
+            statusItemAdapter.notifyDataSetChanged();
         }
         _closeDialogButton.setOnClickListener(new View.OnClickListener() {
             @Override

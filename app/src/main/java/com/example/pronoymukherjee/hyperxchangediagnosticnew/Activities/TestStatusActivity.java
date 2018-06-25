@@ -12,7 +12,7 @@ import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 public class TestStatusActivity extends AppCompatActivity {
     AppCompatImageView _statusIcon;
-    AppCompatImageButton _successBucket, _failedBucket;
+    AppCompatImageButton _successBucket, _failedBucket,_nextButton;
     int statusIconID;
 
     @Override
@@ -27,7 +27,12 @@ public class TestStatusActivity extends AppCompatActivity {
             if (isCompleted)
                 statusIconID = R.drawable.ic_test_completed;
             else statusIconID = R.drawable.ic_test_failed;
+            _statusIcon.setImageResource(statusIconID);
         }
+        /*_successBucket.setImageResource(R.drawable.ic_sucess_bucket);
+        _failedBucket.setImageResource(R.drawable.ic_failed_bucket);*/
+        _successBucket.setBackground(getResources().getDrawable(R.drawable.ic_sucess_bucket));
+        _failedBucket.setBackground(getResources().getDrawable(R.drawable.ic_failed_bucket));
         _successBucket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,11 +55,20 @@ public class TestStatusActivity extends AppCompatActivity {
                 startActivity(openDialogIntent);
             }
         });
+        _nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent manualTestIntent=new Intent(TestStatusActivity.this,
+                        ManualTestScreen.class);
+                startActivity(manualTestIntent);
+            }
+        });
     }
 
     private void initializeViews() {
         _statusIcon = findViewById(R.id.testStatusIcon);
         _successBucket = findViewById(R.id.successTestSet);
         _failedBucket = findViewById(R.id.failedTestSet);
+        _nextButton=findViewById(R.id.next);
     }
 }

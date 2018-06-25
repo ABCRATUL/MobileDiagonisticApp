@@ -67,11 +67,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="height" value="1000" />
-                            <entry key="outputName" value="ic_test_failed" />
-                            <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/Manual and others/Others/Test Failed.svg" />
-                            <entry key="width" value="1000" />
+                            <entry key="outputName" value="ic_next" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/Manual and others/Others/Next.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -28,7 +28,7 @@ public class Constants {
         automatedTestList.add(new Test("Flash Test",0,R.drawable.flashlight));
         automatedTestList.add(new Test("Accelerometer Test",0,R.drawable.ic_accelerometer));
         automatedTestList.add(new Test("Gyroscope Test",0,R.drawable.ic_gyroscope));
-        automatedTestList.add(new Test("External Storage Test",0,R.drawable.ic_external_storage));
+        automatedTestList.add(new Test("External Storage Test",0,R.drawable.ic_ram_new));
         Message.logMessage(TAG_CLASS,automatedTestList.size()+"");
     }
 }
