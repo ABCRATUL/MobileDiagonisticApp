@@ -1,7 +1,9 @@
 package com.example.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -27,8 +30,7 @@ public class AutoTestScreen extends AppCompatActivity {
     RecyclerView testList;
     RecyclerView.LayoutManager layoutManager;
     AppCompatImageView _currentTestImage;
-    AppCompatButton _exitApp;
-    AppCompatImageButton _stopTest;
+    AppCompatImageButton _exitApp;
     AppCompatImageView _successBucket, _failedBucket;
     CircularProgressBar _progressBar;
 
@@ -52,6 +54,12 @@ public class AutoTestScreen extends AppCompatActivity {
         _failedBucket.setImageResource(R.drawable.ic_failed_bucket);
         _progressBar.setProgress(0);
         _progressBar.setProgressWithAnimation(1,1500);
+        _exitApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exitApp();
+            }
+        });
         performTest();
     }
 
@@ -62,7 +70,6 @@ public class AutoTestScreen extends AppCompatActivity {
         testList = findViewById(R.id.pendingTestList);
         _currentTestImage = findViewById(R.id.currentTestImage);
         _exitApp = findViewById(R.id.exitAppButton);
-        _stopTest = findViewById(R.id.stopTestButton);
         _successBucket = findViewById(R.id.successTest);
         _failedBucket = findViewById(R.id.failedTest);
         _progressBar=findViewById(R.id.circularProgressBar);
@@ -117,10 +124,10 @@ public class AutoTestScreen extends AppCompatActivity {
                     currentTest.setScore(score);
                     if (score > 0) {
                         Constants.successTestList.add(currentTest);
-                        YoYo.with(Techniques.Shake).duration(1000).playOn(_successBucket);
+                        YoYo.with(Techniques.Shake).duration(1500).playOn(_successBucket);
                     } else if (score == 0) {
                         Constants.failedTestList.add(currentTest);
-                        YoYo.with(Techniques.Shake).duration(1000).playOn(_failedBucket);
+                        YoYo.with(Techniques.Shake).duration(1500).playOn(_failedBucket);
                     }
                     Constants.automatedTestList.remove(currentTest);
                     testItemAdapter.notifyDataSetChanged();
@@ -143,5 +150,18 @@ public class AutoTestScreen extends AppCompatActivity {
                 _progressBar.setProgressWithAnimation(100,1000);
             }
         },2000);
+    }
+    /**
+     * This is the method to exit the app.
+     */
+    @SuppressLint("ObsoleteSdkInt")
+    private void exitApp() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            this.finishAffinity();
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.finishAndRemoveTask();
+        }
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
     }
 }

@@ -13,6 +13,11 @@ public class Constants {
     public static ArrayList<Test> automatedTestList=new ArrayList<>();
     public static ArrayList<Test> successTestList=new ArrayList<>();
     public static ArrayList<Test> failedTestList=new ArrayList<>();
+
+    public static ArrayList<Test> manualTestList=new ArrayList<>();
+    public static ArrayList<Test> successManualTestList=new ArrayList<>();
+    public static ArrayList<Test> failedManualTestList=new ArrayList<>();
+
     public static String TEST_STATUS_DIALOG_KEY ="testStatus";
     public static String TEST_STATUS_KEY="statusTestKey";
 
@@ -28,8 +33,11 @@ public class Constants {
         automatedTestList.add(new Test("Flash Test",0,R.drawable.flashlight));
         automatedTestList.add(new Test("Accelerometer Test",0,R.drawable.ic_accelerometer));
         automatedTestList.add(new Test("Gyroscope Test",0,R.drawable.ic_gyroscope));
-        automatedTestList.add(new Test("External Storage Test",0,R.drawable.ic_ram_new));
+        automatedTestList.add(new Test("External Storage Test",0,R.drawable.ic_external_storage));
         Message.logMessage(TAG_CLASS,automatedTestList.size()+"");
+    }
+    public static void fillManualTestList(){
+
     }
 }
 

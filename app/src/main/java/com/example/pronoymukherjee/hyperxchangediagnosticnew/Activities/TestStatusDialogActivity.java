@@ -22,6 +22,7 @@ public class TestStatusDialogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_status_dialog);
+        setTitle("");
         initializeViews();
         Intent intent=getIntent();
         if(intent!=null){

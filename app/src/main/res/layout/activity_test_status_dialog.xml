@@ -4,30 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
     android:layout_gravity="center"
+    style="@style/dialog"
     android:layout_height="wrap_content"
     tools:context=".Activities.TestStatusDialogActivity">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/testStatusDialogIcon"
-        android:layout_width="59dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        tools:src="@drawable/ic_launcher_background"
-        app:layout_constraintEnd_toStartOf="@+id/testStatusDialogClose"
-        app:layout_constraintHorizontal_bias="0.004"
+        android:layout_width="112dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="28dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
 
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/testStatusDialogClose"
-        android:layout_width="48dp"
-        android:layout_height="42dp"
+        android:layout_width="54dp"
+        android:layout_height="55dp"
         android:layout_marginEnd="36dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_cross"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/testStatusDialogIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView

@@ -6,4 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".Activities.ManualTestScreen">
 
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/failedTestManual"
+        android:layout_width="93dp"
+        android:layout_height="81dp"
+        android:src="@drawable/ic_failed_bucket"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/successTestManual"
+        android:layout_width="102dp"
+        android:layout_height="81dp"
+        android:layout_marginEnd="216dp"
+        android:src="@drawable/ic_sucess_bucket"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/currentManualTest"
+        android:layout_width="179dp"
+        android:layout_height="153dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/manualTestGrid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@drawable/ic_touch_screen_test" />
+
+    <android.support.v7.widget.AppCompatImageButton
+        android:id="@+id/exitAppButtonManual"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/ic_exit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <GridView
+        android:id="@+id/manualTestGrid"
+        android:layout_width="340dp"
+        android:layout_height="166dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        app:layout_constraintBottom_toTopOf="@+id/exitAppButtonManual"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
