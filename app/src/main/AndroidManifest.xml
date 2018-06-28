@@ -37,7 +37,8 @@
             android:theme="@style/dialog" />
         <activity android:name=".Activities.StartTestScreen" />
         <activity android:name=".Activities.PermissionExplainDialog" />
-        <activity android:name=".Activities.ManualTestScreen"></activity>
+        <activity android:name=".Activities.ManualTestScreen" />
+        <activity android:name=".ManualTestActivities.TouchScreenTest"></activity>
     </application>
 
 </manifest>

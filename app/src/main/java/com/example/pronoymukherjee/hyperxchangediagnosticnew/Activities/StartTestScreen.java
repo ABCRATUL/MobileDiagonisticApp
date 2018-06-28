@@ -36,7 +36,7 @@ public class StartTestScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_test_screen);
-        modelName = Build.MANUFACTURER + " " + Build.PRODUCT;
+        modelName =  Build.MODEL;
         initializeViews();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermissions();
@@ -44,19 +44,21 @@ public class StartTestScreen extends AppCompatActivity {
         _startTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startTestIntent = new Intent(StartTestScreen.this, AutoTestScreen.class);
-                startActivity(startTestIntent);
                 if (isNetworkAvailable()) {
-                    //TODO: Start the test.
+                    Intent startTestIntent = new Intent(StartTestScreen.this,
+                            AutoTestScreen.class);
+                    startActivity(startTestIntent);
                 } else {
                     Bundle bundle = new Bundle();
                     bundle.putString(Constants.DIALOG_MSG, "Please connect the device to the internet.");
-                    Intent dialogIntent = new Intent(StartTestScreen.this, PermissionExplainDialog.class);
+                    Intent dialogIntent = new Intent(StartTestScreen.this,
+                            PermissionExplainDialog.class);
                     dialogIntent.putExtras(bundle);
                     startActivityForResult(dialogIntent, Constants.DIALOG_INTERNET_CODE);
                 }
             }
         });
+        _modelName.setText(modelName);
     }
 
     /**

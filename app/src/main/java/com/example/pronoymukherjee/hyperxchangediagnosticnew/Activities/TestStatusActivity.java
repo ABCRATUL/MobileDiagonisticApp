@@ -12,7 +12,7 @@ import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 public class TestStatusActivity extends AppCompatActivity {
     AppCompatImageView _statusIcon;
-    AppCompatImageButton _successBucket, _failedBucket,_nextButton;
+    AppCompatImageButton _successBucket, _failedBucket, _nextButton;
     int statusIconID;
 
     @Override
@@ -29,17 +29,16 @@ public class TestStatusActivity extends AppCompatActivity {
             else statusIconID = R.drawable.ic_test_failed;
             _statusIcon.setImageResource(statusIconID);
         }
-        /*_successBucket.setImageResource(R.drawable.ic_sucess_bucket);
-        _failedBucket.setImageResource(R.drawable.ic_failed_bucket);*/
+
         _successBucket.setBackground(getResources().getDrawable(R.drawable.ic_sucess_bucket));
         _failedBucket.setBackground(getResources().getDrawable(R.drawable.ic_failed_bucket));
         _successBucket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openDialogIntent=new Intent(TestStatusActivity.this,
+                Intent openDialogIntent = new Intent(TestStatusActivity.this,
                         TestStatusDialogActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putBoolean(Constants.TEST_STATUS_DIALOG_KEY,true);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(Constants.TEST_STATUS_DIALOG_KEY, true);
                 openDialogIntent.putExtras(bundle);
                 startActivity(openDialogIntent);
             }
@@ -47,10 +46,10 @@ public class TestStatusActivity extends AppCompatActivity {
         _failedBucket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openDialogIntent=new Intent(TestStatusActivity.this,
+                Intent openDialogIntent = new Intent(TestStatusActivity.this,
                         TestStatusDialogActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putBoolean(Constants.TEST_STATUS_DIALOG_KEY,false);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(Constants.TEST_STATUS_DIALOG_KEY, false);
                 openDialogIntent.putExtras(bundle);
                 startActivity(openDialogIntent);
             }
@@ -58,7 +57,7 @@ public class TestStatusActivity extends AppCompatActivity {
         _nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent manualTestIntent=new Intent(TestStatusActivity.this,
+                Intent manualTestIntent = new Intent(TestStatusActivity.this,
                         ManualTestScreen.class);
                 startActivity(manualTestIntent);
             }
@@ -69,6 +68,6 @@ public class TestStatusActivity extends AppCompatActivity {
         _statusIcon = findViewById(R.id.testStatusIcon);
         _successBucket = findViewById(R.id.successTestSet);
         _failedBucket = findViewById(R.id.failedTestSet);
-        _nextButton=findViewById(R.id.next);
+        _nextButton = findViewById(R.id.next);
     }
 }

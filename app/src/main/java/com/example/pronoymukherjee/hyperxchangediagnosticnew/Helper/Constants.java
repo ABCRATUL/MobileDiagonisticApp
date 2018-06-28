@@ -37,7 +37,19 @@ public class Constants {
         Message.logMessage(TAG_CLASS,automatedTestList.size()+"");
     }
     public static void fillManualTestList(){
-
+        manualTestList.add(new Test("Touch Screen Test",0,R.drawable.ic_touch_screen_test));
+        manualTestList.add(new Test("Speaker Test",0,R.drawable.ic_speaker_test));
+        manualTestList.add(new Test("Volume Button Up Test",0,R.drawable.ic_volume_button_test));
+        manualTestList.add(new Test("Volume Button Down Test",0,R.drawable.ic_volume_button_test));
+        manualTestList.add(new Test("Proximity Test",0,R.drawable.ic_proximity_test));
+        manualTestList.add(new Test("Rear Camera Test",0,R.drawable.ic_rear_cam_test));
+        manualTestList.add(new Test("Front Camera Test",0,R.drawable.ic_front_cam_test));
+        manualTestList.add(new Test("Back Button Test",0,R.drawable.ic_back_button_test));
+        manualTestList.add(new Test("Home Button Test",0,R.drawable.ic_home_button_test));
+        manualTestList.add(new Test("Power Button Test",0,R.drawable.ic_power_button_test));
+        manualTestList.add(new Test("Vibration Test",0,R.drawable.ic_vibration_test));
+        manualTestList.add(new Test("Charger Test",0,R.drawable.ic_charger_test));
+        manualTestList.add(new Test("Headphone Test",0,R.drawable.ic_headphone_jack_test));
     }
 }
 

@@ -81,7 +81,7 @@ public class AutoTestScreen extends AppCompatActivity {
      */
     private void performTest() {
         score=0;
-        _progressBar.setProgressWithAnimation(40,1500);
+        _progressBar.setProgressWithAnimation(20,1500);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
