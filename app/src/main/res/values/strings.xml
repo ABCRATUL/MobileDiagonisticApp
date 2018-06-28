@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HyperXchangeDiagnosticNew</string>
+    <string name="app_name">Diagnostic App</string>
     <string name="go_to_hx_marketplace">Go to HX Marketplace</string>
     <string name="imei_number">IMEI Number:</string>
     <string name="start_testing_the_device">Start Testing the device</string>
@@ -10,4 +10,5 @@
     <string name="speaker_test_message">Please enter the number you hear from the speaker.</string>
     <string name="speaker_hint">Enter the Number here.</string>
     <string name="replay_audio">Replay Audio</string>
+    <string name="volume_down_msg">Please press the Volume down Button</string>
 </resources>

@@ -2,10 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="300dp"
     android:layout_gravity="center"
     android:layout_height="wrap_content"
-    android:background="#fff"
     tools:context=".Activities.PermissionExplainDialog">
 
     <android.support.v7.widget.AppCompatTextView
@@ -14,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:gravity="center"
         android:layout_marginTop="8dp"
         android:text="@string/ops_we_need_all_the_permissions_to_diagnosis_the_device"
         android:textAppearance="?android:attr/textAppearanceMedium"

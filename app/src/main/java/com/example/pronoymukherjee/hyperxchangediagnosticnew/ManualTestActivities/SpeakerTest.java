@@ -15,6 +15,8 @@ import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.Locale;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SpeakerTest extends AppCompatActivity {
     AppCompatButton _okayButton, _replayButton;
@@ -22,13 +24,20 @@ public class SpeakerTest extends AppCompatActivity {
     TextToSpeech textToSpeech;
     int generatedNumber;
     public String TAG_CLASS=SpeakerTest.class.getSimpleName();
-
+    Timer timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speaker_test);
         setTitle("");
         initializeViews();
+        timer=new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                completeActivity(false);
+            }
+        },Constants.TEST_TIMER);
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -45,6 +54,7 @@ public class SpeakerTest extends AppCompatActivity {
                     int inputNumber = Integer.parseInt(_userInput.getText().toString());
                     if (inputNumber == generatedNumber) {
                         completeActivity(true);
+                        timer.cancel();
                         Message.logMessage(TAG_CLASS,"true");
                     }
                 } catch (NumberFormatException e) {

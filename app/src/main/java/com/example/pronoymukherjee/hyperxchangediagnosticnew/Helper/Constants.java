@@ -21,7 +21,7 @@ public class Constants {
     public static String TEST_STATUS_DIALOG_KEY ="testStatus";
     public static String TEST_STATUS_KEY="statusTestKey";
     public static int TEST_TIMER=5000;
-    public static String SPEAKER_VOLUME_MSG="Please make sure that your media volume is hearable.";
+    public static String SPEAKER_VOLUME_MSG="Please make sure that your media volume is audible.";
 
 
 
@@ -57,5 +57,7 @@ public class Constants {
     }
     public static int TOUCH_SCREEN_CODE=1;
     public static int SPEAKER_CODE=2;
+    public static int VOLUME_BUTTON_UP_CODE=3;
+    public static int VOLUME_BUTTON_DOWN_CODE=4;
 }
 

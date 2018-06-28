@@ -45,8 +45,12 @@ public class StartTestScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isNetworkAvailable()) {
-                    Intent startTestIntent = new Intent(StartTestScreen.this,
+                    /*Intent startTestIntent = new Intent(StartTestScreen.this,
                             AutoTestScreen.class);
+                    startActivity(startTestIntent);*/
+                    //TODO: First start the Auto Test.
+                    Intent startTestIntent = new Intent(StartTestScreen.this,
+                            ManualTestScreen.class);
                     startActivity(startTestIntent);
                 } else {
                     Bundle bundle = new Bundle();

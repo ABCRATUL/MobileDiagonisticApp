@@ -31,17 +31,22 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.TestScoreScreen" />
-        <activity android:name=".Activities.AutoTestScreen" />
+        <activity android:name=".Activities.AutoTestScreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".Activities.TestStatusActivity" />
         <activity
             android:name=".Activities.TestStatusDialogActivity"
             android:theme="@style/dialog" />
         <activity android:name=".Activities.StartTestScreen" />
-        <activity android:name=".Activities.PermissionExplainDialog"
-            android:theme="@style/dialog"/>
+        <activity
+            android:name=".Activities.PermissionExplainDialog"
+            android:theme="@style/dialog" />
         <activity android:name=".Activities.ManualTestScreen" />
         <activity android:name=".ManualTestActivities.TouchScreenTest" />
-        <activity android:name=".ManualTestActivities.SpeakerTest"
+        <activity
+            android:name=".ManualTestActivities.SpeakerTest"
+            android:theme="@style/dialog" />
+        <activity android:name=".ManualTestActivities.VolumeButtonDownTest"
             android:theme="@style/dialog"/>
     </application>
 
