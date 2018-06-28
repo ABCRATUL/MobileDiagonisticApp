@@ -9,6 +9,7 @@ import android.widget.GridView;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Adapters.ManualGridAdapter;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.SpeakerTest;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.TouchScreenTest;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
@@ -26,8 +27,8 @@ public class ManualTestScreen extends AppCompatActivity {
                 getApplicationContext());
         _testGrid.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        /*Intent intent=new Intent(ManualTestScreen.this, TouchScreenTest.class);
-        startActivity(intent);*/
+        Intent intent=new Intent(ManualTestScreen.this, SpeakerTest.class);
+        startActivity(intent);
     }
     private void initializeViews() {
         _successBucket=findViewById(R.id.successTestManual);

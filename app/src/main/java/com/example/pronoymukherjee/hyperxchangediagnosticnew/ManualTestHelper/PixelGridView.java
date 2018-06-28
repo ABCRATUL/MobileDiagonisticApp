@@ -13,6 +13,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 public class PixelGridView extends View {
@@ -22,7 +28,7 @@ public class PixelGridView extends View {
     private boolean[][] cellChecked ;
 
     int score=0;
-
+    Timer timer;
     public PixelGridView(Context context) {
         this(context, null);
     }
@@ -31,6 +37,19 @@ public class PixelGridView extends View {
         super(context, attrs);
         blackPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         blackPaint.setColor(Color.CYAN);
+        timer=new Timer();
+        timer=new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Intent data = new Intent();
+                data.setData(Uri.parse(String.valueOf(score)));
+                data.putExtra("id", Constants.TOUCH_SCREEN_CODE);
+                ((Activity)getContext()).setResult(RESULT_CANCELED, data);
+                //---close the activity---
+                ((Activity)getContext()).finish();
+            }
+        }, Constants.TEST_TIMER);
     }
 
 
@@ -112,6 +131,7 @@ public class PixelGridView extends View {
             data.setData(Uri.parse(String.valueOf(score)));
             data.putExtra("id",2);
             ((Activity)getContext()).setResult(RESULT_OK, data);
+            timer.cancel();
             //---close the activity---
             ((Activity)getContext()).finish();
         }

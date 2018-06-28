@@ -20,9 +20,12 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestHelper.PixelGridView;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TouchScreenTest extends Activity {
 
@@ -35,6 +38,7 @@ public class TouchScreenTest extends Activity {
     TextView pointer4_text;
     TextView pointer5_text;
 
+    Timer timer;
     int numberOfPointers = 0;
     int maxPointers = 5;
     Paint mPaint;
@@ -58,7 +62,6 @@ public class TouchScreenTest extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //Uncomment the below code to Set the message and title from the strings.xml file
@@ -90,7 +93,7 @@ public class TouchScreenTest extends Activity {
 
         setContentView(pixelGrid);
 
-        Handler h = new Handler();
+        /*Handler h = new Handler();
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -103,7 +106,7 @@ public class TouchScreenTest extends Activity {
                 //---close the activity---
                 finish();
             }
-        }, 9500);
+        }, 9500);*/
     }
 
     private void resetTextFields() {

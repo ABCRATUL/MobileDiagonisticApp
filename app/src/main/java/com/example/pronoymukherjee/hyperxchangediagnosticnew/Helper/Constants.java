@@ -20,6 +20,10 @@ public class Constants {
 
     public static String TEST_STATUS_DIALOG_KEY ="testStatus";
     public static String TEST_STATUS_KEY="statusTestKey";
+    public static int TEST_TIMER=5000;
+    public static String SPEAKER_VOLUME_MSG="Please make sure that your media volume is hearable.";
+
+
 
     /**
      * This is the method to fill the automated test list.
@@ -51,5 +55,7 @@ public class Constants {
         manualTestList.add(new Test("Charger Test",0,R.drawable.ic_charger_test));
         manualTestList.add(new Test("Headphone Test",0,R.drawable.ic_headphone_jack_test));
     }
+    public static int TOUCH_SCREEN_CODE=1;
+    public static int SPEAKER_CODE=2;
 }
 
