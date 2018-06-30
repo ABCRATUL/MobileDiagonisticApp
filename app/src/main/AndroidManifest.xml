@@ -31,8 +31,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.TestScoreScreen" />
-        <activity android:name=".Activities.AutoTestScreen"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activities.AutoTestScreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".Activities.TestStatusActivity" />
         <activity
             android:name=".Activities.TestStatusDialogActivity"
@@ -46,8 +47,10 @@
         <activity
             android:name=".ManualTestActivities.SpeakerTest"
             android:theme="@style/dialog" />
-        <activity android:name=".ManualTestActivities.VolumeButtonDownTest"
-            android:theme="@style/dialog"/>
+        <activity
+            android:name=".ManualTestActivities.VolumeButtonDownTest"
+            android:theme="@style/dialog" />
+        <activity android:name=".ManualTestActivities.VolumeButtonUpTest"></activity>
     </application>
 
 </manifest>

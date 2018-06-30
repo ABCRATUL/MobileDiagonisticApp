@@ -123,10 +123,9 @@ public class SpeakerTest extends AppCompatActivity {
     private void completeActivity(boolean status) {
         if (status) {
             setResult(RESULT_OK);
-            finish();
         } else {
             setResult(RESULT_CANCELED);
-            finish();
         }
+        finish();
     }
 }

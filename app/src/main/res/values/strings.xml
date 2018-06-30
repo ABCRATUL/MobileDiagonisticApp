@@ -11,4 +11,5 @@
     <string name="speaker_hint">Enter the Number here.</string>
     <string name="replay_audio">Replay Audio</string>
     <string name="volume_down_msg">Please press the Volume down Button</string>
+    <string name="volume_up_test">Please press the Volume Up Button</string>
 </resources>

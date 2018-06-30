@@ -11,13 +11,13 @@ import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class VolumeButtonDownTest extends AppCompatActivity {
+public class VolumeButtonUpTest extends AppCompatActivity {
     Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_volume_button_down_test);
+        setContentView(R.layout.activity_volume_button_up_test);
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -28,20 +28,19 @@ public class VolumeButtonDownTest extends AppCompatActivity {
     }
 
     private void completeActivity(boolean status) {
-        if (status) {
+        if (status)
             setResult(RESULT_OK);
-        } else {
+        else
             setResult(RESULT_CANCELED);
-        }
         finish();
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-            Message.toastMesage(getApplicationContext(), "Volume Down button pressed.", "");
-            timer.cancel();
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+            Message.toastMesage(getApplicationContext(), "Volume Up Button Pressed.", "");
             completeActivity(true);
+            timer.cancel();
         }
         return false;
     }
