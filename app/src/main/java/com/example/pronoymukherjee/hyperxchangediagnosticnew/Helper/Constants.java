@@ -34,7 +34,7 @@ public class Constants {
         automatedTestList.add(new Test("Bluetooth Test", 0, R.drawable.ic_bluetooth));
         automatedTestList.add(new Test("NFC Test", 0, R.drawable.ic_nfc));
         automatedTestList.add(new Test("Flash Test", 0, R.drawable.flashlight));
-        automatedTestList.add(new Test("Accelerometer Test", 0, R.drawable.ic_accelerometer));
+        automatedTestList.add(new Test("Accelerometer Test", 0, R.drawable.ic_accelerometer_new));
         automatedTestList.add(new Test("Gyroscope Test", 0, R.drawable.ic_gyroscope));
         automatedTestList.add(new Test("External Storage Test", 0, R.drawable.ic_external_storage));
         Message.logMessage(TAG_CLASS, automatedTestList.size() + "");

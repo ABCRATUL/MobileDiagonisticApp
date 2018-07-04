@@ -13,6 +13,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -29,11 +30,10 @@ public class AutoTestScreen extends AppCompatActivity {
     public String TAG_CLASS=AutoTestScreen.class.getSimpleName();
     RecyclerView testList;
     RecyclerView.LayoutManager layoutManager;
-    AppCompatImageView _currentTestImage;
+    ImageView _currentTestImage;
     AppCompatImageButton _exitApp;
     AppCompatImageView _successBucket, _failedBucket;
     CircularProgressBar _progressBar;
-
     Context context;
     int score = 0;
     TestItemAdapter testItemAdapter;
@@ -86,10 +86,10 @@ public class AutoTestScreen extends AppCompatActivity {
             @Override
             public void run() {
                 if (Constants.automatedTestList.size() > 0) {
-                    //_progressBar.setProgress(40);
                     Test currentTest = Constants.automatedTestList.get(0);
                     _currentTestImage.setImageResource(currentTest.getTestIconID());
-                    YoYo.with(Techniques.Bounce).duration(1000).playOn(_currentTestImage);
+                    YoYo.with(Techniques.Bounce).duration(1500).playOn(_currentTestImage);
+                    YoYo.with(Techniques.Shake).duration(1000).playOn(_currentTestImage);
                     switch (currentTest.getTestName()) {
                         case "Ram Test":
                             score = TestApi.testRam(context);

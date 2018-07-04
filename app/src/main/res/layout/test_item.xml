@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="220dp"
+    android:layout_width="169dp"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/imageTest"
-        android:layout_width="wrap_content"
-        android:layout_height="125dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="131dp"
+        android:layout_height="108dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_launcher_background" />
@@ -21,10 +21,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:textColor="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.655"
+        app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="External Storage Test" />
 </android.support.constraint.ConstraintLayout>
