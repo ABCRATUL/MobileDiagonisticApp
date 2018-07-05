@@ -55,7 +55,10 @@
         <activity
             android:name=".ManualTestActivities.ProximityTestActivity"
             android:theme="@style/dialog" />
-        <activity android:name=".ManualTestActivities.CameraRearTestActivity"
+        <activity
+            android:name=".ManualTestActivities.CameraRearTestActivity"
+            android:theme="@style/splash" />
+        <activity android:name=".ManualTestActivities.CameraFrontTestActivity"
             android:theme="@style/splash"/>
     </application>
 

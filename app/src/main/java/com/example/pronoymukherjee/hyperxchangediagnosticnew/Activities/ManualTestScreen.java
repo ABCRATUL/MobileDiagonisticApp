@@ -9,6 +9,7 @@ import android.widget.GridView;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Adapters.ManualGridAdapter;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.CameraFrontTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.CameraRearTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ProximityTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.SpeakerTest;
@@ -30,7 +31,7 @@ public class ManualTestScreen extends AppCompatActivity {
                 getApplicationContext());
         _testGrid.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        Intent intent=new Intent(ManualTestScreen.this, CameraRearTestActivity.class);
+        Intent intent=new Intent(ManualTestScreen.this, CameraFrontTestActivity.class);
         startActivity(intent);
     }
     private void initializeViews() {
