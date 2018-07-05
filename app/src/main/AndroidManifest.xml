@@ -58,8 +58,11 @@
         <activity
             android:name=".ManualTestActivities.CameraRearTestActivity"
             android:theme="@style/splash" />
-        <activity android:name=".ManualTestActivities.CameraFrontTestActivity"
-            android:theme="@style/splash"/>
+        <activity
+            android:name=".ManualTestActivities.CameraFrontTestActivity"
+            android:theme="@style/splash" />
+        <activity android:name=".ManualTestActivities.BackButtonTestActivity"
+            android:theme="@style/dialog"/>
     </application>
 
 </manifest>
