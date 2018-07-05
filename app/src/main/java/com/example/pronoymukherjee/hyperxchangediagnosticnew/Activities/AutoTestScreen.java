@@ -88,8 +88,8 @@ public class AutoTestScreen extends AppCompatActivity {
                 if (Constants.automatedTestList.size() > 0) {
                     Test currentTest = Constants.automatedTestList.get(0);
                     _currentTestImage.setImageResource(currentTest.getTestIconID());
-                    YoYo.with(Techniques.Bounce).duration(1500).playOn(_currentTestImage);
-                    YoYo.with(Techniques.Shake).duration(1000).playOn(_currentTestImage);
+                    //YoYo.with(Techniques.Bounce).duration(1500).playOn(_currentTestImage);
+                    YoYo.with(Techniques.Shake).duration(1500).playOn(_currentTestImage);
                     switch (currentTest.getTestName()) {
                         case "Ram Test":
                             score = TestApi.testRam(context);

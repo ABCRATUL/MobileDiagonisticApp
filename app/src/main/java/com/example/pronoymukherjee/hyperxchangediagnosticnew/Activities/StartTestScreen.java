@@ -50,7 +50,7 @@ public class StartTestScreen extends AppCompatActivity {
                     startActivity(startTestIntent);*/
                     //TODO: First start the Auto Test.
                     Intent startTestIntent = new Intent(StartTestScreen.this,
-                            AutoTestScreen.class);
+                            ManualTestScreen.class);
                     startActivity(startTestIntent);
                 } else {
                     Bundle bundle = new Bundle();

@@ -20,7 +20,7 @@ public class Constants {
 
     public static String TEST_STATUS_DIALOG_KEY = "testStatus";
     public static String TEST_STATUS_KEY = "statusTestKey";
-    public static int TEST_TIMER = 5000;
+    public static int TEST_TIMER = 7000;
     public static String SPEAKER_VOLUME_MSG = "Please make sure that your media volume is audible.";
 
 

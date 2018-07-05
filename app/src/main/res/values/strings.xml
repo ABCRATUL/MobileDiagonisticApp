@@ -12,4 +12,6 @@
     <string name="replay_audio">Replay Audio</string>
     <string name="volume_down_msg">Please press the Volume down Button</string>
     <string name="volume_up_test">Please press the Volume Up Button</string>
+    <string name="proximty_msg">You are covering the Proximity Sensor.</string>
+    <string name="proximity_neg_msg">Please move your hand over the Screen.</string>
 </resources>
