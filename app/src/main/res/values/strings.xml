@@ -15,4 +15,5 @@
     <string name="proximty_msg">You are covering the Proximity Sensor.</string>
     <string name="proximity_neg_msg">Please move your hand over the Screen.</string>
     <string name="please_press_the_aback_button">Please press the back Button.</string>
+    <string name="please_speak_the_number_displayed_on_the_screen">Please say the number in words.</string>
 </resources>

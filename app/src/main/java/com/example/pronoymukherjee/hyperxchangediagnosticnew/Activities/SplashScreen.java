@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.MicroPhoneTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 public class SplashScreen extends AppCompatActivity {
@@ -19,7 +20,8 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent changeActivityIntent=new Intent(SplashScreen.this,StartTestScreen.class);
+                Intent changeActivityIntent=new Intent(SplashScreen.this,
+                        StartTestScreen.class);
                 startActivity(changeActivityIntent);
             }
         },100);
