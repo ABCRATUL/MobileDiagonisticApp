@@ -2,6 +2,7 @@ package com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActiviti
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.os.BatteryManager;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,8 +63,8 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
      */
     private int generateRandomNumber() {
         Random random = new Random();
-        int high = 9999;
-        int low = 1000;
+        int high = 1000;
+        int low = 100;
         return random.nextInt(high + low) + low;
     }
 
@@ -87,9 +88,17 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
         if (requestCode == Constants.MICROPHONE_SPEAKER_CODE) {
             if (resultCode == RESULT_OK) {
                 ArrayList<String> resultSet=data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                int spokenNumber=Integer.parseInt(resultSet.get(0));
-                if (spokenNumber == generatedNumber) {
-                    completeActivity(true);
+                try {
+                    int spokenNumber = Integer.parseInt(resultSet.get(0));
+                    if (spokenNumber == generatedNumber) {
+                        completeActivity(true);
+                    }
+                }
+                catch (NumberFormatException e){
+                    Message.toastMesage(getApplicationContext(),
+                            "Please speak Correctly","");
+                    generatedNumber=generateRandomNumber();
+                    _numberShow.setText(String.valueOf(generatedNumber));
                 }
             }
         }

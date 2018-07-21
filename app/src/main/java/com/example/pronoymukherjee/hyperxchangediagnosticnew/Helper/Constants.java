@@ -20,7 +20,7 @@ public class Constants {
 
     public static String TEST_STATUS_DIALOG_KEY = "testStatus";
     public static String TEST_STATUS_KEY = "statusTestKey";
-    public static int TEST_TIMER = 7000;
+    public static int TEST_TIMER = 15000;
     public static int MICROPHONE_SPEAKER_CODE=566;
     public static String SPEAKER_VOLUME_MSG = "Please make sure that your media volume is audible.";
 
@@ -30,7 +30,7 @@ public class Constants {
      */
     public static void fillAutomatedTestList() {
         automatedTestList.add(new Test("Ram Test", 0, R.drawable.ic_ram));
-        automatedTestList.add(new Test("Battery Test", 0, R.drawable.ic_battery));
+        automatedTestList.add(new Test("Battery Test", 0, R.drawable.ic_battery_new));
         automatedTestList.add(new Test("Wifi Test", 0, R.drawable.ic_wifi_new));
         automatedTestList.add(new Test("Bluetooth Test", 0, R.drawable.ic_bluetooth));
         automatedTestList.add(new Test("NFC Test", 0, R.drawable.ic_nfc));
@@ -58,11 +58,13 @@ public class Constants {
         manualTestList.add(new Test("Vibration Test", 0, R.drawable.ic_vibration_test));
         manualTestList.add(new Test("Charger Test", 0, R.drawable.ic_charger_test));
         manualTestList.add(new Test("Headphone Test", 0, R.drawable.ic_headphone_jack_test));
+        manualTestList.add(new Test("RGB Test",0,R.drawable.ic_rgb));
     }
 
     public static int TOUCH_SCREEN_CODE = 1;
     public static int SPEAKER_CODE = 2;
     public static int VOLUME_BUTTON_UP_CODE = 3;
     public static int VOLUME_BUTTON_DOWN_CODE = 4;
+    public static int WRITE_SETTINGS_CODE=99;
 }
 

@@ -9,11 +9,13 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 public class PermissionExplainDialog extends AppCompatActivity {
     AppCompatButton _okayButton, _exitButton;
     AppCompatTextView _textView;
+    private String TAG_CLASS=PermissionExplainDialog.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +23,13 @@ public class PermissionExplainDialog extends AppCompatActivity {
         initializeViews();
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
-        String msg=bundle.getString(Constants.DIALOG_MSG);
+        String msg="";
+        try{
+            msg=bundle.getString(Constants.DIALOG_MSG);
+        }
+        catch (NullPointerException e){
+            Message.logMessage(TAG_CLASS,e.toString());
+        }
         if(msg.length()>0){
             _textView.setText(msg);
         }
