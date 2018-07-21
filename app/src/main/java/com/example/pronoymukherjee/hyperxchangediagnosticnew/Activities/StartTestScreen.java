@@ -121,6 +121,7 @@ public class StartTestScreen extends AppCompatActivity {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.M)
     private void requestPermission(String[] permissionsNeeded) {
         Message.logMessage(TAG_CLASS, permissionsNeeded.length + "");
         if (permissionsNeeded.length > 0) {
@@ -133,6 +134,7 @@ public class StartTestScreen extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == Constants.PERMISSION_REQUEST_CODE) {
