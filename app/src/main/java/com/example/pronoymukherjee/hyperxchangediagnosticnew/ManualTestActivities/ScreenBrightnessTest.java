@@ -33,18 +33,16 @@ public class ScreenBrightnessTest extends AppCompatActivity {
                 changeWriteSettings();
             }
         } else {
-            /*Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE,
-                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);*/
             try {
-                defaultBrightnessMode=Settings.System.getInt(getContentResolver(),
+                defaultBrightnessMode = Settings.System.getInt(getContentResolver(),
                         Settings.System.SCREEN_BRIGHTNESS_MODE);
-                if(defaultBrightnessMode==Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC){
+                if (defaultBrightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
                     Settings.System.putInt(getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS_MODE,
                             Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
                 }
             } catch (Settings.SettingNotFoundException e) {
-                Message.logMessage(TAG_CLASS,e.toString());
+                Message.logMessage(TAG_CLASS, e.toString());
             }
             changeBrightness();
         }
@@ -87,7 +85,8 @@ public class ScreenBrightnessTest extends AppCompatActivity {
         if (requestCode == Constants.WRITE_SETTINGS_CODE) {
             if (resultCode == RESULT_OK) {
                 defaultBrightness = getDefaultBrightness();
-                Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE,
+                Settings.System.putInt(getContentResolver(), Settings.System
+                                .SCREEN_BRIGHTNESS_MODE,
                         Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
                 changeBrightness();
             } else {
@@ -104,28 +103,29 @@ public class ScreenBrightnessTest extends AppCompatActivity {
     private void changeBrightness() {
         CountDownTimer countDownTimer = new
                 CountDownTimer(9000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                millisUntilFinished=9000-millisUntilFinished;
-                Message.logMessage(TAG_CLASS,millisUntilFinished+"");
-                int brightnessValue = (int) ((millisUntilFinished / 1000) * 10);
-                seekBar.setProgress(brightnessValue);
-                Settings.System.putInt(getContentResolver(),
-                        Settings.System.SCREEN_BRIGHTNESS, brightnessValue);
-            }
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        millisUntilFinished = 9000 - millisUntilFinished;
+                        Message.logMessage(TAG_CLASS, millisUntilFinished + "");
+                        int brightnessValue = (int) ((millisUntilFinished / 1000) * 10);
+                        seekBar.setProgress(brightnessValue);
+                        Settings.System.putInt(getContentResolver(),
+                                Settings.System.SCREEN_BRIGHTNESS, brightnessValue);
+                    }
 
-            @Override
-            public void onFinish() {
-                Settings.System.putInt(getContentResolver(),
-                        Settings.System.SCREEN_BRIGHTNESS, defaultBrightness);
-                if(defaultBrightnessMode==Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC){
-                    Settings.System.putInt(getContentResolver(),
-                            Settings.System.SCREEN_BRIGHTNESS_MODE,
-                            Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
-                }
-                completeActivity(true);
-            }
-        };
+                    @Override
+                    public void onFinish() {
+                        Settings.System.putInt(getContentResolver(),
+                                Settings.System.SCREEN_BRIGHTNESS, defaultBrightness);
+                        if (defaultBrightnessMode == Settings
+                                .System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                            Settings.System.putInt(getContentResolver(),
+                                    Settings.System.SCREEN_BRIGHTNESS_MODE,
+                                    Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+                        }
+                        completeActivity(true);
+                    }
+                };
         countDownTimer.start();
     }
 

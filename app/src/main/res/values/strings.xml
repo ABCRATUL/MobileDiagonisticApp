@@ -17,4 +17,9 @@
     <string name="please_press_the_aback_button">Please press the back Button.</string>
     <string name="please_speak_the_number_displayed_on_the_screen">Please say the number in words.</string>
     <string name="screen_brightness_msg">Screen Brightness</string>
+    <string name="home_button_test_msg">Please press the home button and then restore the app.</string>
+    <string name="vibrate_msg">Please hold the device on your hand then press the button to vibrate.</string>
+    <string name="vibrate_button">Vibrate</string>
+    <string name="vibration_hint">Enter the number of vibrations felt:</string>
+    <string name="submit">Submit</string>
 </resources>
