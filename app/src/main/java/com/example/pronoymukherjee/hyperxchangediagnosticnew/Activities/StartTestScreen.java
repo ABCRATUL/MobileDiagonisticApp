@@ -23,7 +23,9 @@ import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.HomeButtonTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ScreenBrightnessTest;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.VibrationTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class StartTestScreen extends AppCompatActivity {
                     startActivity(startTestIntent);*/
                     //TODO: First start the Auto Test.
                     Intent startTestIntent = new Intent(StartTestScreen.this,
-                            ScreenBrightnessTest.class);
+                            VibrationTestActivity.class);
                     startActivity(startTestIntent);
                 } else {
                     Bundle bundle = new Bundle();
@@ -129,7 +131,7 @@ public class StartTestScreen extends AppCompatActivity {
                     permissionsNeeded,
                     Constants.PERMISSION_REQUEST_CODE);
         } else {
-            permissionGranted=true;
+            permissionGranted = true;
             getTelephoneDetails();
         }
     }
@@ -182,6 +184,11 @@ public class StartTestScreen extends AppCompatActivity {
         return networkInfo != null && networkInfo.isConnected();
     }
 
+    /**
+     * Method to check the write Settings permission.
+     *
+     * @return true: If Can write else false.
+     */
     private boolean canWriteSettings() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return Settings.System.canWrite(getApplicationContext());
@@ -189,6 +196,9 @@ public class StartTestScreen extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Method to change the System Settings write permissions.
+     */
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void changeWriteSettings() {
         Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);

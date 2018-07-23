@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
 
     <application
@@ -65,13 +65,20 @@
         <activity
             android:name=".ManualTestActivities.BackButtonTestActivity"
             android:theme="@style/dialog" />
-        <activity android:name=".ManualTestActivities.ScreenBrightnessTest"
-            android:theme="@style/dialog"/>
+        <activity
+            android:name=".ManualTestActivities.ScreenBrightnessTest"
+            android:theme="@style/dialog" />
         <activity
             android:name=".ManualTestActivities.MicroPhoneTestActivity"
             android:theme="@style/dialog" />
-        <activity android:name=".ManualTestActivities.RGBTestActivity"
-            android:theme="@style/splash"/>
+        <activity
+            android:name=".ManualTestActivities.RGBTestActivity"
+            android:theme="@style/splash" />
+        <activity
+            android:name=".ManualTestActivities.HomeButtonTestActivity"
+            android:theme="@style/dialog" />
+        <activity android:name=".ManualTestActivities.VibrationTestActivity"
+            android:theme="@style/dialog"/>
     </application>
 
 </manifest>
