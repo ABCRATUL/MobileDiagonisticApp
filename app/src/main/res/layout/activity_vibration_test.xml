@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
+        android:inputType="number"
         android:layout_marginTop="40dp"
         android:hint="@string/vibration_hint"
         app:layout_constraintEnd_toEndOf="parent"

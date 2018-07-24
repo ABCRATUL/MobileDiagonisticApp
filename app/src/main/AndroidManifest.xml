@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -25,7 +26,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.SplashScreen">
+        <activity
+            android:name=".Activities.SplashScreen"
+            android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,7 +55,9 @@
         <activity
             android:name=".ManualTestActivities.VolumeButtonDownTest"
             android:theme="@style/dialog" />
-        <activity android:name=".ManualTestActivities.VolumeButtonUpTest" />
+        <activity
+            android:name=".ManualTestActivities.VolumeButtonUpTest"
+            android:theme="@style/dialog" />
         <activity
             android:name=".ManualTestActivities.ProximityTestActivity"
             android:theme="@style/dialog" />
@@ -77,8 +82,13 @@
         <activity
             android:name=".ManualTestActivities.HomeButtonTestActivity"
             android:theme="@style/dialog" />
-        <activity android:name=".ManualTestActivities.VibrationTestActivity"
-            android:theme="@style/dialog"/>
+        <activity
+            android:name=".ManualTestActivities.VibrationTestActivity"
+            android:theme="@style/dialog" />
+        <activity
+            android:name=".ManualTestActivities.ChargerTestActivity"
+            android:theme="@style/dialog" />
+        <activity android:name=".ManualTestActivities.PowerButtonTestActivity"></activity>
     </application>
 
 </manifest>

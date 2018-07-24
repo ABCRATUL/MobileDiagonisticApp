@@ -88,40 +88,42 @@ public class AutoTestScreen extends AppCompatActivity {
                 if (Constants.automatedTestList.size() > 0) {
                     Test currentTest = Constants.automatedTestList.get(0);
                     _currentTestImage.setImageResource(currentTest.getTestIconID());
-                    //YoYo.with(Techniques.Bounce).duration(1500).playOn(_currentTestImage);
-                    YoYo.with(Techniques.Shake).duration(1500).playOn(_currentTestImage);
+                    //YoYo.with(Techniques.Shake).duration(1500).playOn(_currentTestImage);
                     switch (currentTest.getTestName()) {
-                        case "Ram Test":
+                        case "Ram":
                             score = TestApi.testRam(context);
                             break;
-                        case "Battery Test":
+                        case "Battery":
                             score = TestApi.testBattery(context);
                             break;
-                        case "Wifi Test":
+                        case "Wifi":
                             score = TestApi.testNetwork(context);
                             break;
-                        case "Bluetooth Test":
+                        case "Bluetooth":
                             score = TestApi.testBluetooth(context);
                             break;
-                        case "NFC Test":
+                        case "NFC":
                             score = TestApi.testNFC(context);
                             break;
-                        case "Flash Test":
+                        case "Flash":
                             score = TestApi.testFlashAvailability(context);
                             break;
-                        case "Accelerometer Test":
+                        case "Accelerometer":
                             score = TestApi.testAcclerometer(context);
                             break;
-                        case "Gyroscope Test":
+                        case "Gyroscope":
                             score = TestApi.testGyroscope(context);
                             break;
-                        case "External Storage Test":
+                        case "External Storage":
                             score = TestApi.testExternalStorage(context);
                             break;
                     }
                     Message.logMessage(TAG_CLASS,score+"");
                     _progressBar.setProgressWithAnimation(90,1500);
                     currentTest.setScore(score);
+                    Constants.automatedTestList.remove(currentTest);
+                    testItemAdapter.notifyDataSetChanged();
+                    _progressBar.setProgressWithAnimation(100,1000);
                     if (score > 0) {
                         Constants.successTestList.add(currentTest);
                         YoYo.with(Techniques.Shake).duration(1500).playOn(_successBucket);
@@ -129,9 +131,6 @@ public class AutoTestScreen extends AppCompatActivity {
                         Constants.failedTestList.add(currentTest);
                         YoYo.with(Techniques.Shake).duration(1500).playOn(_failedBucket);
                     }
-                    Constants.automatedTestList.remove(currentTest);
-                    testItemAdapter.notifyDataSetChanged();
-                    _progressBar.setProgressWithAnimation(100,1500);
                     performTest();
                 }
                 else{
@@ -142,6 +141,7 @@ public class AutoTestScreen extends AppCompatActivity {
                     getResultIntent.putExtras(bundle);
                     startActivity(getResultIntent);
                 }
+                //_progressBar.setProgressWithAnimation(100,1000);
             }
         },3000);
         new Handler().postDelayed(new Runnable() {

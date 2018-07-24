@@ -41,7 +41,7 @@
         android:layout_marginTop="60dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.586"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toEndOf="@+id/modelNameShow"
         app:layout_constraintTop_toBottomOf="@+id/marketPlaceButton"
         tools:text="iPhone 7plus" />
@@ -65,7 +65,7 @@
         android:layout_marginTop="24dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintHorizontal_bias="0.368"
         app:layout_constraintStart_toEndOf="@+id/imeiNumberShow"
         app:layout_constraintTop_toBottomOf="@+id/modelName"
         tools:text="2345657898" />

@@ -22,4 +22,7 @@
     <string name="vibrate_button">Vibrate</string>
     <string name="vibration_hint">Enter the number of vibrations felt:</string>
     <string name="submit">Submit</string>
+    <string name="passed">Passed</string>
+    <string name="charger_msg">Please connect the charger to the phone and press the button to test.</string>
+    <string name="check_charger">Check the Charger</string>
 </resources>
