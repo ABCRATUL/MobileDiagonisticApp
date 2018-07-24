@@ -140,7 +140,7 @@ public class TestApi {
     }
     public static int testExternalStorage(Context context){
         String state= Environment.getExternalStorageState();
-        if(state==Environment.MEDIA_MOUNTED)
+        if(state.equals(Environment.MEDIA_MOUNTED))
             return 10;
         return 0;
     }

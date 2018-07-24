@@ -3,20 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_gravity="center"
     android:layout_height="match_parent"
     style="@style/splash"
     tools:context=".Activities.SplashScreen">
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:foregroundGravity="center_horizontal"
+        android:src="@drawable/splashscreen_logo"
         android:id="@+id/hxLogoImage"/>
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="140dp"
         android:id="@+id/diagnosticText"
         />
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:id="@+id/gifImg"/>
 </android.support.constraint.ConstraintLayout>

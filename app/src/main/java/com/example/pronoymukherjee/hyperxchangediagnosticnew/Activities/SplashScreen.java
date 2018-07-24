@@ -1,7 +1,6 @@
 package com.example.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 
 import android.content.Intent;
-import android.os.BatteryManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,7 +26,8 @@ public class SplashScreen extends AppCompatActivity {
                 Intent changeActivityIntent=new Intent(SplashScreen.this,
                         StartTestScreen.class);
                 startActivity(changeActivityIntent);
+                finish();
             }
-        },100);
+        },1000);
     }
 }

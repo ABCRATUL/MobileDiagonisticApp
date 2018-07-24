@@ -3,13 +3,13 @@ package com.example.pronoymukherjee.hyperxchangediagnosticnew.Adapters;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.ImageView;
+
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Objects.Test;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Objects.TestStatusItem;
@@ -34,7 +34,7 @@ public class TestStatusItemAdapter extends ArrayAdapter {
                     parent, false);
         }
         AppCompatTextView textView = view.findViewById(R.id.testStatusListTestName);
-        AppCompatImageView imageView = view.findViewById(R.id.testStatusListTestImage);
+        ImageView imageView = view.findViewById(R.id.testStatusListTestImage);
         Test item = dataSet.get(position);
         textView.setText(item.getTestName());
         imageView.setImageResource(item.getTestIconID());

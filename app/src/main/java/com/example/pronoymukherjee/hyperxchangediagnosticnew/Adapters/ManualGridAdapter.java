@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Objects.Test;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
@@ -44,7 +45,7 @@ public class ManualGridAdapter extends BaseAdapter {
         if(view==null){
             view= layoutInflater.inflate(R.layout.test_item,null);
             AppCompatTextView textView=view.findViewById(R.id.testName);
-            AppCompatImageView imageView=view.findViewById(R.id.imageTest);
+            ImageView imageView=view.findViewById(R.id.imageTest);
             textView.setText(dataset.get(position).getTestName());
             imageView.setImageResource(dataset.get(position).getTestIconID());
         }

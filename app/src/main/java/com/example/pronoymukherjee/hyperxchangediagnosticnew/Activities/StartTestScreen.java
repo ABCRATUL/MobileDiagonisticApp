@@ -23,7 +23,9 @@ import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ChargerTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.HomeButtonTestActivity;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.PowerButtonTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ScreenBrightnessTest;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.VibrationTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
@@ -59,8 +61,9 @@ public class StartTestScreen extends AppCompatActivity {
                     startActivity(startTestIntent);*/
                     //TODO: First start the Auto Test.
                     Intent startTestIntent = new Intent(StartTestScreen.this,
-                            VibrationTestActivity.class);
+                            PowerButtonTestActivity.class);
                     startActivity(startTestIntent);
+                    finish();
                 } else {
                     Bundle bundle = new Bundle();
                     bundle.putString(Constants.DIALOG_MSG, "Please connect the device to the internet.");
