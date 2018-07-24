@@ -25,4 +25,5 @@
     <string name="passed">Passed</string>
     <string name="charger_msg">Please connect the charger to the phone and press the button to test.</string>
     <string name="check_charger">Check the Charger</string>
+    <string name="power_button_msg">Long Press the Power Button and then press the back button.</string>
 </resources>

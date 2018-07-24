@@ -32,6 +32,7 @@ public class CameraFrontTestActivity extends AppCompatActivity implements Surfac
             @Override
             public void onPreviewFrame(byte[] bytes, Camera camera) {
                 testStatus=true;
+                completeActivity(true);
             }
         };
         camera.startPreview();
@@ -76,8 +77,10 @@ public class CameraFrontTestActivity extends AppCompatActivity implements Surfac
         },2500);
     }
     private void completeActivity(boolean status){
-        if(status)
+        if(status) {
+            closeActivityTimer.cancel();
             setResult(RESULT_OK);
+        }
         else
             setResult(RESULT_CANCELED);
         finish();

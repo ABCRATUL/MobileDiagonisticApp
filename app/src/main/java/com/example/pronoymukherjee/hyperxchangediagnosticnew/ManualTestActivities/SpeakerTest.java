@@ -31,6 +31,7 @@ public class SpeakerTest extends AppCompatActivity {
         setContentView(R.layout.activity_speaker_test);
         setTitle("");
         initializeViews();
+        this.setFinishOnTouchOutside(false);
         timer=new Timer();
         timer.schedule(new TimerTask() {
             @Override
