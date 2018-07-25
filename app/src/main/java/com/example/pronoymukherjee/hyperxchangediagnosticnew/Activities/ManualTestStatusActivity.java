@@ -54,6 +54,12 @@ public class ManualTestStatusActivity extends AppCompatActivity {
                 startActivity(openDialogIntent);
             }
         });
+        _nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void initializeViews() {

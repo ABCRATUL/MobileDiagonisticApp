@@ -22,6 +22,7 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_head_phone_test);
+        this.setFinishOnTouchOutside(false);
         initializeViews();
         setTitle("");
         final AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);

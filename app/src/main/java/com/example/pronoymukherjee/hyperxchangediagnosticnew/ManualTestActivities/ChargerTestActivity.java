@@ -27,6 +27,7 @@ public class ChargerTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chager_test);
+        this.setFinishOnTouchOutside(false);
         setTitle("");
         initializeViews();
         timer.schedule(new TimerTask() {

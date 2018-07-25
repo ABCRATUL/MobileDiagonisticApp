@@ -27,6 +27,7 @@ public class ScreenBrightnessTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_brightness_test);
+        this.setFinishOnTouchOutside(false);
         initializeViews();
         if (!canWriteSettings()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
