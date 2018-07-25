@@ -39,6 +39,7 @@ public class TestStatusActivity extends AppCompatActivity {
                         TestStatusDialogActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putBoolean(Constants.TEST_STATUS_DIALOG_KEY, true);
+                bundle.putBoolean(Constants.TEST_IS_MANUAL,false);
                 openDialogIntent.putExtras(bundle);
                 startActivity(openDialogIntent);
             }
@@ -50,6 +51,7 @@ public class TestStatusActivity extends AppCompatActivity {
                         TestStatusDialogActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putBoolean(Constants.TEST_STATUS_DIALOG_KEY, false);
+                bundle.putBoolean(Constants.TEST_IS_MANUAL,false);
                 openDialogIntent.putExtras(bundle);
                 startActivity(openDialogIntent);
             }

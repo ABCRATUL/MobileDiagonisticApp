@@ -44,7 +44,7 @@ public class VibrationTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Random random = new Random();
-                generatedPattern = random.nextInt(3+1) + 1;
+                generatedPattern = random.nextInt(2+1) + 1;
                 playVibration(generatedPattern);
             }
         });
@@ -58,6 +58,7 @@ public class VibrationTestActivity extends AppCompatActivity {
                         completeActivity(true);
                     }else{
                         completeActivity(false);
+                        timer.cancel();
                     }
                 } catch (NumberFormatException e) {
                     Message.toastMesage(getApplicationContext(),

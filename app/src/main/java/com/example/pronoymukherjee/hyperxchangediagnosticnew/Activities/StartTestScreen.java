@@ -23,7 +23,10 @@ import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.CameraFrontTestActivity;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.CameraRearTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ChargerTestActivity;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.HeadPhoneTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.HomeButtonTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.PowerButtonTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ScreenBrightnessTest;
@@ -61,7 +64,7 @@ public class StartTestScreen extends AppCompatActivity {
                     startActivity(startTestIntent);*/
                     //TODO: First start the Auto Test.
                     Intent startTestIntent = new Intent(StartTestScreen.this,
-                            PowerButtonTestActivity.class);
+                            ManualTestScreen.class);
                     startActivity(startTestIntent);
                     finish();
                 } else {

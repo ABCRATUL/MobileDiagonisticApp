@@ -72,13 +72,14 @@ public class CameraFrontTestActivity extends AppCompatActivity implements Surfac
             @Override
             public void run() {
                 camera.release();
-                completeActivity(true);
+                //completeActivity(true);
             }
         },2500);
     }
     private void completeActivity(boolean status){
         if(status) {
             closeActivityTimer.cancel();
+            camera.release();
             setResult(RESULT_OK);
         }
         else

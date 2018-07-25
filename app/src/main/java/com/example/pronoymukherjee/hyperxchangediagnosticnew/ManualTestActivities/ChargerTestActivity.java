@@ -21,6 +21,7 @@ public class ChargerTestActivity extends AppCompatActivity {
     AppCompatButton _checkButton;
     Timer timer;
     BroadcastReceiver receiver;
+    IntentFilter intentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class ChargerTestActivity extends AppCompatActivity {
                 checkCharger();
             }
         });
+        //registerReceiver(receiver,intentFilter);
     }
 
     /**
@@ -48,6 +50,7 @@ public class ChargerTestActivity extends AppCompatActivity {
     private void initializeViews() {
         _checkButton = findViewById(R.id.checkChargerButton);
         timer = new Timer();
+        intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
     }
 
     /**
@@ -62,7 +65,7 @@ public class ChargerTestActivity extends AppCompatActivity {
         } else {
             setResult(RESULT_CANCELED);
         }
-        unregisterReceiver(receiver);
+        //unregisterReceiver(receiver);
         finish();
     }
 
@@ -70,30 +73,32 @@ public class ChargerTestActivity extends AppCompatActivity {
      * Method to check the charger.
      */
     private void checkCharger() {
-        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 int status = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+                boolean isSuccess=false;
+                unregisterReceiver(receiver);
                 switch (status) {
                     case BatteryManager.BATTERY_PLUGGED_AC:
                         Message.toastMesage(getApplicationContext(),
                                 "On AC Power.", "");
-                        completeActivity(true);
+                        isSuccess=true;
                         break;
                     case BatteryManager.BATTERY_PLUGGED_USB:
                         Message.toastMesage(getApplicationContext(),
                                 "On USB Power", "");
-                        completeActivity(true);
+                        isSuccess=true;
                         break;
                     case 0:
                         Message.toastMesage(getApplicationContext(),
                                 "On Battery Power", "");
-                        completeActivity(false);
+                        isSuccess=false;
                         break;
                 }
+                completeActivity(isSuccess);
             }
         };
-        registerReceiver(receiver, intentFilter);
+        registerReceiver(receiver,intentFilter);
     }
 }
