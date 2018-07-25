@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
     android:layout_height="350dp"
+    android:layout_gravity="center"
     tools:context=".ManualTestActivities.MicroPhoneTestActivity">
 
     <android.support.v7.widget.AppCompatTextView
@@ -11,10 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:text="@string/please_speak_the_number_displayed_on_the_screen"
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,24 +26,25 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        tools:text="1567"
+        android:layout_marginTop="28dp"
         android:gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2"
+        tools:text="1567" />
 
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/voiceButton"
-        android:layout_width="131dp"
-        android:layout_height="131dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/ic_voice_input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numberShowMicro" />
 </android.support.constraint.ConstraintLayout>

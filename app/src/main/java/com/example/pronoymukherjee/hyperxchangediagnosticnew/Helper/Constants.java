@@ -19,6 +19,7 @@ public class Constants {
     public static ArrayList<Test> failedManualTestList = new ArrayList<>();
 
     public static String TEST_STATUS_DIALOG_KEY = "testStatus";
+    public static String TEST_IS_MANUAL="isManual";
     public static String TEST_STATUS_KEY = "statusTestKey";
     public static int TEST_TIMER = 15000;
     public static int MICROPHONE_SPEAKER_CODE=566;
@@ -59,6 +60,8 @@ public class Constants {
         manualTestList.add(new Test("Charger", 0, R.drawable.ic_charger_test));
         manualTestList.add(new Test("Headphone", 0, R.drawable.ic_headphone_jack_test));
         manualTestList.add(new Test("RGB",0,R.drawable.ic_rgb));
+        manualTestList.add(new Test("MicroPhone",0,R.drawable.ic_timer_busy));
+        manualTestList.add(new Test("Screen Brightness",0,R.drawable.ic_gesture_test));
     }
 
     public static int WRITE_SETTINGS_CODE=99;
@@ -77,5 +80,7 @@ public class Constants {
     public static int CHARGER_CODE=12;
     public static int HEADPHONE_CODE=13;
     public static int RGB_CODE=14;
+    public static int MICROPHONE_CODE=15;
+    public static int SCREEN_BRIGHTNESS_CODE=16;
 }
 

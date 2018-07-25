@@ -46,6 +46,7 @@ public class CameraRearTestActivity extends AppCompatActivity implements Surface
                         FileOutputStream fileOutputStream = new FileOutputStream(rearImage);
                         fileOutputStream.write(bytes);
                         completeActivity(true);
+                        //camera.release();
                     } else {
                         isSafeToTakePicture = true;
                     }
@@ -63,14 +64,15 @@ public class CameraRearTestActivity extends AppCompatActivity implements Surface
                         try {
                             camera.takePicture(null, null, pictureCallback);
                         } catch (RuntimeException e) {
+                            Message.logMessage(TAG_CLASS, e.toString());
                         }
                         isSafeToTakePicture = false;
-                        completeActivity(true);
+                        //completeActivity(true);
                     } else {
                         Message.logMessage(TAG_CLASS, "Not able to take picture.");
                     }
 
-                } catch (Exception e) {
+                } catch (RuntimeException e) {
                     Message.logMessage(TAG_CLASS, e.toString());
                 }
             }
@@ -81,7 +83,7 @@ public class CameraRearTestActivity extends AppCompatActivity implements Surface
             camera.setPreviewCallback(previewCallback);
             isSafeToTakePicture = true;
             Message.logMessage(TAG_CLASS, "Preview started");
-            completeActivity(true);
+            //completeActivity(true);
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());
         }
@@ -109,20 +111,35 @@ public class CameraRearTestActivity extends AppCompatActivity implements Surface
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Message.logMessage(TAG_CLASS, "Surface Destroyed.");
+        try {
+            Message.logMessage(TAG_CLASS, "Surface Destroyed.");
+        } catch (RuntimeException e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+        }
     }
 
     private void completeActivity(final boolean status) {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (status) {
-                    setResult(RESULT_OK);
-                } else
-                    setResult(RESULT_CANCELED);
-                finish();
+        if (status) {
+            setResult(RESULT_OK);
+        } else
+            setResult(RESULT_CANCELED);
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        try {
+            if (camera != null) {
+                camera.stopPreview();
+                camera.setPreviewCallback(null);
+                camera.release();
+                camera = null;
             }
-        }, Constants.TEST_TIMER);
+        }
+        catch (RuntimeException e){
+            Message.logMessage(TAG_CLASS,e.toString());
+        }
     }
 }

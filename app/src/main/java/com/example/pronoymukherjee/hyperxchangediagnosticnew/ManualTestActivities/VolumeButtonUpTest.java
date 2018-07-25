@@ -18,6 +18,8 @@ public class VolumeButtonUpTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volume_button_up_test);
+        this.setFinishOnTouchOutside(false);
+        setTitle("");
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override

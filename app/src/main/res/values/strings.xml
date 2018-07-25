@@ -26,4 +26,7 @@
     <string name="charger_msg">Please connect the charger to the phone and press the button to test.</string>
     <string name="check_charger">Check the Charger</string>
     <string name="power_button_msg">Long Press the Power Button and then press the back button.</string>
+    <string name="headphone_button">Please insert the head phone and press the button to check</string>
+    <string name="headphone_check">Check</string>
+    <string name="blank_text">Nothing to display</string>
 </resources>

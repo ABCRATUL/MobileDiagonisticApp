@@ -140,6 +140,7 @@ public class AutoTestScreen extends AppCompatActivity {
                     bundle.putBoolean(Constants.TEST_STATUS_KEY,true);
                     getResultIntent.putExtras(bundle);
                     startActivity(getResultIntent);
+                    finish();
                 }
                 //_progressBar.setProgressWithAnimation(100,1000);
             }
