@@ -21,6 +21,7 @@ public class PermissionExplainDialog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission_explain_dialog);
         initializeViews();
+        this.setFinishOnTouchOutside(false);
         setTitle("");
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();

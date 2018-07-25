@@ -26,6 +26,7 @@ public class ProximityTestActivity extends AppCompatActivity implements SensorEv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proximity_test);
+        this.setFinishOnTouchOutside(false);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         //assert sensorManager != null;
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
