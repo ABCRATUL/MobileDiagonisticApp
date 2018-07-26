@@ -6,4 +6,158 @@
     android:layout_height="match_parent"
     tools:context=".Activities.TestScoreScreen">
 
+    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+        android:id="@+id/testProgress"
+        android:layout_width="220dp"
+        android:layout_height="166dp"
+        android:layout_marginEnd="8dp"
+        app:cpb_background_progressbar_width="10dp"
+        app:cpb_progressbar_width="10dp"
+        app:cpb_background_progressbar_color="#ffff"
+        app:cpb_progressbar_color="#71d286"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/testScore"
+        android:layout_width="96dp"
+        android:layout_height="95dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center_horizontal"
+        android:textColor="#4679cc"
+        android:textSize="80sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="80" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/sadFace"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_sad_black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/okayFace" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/sadText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:text="@string/sad_msg"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintStart_toEndOf="@+id/sadFace"
+        app:layout_constraintTop_toBottomOf="@+id/okayText" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/okayFace"
+        android:layout_width="52dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_okay_black"
+        app:layout_constraintEnd_toStartOf="@+id/okayText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/happyFace" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/okayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="84dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/okay_msg"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/happyText" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/happyFace"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_happy_black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/testProgress" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/happyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/happy_msg"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toEndOf="@+id/happyFace"
+        app:layout_constraintTop_toBottomOf="@+id/testProgress" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/submitButtonTestScore"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/rectangle_rounded_shape"
+        android:text="@string/submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/exitAppButtonTestScore"
+        app:layout_constraintTop_toBottomOf="@+id/priceValue" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/exitAppButtonTestScore"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/rectangle_rounded_shape"
+        android:text="@string/exit_app"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceShow" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/priceShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="84dp"
+        android:textStyle="bold"
+        android:layout_marginTop="36dp"
+        android:text="@string/price_msg"
+        android:textColor="#000"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintEnd_toStartOf="@+id/priceValue"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sadText" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/priceValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="124dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_marginTop="36dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sadText"
+        tools:text="12000/-" />
 </android.support.constraint.ConstraintLayout>
