@@ -62,7 +62,7 @@ public class TestStatusDialogActivity extends AppCompatActivity {
     private void setAdapterForManual(boolean status) {
         boolean isEmpty = false;
         if (status) {
-            if (Constants.successManualTestList.size() >= 0) {
+            if (Constants.successManualTestList.size() > 0) {
                 statusItemAdapter = new
                         TestStatusItemAdapter(this,
                         Constants.successManualTestList);
@@ -73,7 +73,7 @@ public class TestStatusDialogActivity extends AppCompatActivity {
             }
             statusIconID = R.drawable.ic_sucess_bucket;
         } else {
-            if (Constants.failedManualTestList.size() >= 0) {
+            if (Constants.failedManualTestList.size() > 0) {
                 statusItemAdapter = new TestStatusItemAdapter(this,
                         Constants.failedManualTestList);
                 _emptyView.setVisibility(View.GONE);
@@ -83,11 +83,11 @@ public class TestStatusDialogActivity extends AppCompatActivity {
         }
         if (!isEmpty) {
             _testList.setAdapter(statusItemAdapter);
+            statusItemAdapter.notifyDataSetChanged();
         } else {
             _testList.setEmptyView(_emptyView);
         }
         _testDialogIcon.setImageResource(statusIconID);
-        statusItemAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -98,7 +98,7 @@ public class TestStatusDialogActivity extends AppCompatActivity {
     private void setAdapterForAuto(boolean status) {
         boolean isEmpty = false;
         if (status) {
-            if (Constants.successManualTestList.size() >= 0) {
+            if (Constants.successTestList.size() > 0) {
                 statusItemAdapter = new
                         TestStatusItemAdapter(this,
                         Constants.successTestList);
@@ -109,7 +109,7 @@ public class TestStatusDialogActivity extends AppCompatActivity {
             }
             statusIconID = R.drawable.ic_sucess_bucket;
         } else {
-            if (Constants.failedManualTestList.size() >= 0) {
+            if (Constants.failedTestList.size() > 0) {
                 statusItemAdapter = new TestStatusItemAdapter(this,
                         Constants.failedTestList);
                 _emptyView.setVisibility(View.GONE);
@@ -119,11 +119,11 @@ public class TestStatusDialogActivity extends AppCompatActivity {
         }
         if (!isEmpty) {
             _testList.setAdapter(statusItemAdapter);
+            statusItemAdapter.notifyDataSetChanged();
         } else {
             _testList.setEmptyView(_emptyView);
         }
         _testDialogIcon.setImageResource(statusIconID);
-        statusItemAdapter.notifyDataSetChanged();
     }
 }
 

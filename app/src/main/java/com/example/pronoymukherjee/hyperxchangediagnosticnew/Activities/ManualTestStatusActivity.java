@@ -57,7 +57,9 @@ public class ManualTestStatusActivity extends AppCompatActivity {
         _nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(ManualTestStatusActivity.this,
+                        TestScoreScreen.class);
+                startActivity(intent);
             }
         });
     }

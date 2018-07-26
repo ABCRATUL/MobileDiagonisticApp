@@ -29,4 +29,9 @@
     <string name="headphone_button">Please insert the head phone and press the button to check</string>
     <string name="headphone_check">Check</string>
     <string name="blank_text">Nothing to display</string>
+    <string name="sad_msg">Heavy dents and scratches</string>
+    <string name="okay_msg">Light Dents and scratches.</string>
+    <string name="happy_msg">No Major Scratched or dents.</string>
+    <string name="price_msg">Price:</string>
+    <string name="finger_print_msg">Please press your Finger on the finger print sensor</string>
 </resources>
