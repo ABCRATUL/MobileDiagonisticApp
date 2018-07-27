@@ -72,6 +72,7 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
      * @param status: true if successful, else false.
      */
     private void completeActivity(boolean status) {
+        fingerPrintAuthHelper.stopAuth();
         if (status) {
             timer.cancel();
             setResult(RESULT_OK);
@@ -80,4 +81,5 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
         }
         finish();
     }
+
 }
