@@ -6,17 +6,28 @@ import com.example.pronoymukherjee.hyperxchangediagnosticnew.Objects.Test;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Constants {
     private static String TAG_CLASS = Constants.class.getSimpleName();
     public static int PERMISSION_REQUEST_CODE = 69;
     public static String DIALOG_MSG = "dialogMsg";
     public static int DIALOG_INTERNET_CODE = 169;
+    //Automated Test List.
     public static ArrayList<Test> automatedTestList = new ArrayList<>();
+    public static ArrayList<Test> automatedTestListBackUp = new ArrayList<>();
+
     public static ArrayList<Test> successTestList = new ArrayList<>();
     public static ArrayList<Test> failedTestList = new ArrayList<>();
-
+    /**
+     * OS Name List.
+     */
+    public static Map<String, String> OS_NAMES = new HashMap<>();
+    //Manual Test List.
     public static ArrayList<Test> manualTestList = new ArrayList<>();
+    public static ArrayList<Test> manualTestListBackUP = new ArrayList<>();
+
     public static ArrayList<Test> successManualTestList = new ArrayList<>();
     public static ArrayList<Test> failedManualTestList = new ArrayList<>();
 
@@ -41,7 +52,7 @@ public class Constants {
         automatedTestList.add(new Test("Accelerometer", 0, R.drawable.ic_accelerometer));
         automatedTestList.add(new Test("Gyroscope", 0, R.drawable.ic_gyroscope));
         automatedTestList.add(new Test("External Storage", 0, R.drawable.ic_external_storage));
-        Message.logMessage(TAG_CLASS, automatedTestList.size() + "");
+        automatedTestListBackUp = automatedTestList;// Keeping a copy of Automated List.
     }
 
     /**
@@ -65,13 +76,34 @@ public class Constants {
         manualTestList.add(new Test("MicroPhone", 0, R.drawable.ic_timer_busy));
         manualTestList.add(new Test("Screen Brightness", 0, R.drawable.ic_gesture_test));
         manualTestList.add(new Test("Fingerprint", 0, R.drawable.ic_fingerprint));
+        manualTestListBackUP = manualTestList;//Keeping a copy of Manual Test List.
+    }
+
+    /**
+     * Method to fill the Android OS Names.
+     */
+    public static void fillOSNames() {
+        OS_NAMES.put("2.3", "GingerBread");
+        OS_NAMES.put("3.0", "HoneyComb");
+        OS_NAMES.put("4.0", "IceCream SandWich");
+        OS_NAMES.put("4.1", "JellyBean");
+        OS_NAMES.put("4.2", "JellyBean");
+        OS_NAMES.put("4.3", "JellyBean");
+        OS_NAMES.put("4.4", "KitKat");
+        OS_NAMES.put("5.0", "Lollipop");
+        OS_NAMES.put("5.1", "Lollipop");
+        OS_NAMES.put("6.0", "Marshmallow");
+        OS_NAMES.put("7.0", "Nougat");
+        OS_NAMES.put("7.1", "Nougat");
+        OS_NAMES.put("8.0", "Oreo");
+        OS_NAMES.put("8.1", "Oreo");
+        OS_NAMES.put("9.0", "Android P");
     }
 
     public static int WRITE_SETTINGS_CODE = 99;
     public static int SAD_CODE = 3001;
     public static int HAPPY_CODE = 3002;
     public static int OKAY_CODE = 3003;
-    public static String FINGER_PRINT_KEY = "digKey";
 
     public static int TOUCH_SCREEN_CODE = 1;
     public static int SPEAKER_CODE = 2;
@@ -89,6 +121,16 @@ public class Constants {
     public static int RGB_CODE = 14;
     public static int MICROPHONE_CODE = 15;
     public static int SCREEN_BRIGHTNESS_CODE = 16;
-    public static int FINGER_PRINT_CODE=17;
+    public static int FINGER_PRINT_CODE = 17;
+
+    public static String HX_REPORT_FILE_NAME="HXDiagnosticReport.xls";
+    public static String HX_REPORT_SHEET="DiagnosticReport";
+    public static String HX_FOLDER_NAME="HyperXchange";
+    public static String HX_REPORT_FOLDER_NAME="HxReport";
+    public static String HX_CAMERA_FOLDER="HxCamera";
+    public static String HX_CAMERA_FILE_NAME="Rear.jpg";
+
+    public static String LEGAL_COMPANY_NAME ="YIBEAL TRADEX PVT. LTD. PUNE";
+    public static String COMPANY_NAME="HyperXchange";
 }
 

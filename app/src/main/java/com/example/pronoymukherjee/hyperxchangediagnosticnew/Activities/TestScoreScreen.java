@@ -1,6 +1,7 @@
 package com.example.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -9,13 +10,15 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.ExcelCreator;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class TestScoreScreen extends AppCompatActivity {
     AppCompatImageView _sadFace, _okayFace, _happyFace;
     AppCompatTextView _sadText, _okayText, _happyText, _testScore, _priceValue;
-    AppCompatButton _submitButton, _cancelButton;
+    AppCompatButton _submitButton, _exitButton;
     CircularProgressBar _circularProgressBar;
     int basePrice = 12000;
     int physicalStatus;
@@ -26,10 +29,10 @@ public class TestScoreScreen extends AppCompatActivity {
         setContentView(R.layout.activity_test_score_screen);
         initializeViews();
         _circularProgressBar
-                .setProgress(Constants.successManualTestList.size()+
+                .setProgress(Constants.successManualTestList.size() +
                         Constants.successTestList.size());
         _testScore.setText(String.valueOf(Constants.successManualTestList.size()
-                +Constants.successTestList.size()));
+                + Constants.successTestList.size()));
         //TODO:Get the Price.
         _priceValue.setText(String.valueOf(basePrice));
         _sadText.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +65,22 @@ public class TestScoreScreen extends AppCompatActivity {
                 changePrice(physicalStatus);
             }
         });
+        _exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exitApp();
+            }
+        });
+        _submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExcelCreator excelCreator =new ExcelCreator(getApplicationContext());
+                boolean isWrite= excelCreator.createExcel();
+                if(isWrite)
+                    Message.toastMesage(getApplicationContext(),
+                            "Wrote","");
+            }
+        });
     }
 
     /**
@@ -76,7 +95,7 @@ public class TestScoreScreen extends AppCompatActivity {
         _okayText = findViewById(R.id.okayText);
         _happyText = findViewById(R.id.happyText);
         _submitButton = findViewById(R.id.submitButtonTestScore);
-        _cancelButton = findViewById(R.id.exitAppButtonTestScore);
+        _exitButton = findViewById(R.id.exitAppButtonTestScore);
         _circularProgressBar = findViewById(R.id.testProgress);
         _priceValue = findViewById(R.id.priceValue);
     }
@@ -94,5 +113,16 @@ public class TestScoreScreen extends AppCompatActivity {
             _priceValue.setText("10000/-");
         else if (CODE == Constants.HAPPY_CODE)
             _priceValue.setText("12000/-");
+    }
+
+    @SuppressLint("ObsoleteSdkInt")
+    private void exitApp() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            this.finishAffinity();
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.finishAndRemoveTask();
+        }
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
     }
 }

@@ -65,7 +65,7 @@ public class StartTestScreen extends AppCompatActivity {
                     startActivity(startTestIntent);*/
                     //TODO: First start the Auto Test.
                     Intent startTestIntent = new Intent(StartTestScreen.this,
-                            FingerprintTestActivity.class);
+                            ManualTestScreen.class);
                     startActivity(startTestIntent);
                     finish();
                 } else {

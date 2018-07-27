@@ -16,6 +16,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         Constants.fillAutomatedTestList();
         Constants.fillManualTestList();
+        Constants.fillOSNames();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

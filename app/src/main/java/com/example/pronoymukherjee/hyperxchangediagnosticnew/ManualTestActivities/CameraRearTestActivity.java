@@ -36,13 +36,14 @@ public class CameraRearTestActivity extends AppCompatActivity implements Surface
             @Override
             public void onPictureTaken(byte[] bytes, Camera camera) {
                 File hyperXchangeDir = new File(Environment.getExternalStorageDirectory()
-                        + File.separator + "HyperXchangeCamera");
+                        + File.separator + Constants.HX_FOLDER_NAME+File.separator
+                        +Constants.HX_CAMERA_FOLDER);
                 if (!hyperXchangeDir.exists()) {
                     hyperXchangeDir.mkdirs();
                 }
                 try {
                     if (bytes != null) {
-                        File rearImage = new File(hyperXchangeDir, "Rear.jpg");
+                        File rearImage = new File(hyperXchangeDir, Constants.HX_CAMERA_FILE_NAME);
                         FileOutputStream fileOutputStream = new FileOutputStream(rearImage);
                         fileOutputStream.write(bytes);
                         completeActivity(true);
