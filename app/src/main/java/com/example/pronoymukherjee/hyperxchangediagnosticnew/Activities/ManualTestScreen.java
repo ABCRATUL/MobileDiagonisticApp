@@ -174,20 +174,20 @@ public class ManualTestScreen extends AppCompatActivity {
                             startActivityForResult(intent, Constants.SCREEN_BRIGHTNESS_CODE);
                             break;
                         case "Fingerprint":
-                            FingerprintManager fingerprintManager= (FingerprintManager)
+                            FingerprintManager fingerprintManager = (FingerprintManager)
                                     getSystemService(FINGERPRINT_SERVICE);
-                            if(fingerprintManager.isHardwareDetected()){
-                                if(fingerprintManager.hasEnrolledFingerprints()){
-                                    intent=new Intent(ManualTestScreen.this,
+                            if (fingerprintManager.isHardwareDetected()) {
+                                if (fingerprintManager.hasEnrolledFingerprints()) {
+                                    intent = new Intent(ManualTestScreen.this,
                                             FingerprintTestActivity.class);
-                                    startActivityForResult(intent,Constants.FINGER_PRINT_CODE);
-                                }else {
+                                    startActivityForResult(intent, Constants.FINGER_PRINT_CODE);
+                                } else {
                                     Message.toastMesage(getApplicationContext(),
-                                            "Please enroll some finger prints. ","");
+                                            "Please enroll some finger prints. ", "");
                                 }
-                            }else {
+                            } else {
                                 Message.toastMesage(getApplicationContext(),
-                                        "Your device doesn't support finger print.","");
+                                        "Your device doesn't support finger print.", "");
                             }
                             break;
                     }
@@ -208,18 +208,25 @@ public class ManualTestScreen extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.VOLUME_BUTTON_UP_CODE) {
+            if (resultCode == RESULT_OK) {
+                Constants.successManualTestList.add(currentTest);
+            } else if (resultCode == RESULT_CANCELED) {
+                Constants.failedManualTestList.add(currentTest);
+            }
+        }
         if (resultCode == RESULT_OK) {
             Constants.successManualTestList.add(currentTest);
         } else if (resultCode == RESULT_CANCELED) {
             Constants.failedManualTestList.add(currentTest);
         }
         Constants.manualTestList.remove(currentTest);
-        gridAdapter.notifyDataSetChanged();
         if (Constants.manualTestList.size() >= 0) {
-
+            gridAdapter=new ManualGridAdapter(Constants.manualTestList,getApplicationContext());
             Message.logMessage(TAG_CLASS, "FAILED:" + Constants.failedManualTestList.size() + "");
             Message.logMessage(TAG_CLASS, "SUCCESS:" + Constants.successManualTestList.size() + "");
-
+            _testGrid.setAdapter(gridAdapter);
+            gridAdapter.notifyDataSetChanged();
             performTest();
         } else {
             Intent statusIntent = new Intent(ManualTestScreen.this,

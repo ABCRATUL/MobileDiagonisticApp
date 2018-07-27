@@ -6,23 +6,36 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 import com.multidots.fingerprintauth.FingerPrintAuthCallback;
 import com.multidots.fingerprintauth.FingerPrintAuthHelper;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerprintTestActivity extends AppCompatActivity implements FingerPrintAuthCallback {
     private String TAG_CLASS = FingerprintManager.class.getSimpleName();
     FingerPrintAuthHelper fingerPrintAuthHelper;
+    Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint_test);
+        setTitle("");
         fingerPrintAuthHelper = FingerPrintAuthHelper.getHelper(this, this);
         fingerPrintAuthHelper.startAuth();
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                completeActivity(false);
+            }
+        }, Constants.TEST_TIMER);
     }
 
     @Override
@@ -42,12 +55,29 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
 
     @Override
     public void onAuthSuccess(FingerprintManager.CryptoObject cryptoObject) {
-        Message.toastMesage(getApplicationContext(), "Success", "");
+        Message.toastMesage(getApplicationContext(), "Finger print Checked.", "");
+        completeActivity(true);
     }
 
     @Override
     public void onAuthFailed(int errorCode, String errorMessage) {
         Message.toastMesage(getApplicationContext(),
                 "Finger Print Detected", "");
+        completeActivity(true);
+    }
+
+    /**
+     * Method to complete the Activity.
+     *
+     * @param status: true if successful, else false.
+     */
+    private void completeActivity(boolean status) {
+        if (status) {
+            timer.cancel();
+            setResult(RESULT_OK);
+        } else {
+            setResult(RESULT_CANCELED);
+        }
+        finish();
     }
 }
