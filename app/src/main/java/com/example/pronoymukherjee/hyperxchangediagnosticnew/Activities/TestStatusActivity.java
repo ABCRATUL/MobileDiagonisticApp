@@ -59,6 +59,8 @@ public class TestStatusActivity extends AppCompatActivity {
         _nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO:Go to Manual Test.
+                Constants.fillAutomatedTestList();
                 Intent manualTestIntent = new Intent(TestStatusActivity.this,
                         ManualTestScreen.class);
                 startActivity(manualTestIntent);
