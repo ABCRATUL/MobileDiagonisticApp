@@ -52,7 +52,8 @@ public class Constants {
         automatedTestList.add(new Test("Accelerometer", 0, R.drawable.ic_accelerometer));
         automatedTestList.add(new Test("Gyroscope", 0, R.drawable.ic_gyroscope));
         automatedTestList.add(new Test("External Storage", 0, R.drawable.ic_external_storage));
-        automatedTestListBackUp = automatedTestList;// Keeping a copy of Automated List.
+        // Keeping a copy of Automated List.
+        automatedTestListBackUp = new ArrayList<>(Constants.automatedTestList);
     }
 
     /**
@@ -76,7 +77,8 @@ public class Constants {
         manualTestList.add(new Test("MicroPhone", 0, R.drawable.ic_timer_busy));
         manualTestList.add(new Test("Screen Brightness", 0, R.drawable.ic_gesture_test));
         manualTestList.add(new Test("Fingerprint", 0, R.drawable.ic_fingerprint));
-        manualTestListBackUP = manualTestList;//Keeping a copy of Manual Test List.
+        //Keeping a copy of Manual Test List.
+        manualTestListBackUP = new ArrayList<>(Constants.manualTestList);
     }
 
     /**

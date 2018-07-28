@@ -9,10 +9,12 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.telephony.TelephonyManager;
 
+import java.util.Map;
+
 
 public class DeviceInformation {
     Context context;
-    private String TAG_CLASS=DeviceInformation.class.getSimpleName();
+    private String TAG_CLASS = DeviceInformation.class.getSimpleName();
 
     public DeviceInformation(Context context) {
         this.context = context;
@@ -87,7 +89,11 @@ public class DeviceInformation {
         TelephonyManager telephonyManager = (TelephonyManager) context
                 .getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
         assert telephonyManager != null;
-        return telephonyManager.getSimCountryIso().toUpperCase();
+        String region= telephonyManager.getSimCountryIso().toUpperCase();
+        if(region.equals("")){
+            return "NA";
+        }
+        return region;
     }
 
     /**
@@ -102,22 +108,22 @@ public class DeviceInformation {
         assert telephonyManager != null;
         return telephonyManager.getDeviceId();
     }
+
     @SuppressLint("PrivateApi")
-    public double getBatteryActualCapacity(){
+    public double getBatteryActualCapacity() {
         Object powerProfile;
-        double batteryCapacity=0;
-        String POWER="com.android.internal.os.PowerProfile";
-        try{
-            powerProfile=Class.forName(POWER)
+        double batteryCapacity = 0;
+        String POWER = "com.android.internal.os.PowerProfile";
+        try {
+            powerProfile = Class.forName(POWER)
                     .getConstructor(Context.class)
                     .newInstance(context.getApplicationContext());
-            batteryCapacity=(double) Class
+            batteryCapacity = (double) Class
                     .forName(POWER)
                     .getMethod("getBatteryCapacity")
                     .invoke(powerProfile);
-        }
-        catch (Exception e){
-            Message.logMessage(TAG_CLASS,e.toString());
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
             return 0.0;
         }
         return batteryCapacity;
@@ -125,13 +131,47 @@ public class DeviceInformation {
 
     /**
      * Method to get the Wear level new Battery.
+     *
      * @return The Wear Battery capacity.
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public int getBatteryWearCapacity(){
-        BatteryManager batteryManager= (BatteryManager) context
+    public double getBatteryWearCapacity() {
+        BatteryManager batteryManager = (BatteryManager) context
                 .getSystemService(Context.BATTERY_SERVICE);
         assert batteryManager != null;
-        return batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER);
+        return (batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)*0.001);
+    }
+
+    /**
+     * Method to get the OS Version. Android Version.
+     *
+     * @return OS Version.
+     */
+    public String getOSVersion() {
+        return Build.VERSION.RELEASE;
+    }
+
+    /**
+     * Method to get the API Level.
+     *
+     * @return API Level.
+     */
+    public String getAPILevel() {
+        return String.valueOf(Build.VERSION.SDK_INT);
+    }
+
+    /**
+     * Method to get the OS Name.
+     *
+     * @param osVersion: The OS Version Code.
+     * @return OSName: The OS Name matching the OS Version code.
+     */
+    public String getOSName(String osVersion) {
+        for (Map.Entry<String, String> item : Constants.OS_NAMES.entrySet()) {
+            if (osVersion.startsWith(item.getKey())) {
+                return item.getValue();
+            }
+        }
+        return null;
     }
 }
