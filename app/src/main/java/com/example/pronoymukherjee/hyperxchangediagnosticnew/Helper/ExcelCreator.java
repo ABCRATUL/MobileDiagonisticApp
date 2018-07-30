@@ -25,14 +25,9 @@ import jxl.write.WriteException;
  * This is the class to make the excel files for the test Report.
  */
 public class ExcelCreator {
-    Context context;
-
-    public ExcelCreator(Context context) {
-        this.context = context;
-    }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public boolean createExcel() {
+    public static boolean createExcel(Context context) {
         DeviceInformation deviceInformation = new DeviceInformation(context);
         File path = new File(Environment.getExternalStorageDirectory() + File.separator +
                 Constants.HX_FOLDER_NAME + File.separator + Constants.HX_REPORT_FOLDER_NAME);
@@ -194,34 +189,35 @@ public class ExcelCreator {
                 row++;
             }
             //Adding the overall test.
-            row+=2;
-            headingLabel=new Label(2,row,"Overall:",cellFormat);
+            row += 2;
+            headingLabel = new Label(2, row, "Overall:", cellFormat);
             sheet.addCell(headingLabel);
-            if(Constants.failedManualTestList.size()>=0 || Constants.failedTestList.size()==0){
-                valueLabel=new Label(3,row,"Unsuccessful",cellFormat);
-            }else
-                valueLabel=new Label(3,row,"Successful",cellFormat);
+            if (Constants.failedManualTestList.size() >= 0 || Constants.failedTestList.size() == 0) {
+                valueLabel = new Label(3, row, "Unsuccessful", cellFormat);
+            } else
+                valueLabel = new Label(3, row, "Successful", cellFormat);
             sheet.addCell(valueLabel);
 
             //Report Details.
-            row+=2;
-            midHeadingLabel=new Label(2,row,"Report Details",cellFormatMidHeading);
+            row += 2;
+            midHeadingLabel = new Label(2, row, "Report Details", cellFormatMidHeading);
             sheet.addCell(midHeadingLabel);
-            row+=2;
+            row += 2;
             //Adding the Report UUID
-            headingLabel=new Label(2,row,"Report UUID:",cellFormat);
-            String reportUUID=deviceInformation.getUUID()+deviceInformation.getBSSID();
-            valueLabel=new Label(3,row,reportUUID,cellFormat);
+            headingLabel = new Label(2, row, "Report UUID:", cellFormat);
+            String reportUUID = deviceInformation.getUUID() + Calendar
+                    .getInstance().getTimeInMillis();
+            valueLabel = new Label(3, row, reportUUID, cellFormat);
             sheet.addCell(headingLabel);
             sheet.addCell(valueLabel);
 
             //Adding the Current Date.
             row++;
-            Date currentDate= Calendar.getInstance().getTime();
-            DateFormat format= new DateFormat("dd MMM yyyy hh:mm:ss");
-            WritableCellFormat dateFormat=new WritableCellFormat(format);
-            headingLabel=new Label(2,row,"Report Date:",cellFormat);
-            DateTime dateTime=new DateTime(3,row,currentDate,dateFormat);
+            Date currentDate = Calendar.getInstance().getTime();
+            DateFormat format = new DateFormat("dd MMM yyyy hh:mm:ss");
+            WritableCellFormat dateFormat = new WritableCellFormat(format);
+            headingLabel = new Label(2, row, "Report Date:", cellFormat);
+            DateTime dateTime = new DateTime(3, row, currentDate, dateFormat);
             sheet.addCell(headingLabel);
             sheet.addCell(dateTime);
 
@@ -235,7 +231,7 @@ public class ExcelCreator {
         }
     }
 
-    private boolean isPresent(Test test, boolean isManual) {
+    private static boolean isPresent(Test test, boolean isManual) {
         if (!isManual) {
             for (int i = 0; i < Constants.successTestList.size(); i++) {
                 if (Constants.successTestList.get(i).getTestName().equals(test.getTestName()))

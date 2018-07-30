@@ -8,14 +8,14 @@
     style="@style/dialog"
     tools:context=".ManualTestActivities.ProximityTestActivity">
 
-    <android.support.v7.widget.AppCompatImageView
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/appCompatImageView5"
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/ic_proximity_test"
+        android:src="@drawable/ic_proximity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

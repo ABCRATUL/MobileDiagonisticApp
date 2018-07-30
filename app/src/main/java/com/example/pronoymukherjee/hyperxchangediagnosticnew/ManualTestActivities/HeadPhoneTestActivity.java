@@ -4,6 +4,7 @@ import android.media.AudioManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
@@ -69,5 +70,12 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
             timer.cancel();
         }
         finish();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

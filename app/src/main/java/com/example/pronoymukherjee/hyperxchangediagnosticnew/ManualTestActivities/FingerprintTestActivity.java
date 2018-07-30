@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
@@ -50,12 +51,12 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
 
     @Override
     public void onBelowMarshmallow() {
-        Message.logMessage(TAG_CLASS, "API Level doesn't support Finger print.");
+        Message.logMessage(TAG_CLASS, "API Level doesn't support finger_print.");
     }
 
     @Override
     public void onAuthSuccess(FingerprintManager.CryptoObject cryptoObject) {
-        Message.toastMesage(getApplicationContext(), "Finger print Checked.", "");
+        Message.toastMesage(getApplicationContext(), "finger_print Checked.", "");
         completeActivity(true);
     }
 
@@ -82,4 +83,11 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
         finish();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

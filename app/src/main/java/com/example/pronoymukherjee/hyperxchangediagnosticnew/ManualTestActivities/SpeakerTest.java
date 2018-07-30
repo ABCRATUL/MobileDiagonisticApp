@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Activities.PermissionExplainDialog;
@@ -23,8 +24,9 @@ public class SpeakerTest extends AppCompatActivity {
     AppCompatEditText _userInput;
     TextToSpeech textToSpeech;
     int generatedNumber;
-    public String TAG_CLASS=SpeakerTest.class.getSimpleName();
+    public String TAG_CLASS = SpeakerTest.class.getSimpleName();
     Timer timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +34,13 @@ public class SpeakerTest extends AppCompatActivity {
         setTitle("");
         initializeViews();
         this.setFinishOnTouchOutside(false);
-        timer=new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 completeActivity(false);
             }
-        },Constants.TEST_TIMER);
+        }, Constants.TEST_TIMER);
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -56,7 +58,7 @@ public class SpeakerTest extends AppCompatActivity {
                     if (inputNumber == generatedNumber) {
                         completeActivity(true);
                         timer.cancel();
-                        Message.logMessage(TAG_CLASS,"true");
+                        Message.logMessage(TAG_CLASS, "true");
                     }
                 } catch (NumberFormatException e) {
                     Message.toastMesage(getApplicationContext(), "Please provide number only",
@@ -128,5 +130,13 @@ public class SpeakerTest extends AppCompatActivity {
             setResult(RESULT_CANCELED);
         }
         finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

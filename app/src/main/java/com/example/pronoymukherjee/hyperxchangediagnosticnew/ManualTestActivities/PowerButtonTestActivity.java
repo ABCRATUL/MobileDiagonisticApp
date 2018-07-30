@@ -2,6 +2,7 @@ package com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActiviti
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
@@ -56,5 +57,13 @@ public class PowerButtonTestActivity extends AppCompatActivity {
                     "Press the back button now.", "");
             completeActivity(true);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

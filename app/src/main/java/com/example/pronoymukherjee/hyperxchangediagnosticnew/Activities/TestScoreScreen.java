@@ -74,11 +74,10 @@ public class TestScoreScreen extends AppCompatActivity {
         _submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExcelCreator excelCreator =new ExcelCreator(getApplicationContext());
-                boolean isWrite= excelCreator.createExcel();
-                if(isWrite)
+                boolean isWrite = ExcelCreator.createExcel(getApplicationContext());
+                if (isWrite)
                     Message.toastMesage(getApplicationContext(),
-                            "Wrote","");
+                            "Wrote", "");
             }
         });
     }

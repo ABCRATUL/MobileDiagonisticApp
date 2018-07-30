@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 public class ManualTestStatusActivity extends AppCompatActivity {
     AppCompatImageButton _successButton, _failedButton, _nextButton;
-    AppCompatImageView _imageView;
+    ImageView _imageView;
     private String TAG_CLASS = ManualTestStatusActivity.class.getSimpleName();
     Intent intent;
 
@@ -26,7 +27,7 @@ public class ManualTestStatusActivity extends AppCompatActivity {
             Bundle bundle=intent.getExtras();
             boolean isSuccess=bundle.getBoolean(Constants.TEST_STATUS_KEY);
             if(isSuccess){
-                _imageView.setImageResource(R.drawable.ic_test_completed);
+                _imageView.setImageResource(R.drawable.ic_test_complete);
             }else
                 _imageView.setImageResource(R.drawable.ic_test_failed);
         }

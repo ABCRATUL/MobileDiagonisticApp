@@ -7,6 +7,7 @@ import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.KeyEvent;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
@@ -20,13 +21,14 @@ public class ProximityTestActivity extends AppCompatActivity implements SensorEv
     Sensor sensor;
     SensorManager sensorManager;
     Timer timer;
-    private String TAG_CLASS=ProximityTestActivity.class.getSimpleName();
+    private String TAG_CLASS = ProximityTestActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proximity_test);
         this.setFinishOnTouchOutside(false);
+        setTitle("");
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         //assert sensorManager != null;
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
@@ -73,19 +75,27 @@ public class ProximityTestActivity extends AppCompatActivity implements SensorEv
             timer.cancel();
         } else
             setResult(RESULT_CANCELED);
-        Message.logMessage(TAG_CLASS,status+"");
+        Message.logMessage(TAG_CLASS, status + "");
         finish();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        sensorManager.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

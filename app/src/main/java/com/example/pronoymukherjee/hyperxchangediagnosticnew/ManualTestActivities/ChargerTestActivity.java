@@ -8,6 +8,7 @@ import android.os.BatteryManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
@@ -78,28 +79,36 @@ public class ChargerTestActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 int status = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
-                boolean isSuccess=false;
+                boolean isSuccess = false;
                 unregisterReceiver(receiver);
                 switch (status) {
                     case BatteryManager.BATTERY_PLUGGED_AC:
                         Message.toastMesage(getApplicationContext(),
                                 "On AC Power.", "");
-                        isSuccess=true;
+                        isSuccess = true;
                         break;
                     case BatteryManager.BATTERY_PLUGGED_USB:
                         Message.toastMesage(getApplicationContext(),
                                 "On USB Power", "");
-                        isSuccess=true;
+                        isSuccess = true;
                         break;
                     case 0:
                         Message.toastMesage(getApplicationContext(),
                                 "On Battery Power", "");
-                        isSuccess=false;
+                        isSuccess = false;
                         break;
                 }
                 completeActivity(isSuccess);
             }
         };
-        registerReceiver(receiver,intentFilter);
+        registerReceiver(receiver, intentFilter);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

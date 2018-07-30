@@ -3,10 +3,12 @@ package com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActiviti
 import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.List;
@@ -85,5 +87,12 @@ public class CameraFrontTestActivity extends AppCompatActivity implements Surfac
         else
             setResult(RESULT_CANCELED);
         finish();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            return false;
+        }
+        return super.onKeyDown(keyCode,event);
     }
 }

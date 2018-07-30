@@ -4,15 +4,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
-import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 public class TestStatusActivity extends AppCompatActivity {
-    AppCompatImageView _statusIcon;
+    ImageView _statusIcon;
     AppCompatImageButton _successBucket, _failedBucket, _nextButton;
+    AppCompatTextView _successNumber,_failedNumber;
     int statusIconID;
 
     @Override
@@ -25,13 +27,15 @@ public class TestStatusActivity extends AppCompatActivity {
             Bundle bundle = intent.getExtras();
             boolean isCompleted = bundle.getBoolean(Constants.TEST_STATUS_KEY);
             if (isCompleted)
-                statusIconID = R.drawable.ic_test_completed;
+                statusIconID = R.drawable.ic_test_complete;
             else statusIconID = R.drawable.ic_test_failed;
             _statusIcon.setImageResource(statusIconID);
         }
 
         _successBucket.setBackground(getResources().getDrawable(R.drawable.ic_sucess_bucket));
         _failedBucket.setBackground(getResources().getDrawable(R.drawable.ic_failed_bucket));
+        _successNumber.setText(String.valueOf(Constants.successTestList.size()));
+        _failedNumber.setText(String.valueOf(Constants.failedTestList.size()));
         _successBucket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,5 +77,7 @@ public class TestStatusActivity extends AppCompatActivity {
         _successBucket = findViewById(R.id.successTestSet);
         _failedBucket = findViewById(R.id.failedTestSet);
         _nextButton = findViewById(R.id.next);
+        _successNumber =findViewById(R.id.passedNumber);
+        _failedNumber=findViewById(R.id.failedNumber);
     }
 }
