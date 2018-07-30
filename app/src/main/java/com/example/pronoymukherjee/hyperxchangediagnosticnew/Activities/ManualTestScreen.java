@@ -215,10 +215,10 @@ public class ManualTestScreen extends AppCompatActivity {
         if (requestCode == Constants.VOLUME_BUTTON_UP_CODE) {
             if (resultCode == RESULT_OK) {
                 Constants.successManualTestList.add(currentTest);
-                YoYo.with(Techniques.StandUp).playOn(_successBucket);
+                YoYo.with(Techniques.StandUp).duration(1500).playOn(_successBucket);
             } else if (resultCode == RESULT_CANCELED) {
                 Constants.failedManualTestList.add(currentTest);
-                YoYo.with(Techniques.StandUp).playOn(_failedBucket);
+                YoYo.with(Techniques.StandUp).duration(1500).playOn(_failedBucket);
             }
         }
         if (resultCode == RESULT_OK) {

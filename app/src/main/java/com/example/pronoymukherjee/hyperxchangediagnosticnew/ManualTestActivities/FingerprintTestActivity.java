@@ -56,7 +56,7 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
 
     @Override
     public void onAuthSuccess(FingerprintManager.CryptoObject cryptoObject) {
-        Message.toastMesage(getApplicationContext(), "finger_print Checked.", "");
+        Message.toastMesage(getApplicationContext(), "Finger print Checked.", "");
         completeActivity(true);
     }
 
