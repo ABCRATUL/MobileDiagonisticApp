@@ -2,8 +2,9 @@ package com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActiviti
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.os.BatteryManager;
+import android.os.Handler;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
@@ -27,6 +28,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
     private String TAG_CLASS = MicroPhoneTestActivity.class.getSimpleName();
     int generatedNumber;
     Timer timer;
+    TextToSpeech textToSpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_micro_phone_test);
         setTitle("");
         initializeViews();
+        initializeTextToSpeech();
         this.setFinishOnTouchOutside(false);
         generatedNumber = generateRandomNumber();
         _numberShow.setText(String.valueOf(generatedNumber));
@@ -76,9 +79,15 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, new Locale("en", "In"));
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Hello, Please say the number in words.");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please say the number in words.");
         try {
             startActivityForResult(intent, Constants.MICROPHONE_SPEAKER_CODE);
+            /*new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    textToSpeech.speak(String.valueOf(generatedNumber),TextToSpeech.QUEUE_FLUSH,null);
+                }
+            },1700);*/
         } catch (ActivityNotFoundException e) {
             Message.logMessage(TAG_CLASS, e.toString());
         }
@@ -92,6 +101,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
                 try {
                     int spokenNumber = Integer.parseInt(resultSet.get(0));
                     if (spokenNumber == generatedNumber) {
+                        Message.logMessage(TAG_CLASS,"True");
                         completeActivity(true);
                     }
                 } catch (NumberFormatException e) {
@@ -125,5 +135,16 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void initializeTextToSpeech() {
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    textToSpeech.setLanguage(Locale.getDefault());
+                }
+            }
+        });
     }
 }

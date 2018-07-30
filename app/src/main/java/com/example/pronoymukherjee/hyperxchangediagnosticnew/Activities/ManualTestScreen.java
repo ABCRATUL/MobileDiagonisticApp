@@ -107,12 +107,12 @@ public class ManualTestScreen extends AppCompatActivity {
                                     SpeakerTest.class);
                             startActivityForResult(intent, Constants.SPEAKER_CODE);
                             break;
-                        case "Volume Button Up":
+                        case "Volume Up":
                             intent = new Intent(ManualTestScreen.this,
                                     VolumeButtonUpTest.class);
                             startActivityForResult(intent, Constants.VOLUME_BUTTON_UP_CODE);
                             break;
-                        case "Volume Button Down":
+                        case "Volume Down":
                             intent = new Intent(ManualTestScreen.this,
                                     VolumeButtonDownTest.class);
                             startActivityForResult(intent, Constants.VOLUME_BUTTON_DOWN_CODE);
@@ -172,7 +172,7 @@ public class ManualTestScreen extends AppCompatActivity {
                                     MicroPhoneTestActivity.class);
                             startActivityForResult(intent, Constants.MICROPHONE_CODE);
                             break;
-                        case "Screen Brightness":
+                        case "Brightness":
                             intent = new Intent(ManualTestScreen.this,
                                     ScreenBrightnessTest.class);
                             startActivityForResult(intent, Constants.SCREEN_BRIGHTNESS_CODE);
