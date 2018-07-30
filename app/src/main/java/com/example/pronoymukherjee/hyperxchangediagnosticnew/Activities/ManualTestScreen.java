@@ -13,7 +13,10 @@ import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Adapters.ManualGridAdapter;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
@@ -39,7 +42,8 @@ import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 public class ManualTestScreen extends AppCompatActivity {
     AppCompatImageButton _exitApp;
-    AppCompatImageView _currentTest, _successBucket, _failedBucket;
+    AppCompatImageView _successBucket, _failedBucket;
+    ImageView _currentTest;
     GridView _testGrid;
     ManualGridAdapter gridAdapter;
     Test currentTest;
@@ -211,8 +215,10 @@ public class ManualTestScreen extends AppCompatActivity {
         if (requestCode == Constants.VOLUME_BUTTON_UP_CODE) {
             if (resultCode == RESULT_OK) {
                 Constants.successManualTestList.add(currentTest);
+                YoYo.with(Techniques.StandUp).playOn(_successBucket);
             } else if (resultCode == RESULT_CANCELED) {
                 Constants.failedManualTestList.add(currentTest);
+                YoYo.with(Techniques.StandUp).playOn(_failedBucket);
             }
         }
         if (resultCode == RESULT_OK) {
@@ -222,7 +228,7 @@ public class ManualTestScreen extends AppCompatActivity {
         }
         Constants.manualTestList.remove(currentTest);
         if (Constants.manualTestList.size() >= 0) {
-            gridAdapter=new ManualGridAdapter(Constants.manualTestList,getApplicationContext());
+            gridAdapter = new ManualGridAdapter(Constants.manualTestList, getApplicationContext());
             Message.logMessage(TAG_CLASS, "FAILED:" + Constants.failedManualTestList.size() + "");
             Message.logMessage(TAG_CLASS, "SUCCESS:" + Constants.successManualTestList.size() + "");
             _testGrid.setAdapter(gridAdapter);

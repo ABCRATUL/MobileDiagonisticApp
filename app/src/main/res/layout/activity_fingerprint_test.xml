@@ -20,13 +20,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="92dp"
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="122dp"
         android:layout_height="120dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="84dp"
-        android:src="@drawable/ic_fingerprint"
+        android:src="@drawable/ic_finger_print"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.536"
         app:layout_constraintStart_toStartOf="parent"

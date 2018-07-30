@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
@@ -82,7 +83,7 @@ public class VibrationTestActivity extends AppCompatActivity {
     /**
      * Method to play the vibration.
      *
-     * @param pattern: The Vibration pattern.
+     * @param pattern: The vibration pattern.
      */
     private void playVibration(int pattern) {
         Message.logMessage(TAG_CLASS,pattern+"");
@@ -115,5 +116,12 @@ public class VibrationTestActivity extends AppCompatActivity {
             Message.logMessage(TAG_CLASS,"FALSE");
         }
         finish();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

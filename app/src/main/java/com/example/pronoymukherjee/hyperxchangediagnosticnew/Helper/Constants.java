@@ -48,7 +48,7 @@ public class Constants {
         automatedTestList.add(new Test("Wifi", 0, R.drawable.ic_wifi));
         automatedTestList.add(new Test("Bluetooth", 0, R.drawable.ic_bluetooth));
         automatedTestList.add(new Test("NFC", 0, R.drawable.ic_nfc));
-        automatedTestList.add(new Test("Flash", 0, R.drawable.flashlight));
+        automatedTestList.add(new Test("Flash", 0, R.drawable.ic_flash));
         automatedTestList.add(new Test("Accelerometer", 0, R.drawable.ic_accelerometer));
         automatedTestList.add(new Test("Gyroscope", 0, R.drawable.ic_gyroscope));
         automatedTestList.add(new Test("External Storage", 0, R.drawable.ic_external_storage));
@@ -60,23 +60,23 @@ public class Constants {
      * This is the method to fill the manual test list.
      */
     public static void fillManualTestList() {
-        manualTestList.add(new Test("Touch Screen", 0, R.drawable.ic_touch_screen_test));
+        manualTestList.add(new Test("Touch Screen", 0, R.drawable.ic_touch_screen));
         manualTestList.add(new Test("Speaker", 0, R.drawable.ic_speaker));
-        manualTestList.add(new Test("Volume Button Up", 0, R.drawable.ic_volume_button_test));
-        manualTestList.add(new Test("Volume Button Down", 0, R.drawable.ic_volume_button_test));
-        manualTestList.add(new Test("Proximity", 0, R.drawable.ic_proximity_test));
-        manualTestList.add(new Test("Rear Camera", 0, R.drawable.ic_rear_cam_test));
-        manualTestList.add(new Test("Front Camera", 0, R.drawable.ic_front_cam_test));
-        manualTestList.add(new Test("Back Button", 0, R.drawable.ic_back_button_test));
-        manualTestList.add(new Test("Home Button", 0, R.drawable.ic_home_button_test));
-        manualTestList.add(new Test("Power Button", 0, R.drawable.ic_power_button_test));
+        manualTestList.add(new Test("Volume Button Up", 0, R.drawable.ic_volume));
+        manualTestList.add(new Test("Volume Button Down", 0, R.drawable.ic_volume));
+        manualTestList.add(new Test("Proximity", 0, R.drawable.ic_proximity));
+        manualTestList.add(new Test("Rear Camera", 0, R.drawable.ic_back_camera));
+        manualTestList.add(new Test("Front Camera", 0, R.drawable.ic_front_camera));
+        manualTestList.add(new Test("Back Button", 0, R.drawable.ic_back_button));
+        manualTestList.add(new Test("Home Button", 0, R.drawable._ic_home));
+        manualTestList.add(new Test("Power Button", 0, R.drawable.ic_power_button));
         manualTestList.add(new Test("Vibration", 0, R.drawable.ic_vibration_test));
-        manualTestList.add(new Test("Charger", 0, R.drawable.ic_charger_test));
-        manualTestList.add(new Test("Headphone", 0, R.drawable.ic_headphone_jack_test));
+        manualTestList.add(new Test("Charger", 0, R.drawable.ic_charger));
+        manualTestList.add(new Test("Headphone", 0, R.drawable.ic_headphone_jack));
         manualTestList.add(new Test("RGB", 0, R.drawable.ic_rgb));
-        manualTestList.add(new Test("MicroPhone", 0, R.drawable.ic_timer_busy));
-        manualTestList.add(new Test("Screen Brightness", 0, R.drawable.ic_gesture_test));
-        manualTestList.add(new Test("Fingerprint", 0, R.drawable.ic_fingerprint));
+        manualTestList.add(new Test("MicroPhone", 0, R.drawable.ic_timer));
+        manualTestList.add(new Test("Screen Brightness", 0, R.drawable.ic_screen_brightness));
+        manualTestList.add(new Test("Fingerprint", 0, R.drawable.ic_finger_print));
         //Keeping a copy of Manual Test List.
         manualTestListBackUP = new ArrayList<>(Constants.manualTestList);
     }

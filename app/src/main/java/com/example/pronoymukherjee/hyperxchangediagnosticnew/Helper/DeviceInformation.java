@@ -89,8 +89,8 @@ public class DeviceInformation {
         TelephonyManager telephonyManager = (TelephonyManager) context
                 .getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
         assert telephonyManager != null;
-        String region= telephonyManager.getSimCountryIso().toUpperCase();
-        if(region.equals("")){
+        String region = telephonyManager.getSimCountryIso().toUpperCase();
+        if (region.equals("")) {
             return "NA";
         }
         return region;
@@ -139,7 +139,8 @@ public class DeviceInformation {
         BatteryManager batteryManager = (BatteryManager) context
                 .getSystemService(Context.BATTERY_SERVICE);
         assert batteryManager != null;
-        return (batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)*0.001);
+        return Math.floor(batteryManager
+                .getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER) * 0.001);
     }
 
     /**

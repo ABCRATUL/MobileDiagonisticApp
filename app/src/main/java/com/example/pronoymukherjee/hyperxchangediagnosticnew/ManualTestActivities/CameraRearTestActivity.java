@@ -79,7 +79,7 @@ public class CameraRearTestActivity extends AppCompatActivity implements Surface
             }
         };
         try {
-            camera = Camera.open(0);    // For Back Camera
+            camera = Camera.open(0);    // For back_Camera
             camera.setDisplayOrientation(90);
             camera.setPreviewCallback(previewCallback);
             isSafeToTakePicture = true;

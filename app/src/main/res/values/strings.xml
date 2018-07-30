@@ -34,4 +34,5 @@
     <string name="happy_msg">No Major Scratched or dents.</string>
     <string name="price_msg">Price:</string>
     <string name="finger_print_msg">Please press your Finger on the finger print sensor</string>
+    <string name="failed">Failed</string>
 </resources>

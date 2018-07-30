@@ -41,10 +41,13 @@ public class VolumeButtonDownTest extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-            Message.toastMesage(getApplicationContext(), "Volume Down button pressed.", "");
+            Message.toastMesage(getApplicationContext(), "volume Down button pressed.", "");
             timer.cancel();
             completeActivity(true);
+            return true;
+        } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
         }
-        return false;
+        return super.onKeyDown(keyCode, event);
     }
 }

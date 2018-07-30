@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
@@ -63,8 +64,8 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
      */
     private int generateRandomNumber() {
         Random random = new Random();
-        int high = 1000;
-        int low = 100;
+        int high = 9;
+        int low = 0;
         return random.nextInt(high + low) + low;
     }
 
@@ -87,17 +88,16 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.MICROPHONE_SPEAKER_CODE) {
             if (resultCode == RESULT_OK) {
-                ArrayList<String> resultSet=data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                ArrayList<String> resultSet = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 try {
                     int spokenNumber = Integer.parseInt(resultSet.get(0));
                     if (spokenNumber == generatedNumber) {
                         completeActivity(true);
                     }
-                }
-                catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     Message.toastMesage(getApplicationContext(),
-                            "Please speak Correctly","");
-                    generatedNumber=generateRandomNumber();
+                            "Please speak Correctly", "");
+                    generatedNumber = generateRandomNumber();
                     _numberShow.setText(String.valueOf(generatedNumber));
                 }
             }
@@ -112,10 +112,18 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
     private void completeActivity(boolean status) {
         if (status) {
             timer.cancel();
-            Message.logMessage(TAG_CLASS,"Success");
+            Message.logMessage(TAG_CLASS, "Success");
             setResult(RESULT_OK);
         } else
             setResult(RESULT_CANCELED);
         finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

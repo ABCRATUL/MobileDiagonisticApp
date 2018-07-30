@@ -46,7 +46,9 @@
         <activity
             android:name=".Activities.AutoTestScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Activities.TestStatusActivity" />
+        <activity
+            android:name=".Activities.TestStatusActivity"
+            android:theme="@style/splash" />
         <activity
             android:name=".Activities.TestStatusDialogActivity"
             android:theme="@style/dialog" />
@@ -54,7 +56,10 @@
         <activity
             android:name=".Activities.PermissionExplainDialog"
             android:theme="@style/dialog" />
-        <activity android:name=".Activities.ManualTestScreen" />
+        <activity
+            android:name=".Activities.ManualTestScreen"
+            android:theme="@style/splash" />
+
         <activity android:name=".ManualTestActivities.TouchScreenTest" />
         <activity
             android:name=".ManualTestActivities.SpeakerTest"
@@ -101,9 +106,13 @@
         <activity
             android:name=".ManualTestActivities.HeadPhoneTestActivity"
             android:theme="@style/dialog" />
-        <activity android:name=".Activities.ManualTestStatusActivity" />
-        <activity android:name=".ManualTestActivities.FingerprintTestActivity"
-            android:theme="@style/dialog"/>
+        <activity
+            android:name=".Activities.ManualTestStatusActivity"
+            android:theme="@style/splash" />
+
+        <activity
+            android:name=".ManualTestActivities.FingerprintTestActivity"
+            android:theme="@style/dialog" />
     </application>
 
 </manifest>

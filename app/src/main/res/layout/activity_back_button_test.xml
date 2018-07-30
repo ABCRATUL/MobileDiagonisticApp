@@ -7,14 +7,14 @@
     android:layout_gravity="center"
     tools:context=".ManualTestActivities.BackButtonTestActivity">
 
-    <android.support.v7.widget.AppCompatImageView
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/appCompatImageView"
         android:layout_width="150dp"
         android:layout_height="120dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/ic_back_button_test"
+        android:src="@drawable/ic_back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

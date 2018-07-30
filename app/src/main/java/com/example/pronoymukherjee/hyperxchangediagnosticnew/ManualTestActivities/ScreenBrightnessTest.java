@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSeekBar;
+import android.view.KeyEvent;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
@@ -28,6 +29,7 @@ public class ScreenBrightnessTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_brightness_test);
         this.setFinishOnTouchOutside(false);
+        setTitle("");
         initializeViews();
         if (!canWriteSettings()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -152,5 +154,13 @@ public class ScreenBrightnessTest extends AppCompatActivity {
             setResult(RESULT_CANCELED);
         }
         finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
