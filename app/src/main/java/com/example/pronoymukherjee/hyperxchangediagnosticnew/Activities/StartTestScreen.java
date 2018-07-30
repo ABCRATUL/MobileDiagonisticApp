@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -76,6 +77,19 @@ public class StartTestScreen extends AppCompatActivity {
                     dialogIntent.putExtras(bundle);
                     startActivityForResult(dialogIntent, Constants.DIALOG_INTERNET_CODE);
                 }
+            }
+        });
+        _marketPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=getPackageManager()
+                        .getLaunchIntentForPackage("com.hyperxchange.hyperxchange");
+                if(intent==null){
+                    intent=new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("market://details?id="+"com.hyperxchange.hyperxchange"));
+                }
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
         _modelName.setText(modelName);
