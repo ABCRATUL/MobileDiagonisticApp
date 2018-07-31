@@ -8,12 +8,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -121,7 +120,7 @@ public class PixelGridView extends View {
 
         if(completed == true)
         {
-            Toast.makeText(getContext(), "Touchscreen OK", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Touchscreen OK", Toast.LENGTH_SHORT).show();
 
             score =1;
             //new intent here
@@ -151,7 +150,7 @@ public class PixelGridView extends View {
             int column = (int)(event.getX() / cellWidth);
             int row = (int)(event.getY() / cellHeight);
 
-            Log.i(this.getClass().getName(), "column : " +column+" row: "+row);
+            Message.logMessage(this.getClass().getName(), "column : " +column+" row: "+row);
 
 
 
@@ -166,7 +165,7 @@ public class PixelGridView extends View {
             int column = (int)(event.getX() / cellWidth);
             int row = (int)(event.getY() / cellHeight);
 
-            Log.i(this.getClass().getName(), "column : " +column+" row: "+row);
+            Message.logMessage(this.getClass().getName(), "column : " +column+" row: "+row);
 
 
             //  cellChecked[column][row] = !cellChecked[column][row];
@@ -180,7 +179,7 @@ public class PixelGridView extends View {
             int column = (int)(event.getX() / cellWidth);
             int row = (int)(event.getY() / cellHeight);
 
-            Log.i(this.getClass().getName(), "column : " +column+" row: "+row);
+            Message.logMessage(this.getClass().getName(), "column : " +column+" row: "+row);
 
             //System.out.print(cellChecked[column][row]+" cellChecked[column][row]");
             //cellChecked[column][row] = !cellChecked[column][row];

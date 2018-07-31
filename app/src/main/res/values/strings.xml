@@ -12,18 +12,18 @@
     <string name="replay_audio">Replay Audio</string>
     <string name="volume_down_msg">Please press the Volume down Button</string>
     <string name="volume_up_test">Please press the Volume Up Button</string>
-    <string name="proximty_msg">You are covering the Proximity Sensor.</string>
+    <string name="proximity_msg">You are covering the Proximity Sensor.</string>
     <string name="proximity_neg_msg">Please move your hand over the Screen.</string>
-    <string name="please_press_the_aback_button">Please press the back Button.</string>
-    <string name="please_speak_the_number_displayed_on_the_screen">Please say the number in words.</string>
+    <string name="back_button_msg">Please press the back Button.</string>
+    <string name="microphone_msg">Tap the Button and please say the number in words.</string>
     <string name="screen_brightness_msg">Screen Brightness</string>
-    <string name="home_button_test_msg">Please press the home button and then restore the app.</string>
-    <string name="vibrate_msg">Please hold the device on your hand then press the button to vibrate.</string>
+    <string name="home_button_test_msg">Please press the home button and then restore the app using menu button.</string>
+    <string name="vibrate_msg">Please hold the device on your hand and then press the button to vibrate.</string>
     <string name="vibrate_button">Vibrate</string>
     <string name="vibration_hint">Enter the number of vibrations felt:</string>
     <string name="submit">Submit</string>
     <string name="passed">Passed</string>
-    <string name="charger_msg">Please connect the charger to the phone and press the button to test.</string>
+    <string name="charger_msg">Please connect the charger to the phone and then press the button to test.</string>
     <string name="check_charger">Check the Charger</string>
     <string name="power_button_msg">Long Press the Power Button and then press the back button.</string>
     <string name="headphone_button">Please insert the head phone and press the button to check</string>
@@ -35,4 +35,5 @@
     <string name="price_msg">Price:</string>
     <string name="finger_print_msg">Please press your Finger on the finger print sensor</string>
     <string name="failed">Failed</string>
+    <string name="allow_system_settings">Please allow to modify system settings.</string>
 </resources>

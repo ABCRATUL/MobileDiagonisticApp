@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -23,14 +24,18 @@ import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.BackButtonTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.CameraFrontTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.CameraRearTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ChargerTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.FingerprintTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.HeadPhoneTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.HomeButtonTestActivity;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.MicroPhoneTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.PowerButtonTestActivity;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ProximityTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ScreenBrightnessTest;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.TouchScreenTest;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.VibrationTestActivity;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
@@ -52,9 +57,9 @@ public class StartTestScreen extends AppCompatActivity {
         initializeViews();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermissions();
-            if (!canWriteSettings()) {
+            /*if (!canWriteSettings()) {
                 changeWriteSettings();
-            }
+            }*/
         }
         _startTest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +83,19 @@ public class StartTestScreen extends AppCompatActivity {
                 }
             }
         });
+        _marketPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=getPackageManager()
+                        .getLaunchIntentForPackage("com.hyperxchange.hyperxchange");
+                if(intent==null){
+                    intent=new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("market://details?id="+"com.hyperxchange.hyperxchange"));
+                }
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
         _modelName.setText(modelName);
     }
 
@@ -93,6 +111,15 @@ public class StartTestScreen extends AppCompatActivity {
             assert telephonyManager != null;
             imeiNumber = telephonyManager.getDeviceId(0);
             _imeiNumber.setText(imeiNumber);
+        }
+        if(!canWriteSettings()){
+            Intent intent=new Intent(StartTestScreen.this,
+                    PermissionExplainDialog.class);
+            Bundle bundle=new Bundle();
+            bundle.putString(Constants.DIALOG_MSG,getResources()
+                    .getString(R.string.allow_system_settings));
+            intent.putExtras(bundle);
+            startActivityForResult(intent,Constants.WRITE_SETTINGS_CODE);
         }
     }
 
@@ -160,6 +187,7 @@ public class StartTestScreen extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.PERMISSION_REQUEST_CODE) {
@@ -168,13 +196,8 @@ public class StartTestScreen extends AppCompatActivity {
         } else if (requestCode == Constants.DIALOG_INTERNET_CODE) {
             //TODO: Start test after checking internet.
         } else if (requestCode == Constants.WRITE_SETTINGS_CODE) {
-            if (resultCode != RESULT_OK) {
-                Intent explainIntent = new Intent(StartTestScreen.this,
-                        PermissionExplainDialog.class);
-                Bundle bundle = new Bundle();
-                bundle.putString(Constants.DIALOG_MSG, "Please allow to modify System settings.");
-                explainIntent.putExtras(bundle);
-                startActivityForResult(explainIntent, Constants.PERMISSION_REQUEST_CODE);
+            if (resultCode == RESULT_OK) {
+                changeWriteSettings();
             }
         }
     }

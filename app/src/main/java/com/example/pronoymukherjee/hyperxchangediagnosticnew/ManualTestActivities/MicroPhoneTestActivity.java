@@ -2,8 +2,9 @@ package com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActiviti
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.os.BatteryManager;
+import android.os.Handler;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
@@ -13,6 +14,7 @@ import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
     private String TAG_CLASS = MicroPhoneTestActivity.class.getSimpleName();
     int generatedNumber;
     Timer timer;
+    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +52,19 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                voiceSpeak.speakVoice(getResources().getString(R.string.microphone_msg));
+            }
+        },Constants.VOICE_DELAY);
     }
 
     private void initializeViews() {
         _speakButton = findViewById(R.id.voiceButton);
         _numberShow = findViewById(R.id.numberShowMicro);
         timer = new Timer();
+        voiceSpeak=new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -76,9 +86,15 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, new Locale("en", "In"));
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Hello, Please say the number in words.");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please say the number in words.");
         try {
             startActivityForResult(intent, Constants.MICROPHONE_SPEAKER_CODE);
+            /*new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    voiceSpeak.speakVoice(String.valueOf(generatedNumber));
+                }
+            },1700);*/
         } catch (ActivityNotFoundException e) {
             Message.logMessage(TAG_CLASS, e.toString());
         }
@@ -92,6 +108,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
                 try {
                     int spokenNumber = Integer.parseInt(resultSet.get(0));
                     if (spokenNumber == generatedNumber) {
+                        Message.logMessage(TAG_CLASS,"True");
                         completeActivity(true);
                     }
                 } catch (NumberFormatException e) {

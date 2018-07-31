@@ -1,5 +1,6 @@
 package com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities;
 
+import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.Random;
@@ -19,13 +21,14 @@ import java.util.TimerTask;
 public class VibrationTestActivity extends AppCompatActivity {
     AppCompatEditText _numberVibration;
     AppCompatButton _vibrateButton, _submitButton;
-    long pattern1[] = {0, 300, 200, 300, 500};
+    long pattern1[] = {0, 300, 200, 300, 200};
     long pattern2[] = {0, 300, 200, 300, 200, 300, 500};
     long pattern3[] = {0, 300, 200, 300, 200, 300, 200, 300, 500};
     Vibrator vibrator;
     int generatedPattern;
     Timer timer;
     private String TAG_CLASS=VibrationTestActivity.class.getSimpleName();
+    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,12 @@ public class VibrationTestActivity extends AppCompatActivity {
                 }
             }
         });
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                voiceSpeak.speakVoice(getResources().getString(R.string.vibrate_msg));
+            }
+        },Constants.VOICE_DELAY);
     }
 
     /**
@@ -78,6 +87,7 @@ public class VibrationTestActivity extends AppCompatActivity {
         _vibrateButton = findViewById(R.id.vibrateButton);
         _submitButton = findViewById(R.id.submitVibration);
         timer = new Timer();
+        voiceSpeak=new VoiceSpeak(getApplicationContext());
     }
 
     /**

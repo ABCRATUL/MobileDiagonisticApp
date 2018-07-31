@@ -1,7 +1,9 @@
 package com.example.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -14,6 +16,8 @@ import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.ExcelCreator
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+
+import java.io.File;
 
 public class TestScoreScreen extends AppCompatActivity {
     AppCompatImageView _sadFace, _okayFace, _happyFace;
@@ -77,7 +81,13 @@ public class TestScoreScreen extends AppCompatActivity {
                 boolean isWrite = ExcelCreator.createExcel(getApplicationContext());
                 if (isWrite)
                     Message.toastMesage(getApplicationContext(),
-                            "Wrote", "");
+                            "You can find the report at: " +
+                                    Environment.getExternalStorageDirectory()
+                                    + Constants.HX_FOLDER_NAME + File.separator + Constants.HX_REPORT_FOLDER_NAME,
+                            "long");
+                Intent intent = new Intent(TestScoreScreen.this, StartTestScreen.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

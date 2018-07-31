@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -13,6 +14,7 @@ import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.Timer;
@@ -23,6 +25,7 @@ public class ChargerTestActivity extends AppCompatActivity {
     Timer timer;
     BroadcastReceiver receiver;
     IntentFilter intentFilter;
+    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,12 @@ public class ChargerTestActivity extends AppCompatActivity {
                 checkCharger();
             }
         });
-        //registerReceiver(receiver,intentFilter);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                voiceSpeak.speakVoice(getResources().getString(R.string.charger_msg));
+            }
+        },Constants.VOICE_DELAY);
     }
 
     /**
@@ -53,6 +61,7 @@ public class ChargerTestActivity extends AppCompatActivity {
         _checkButton = findViewById(R.id.checkChargerButton);
         timer = new Timer();
         intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        voiceSpeak=new VoiceSpeak(getApplicationContext());
     }
 
     /**

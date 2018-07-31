@@ -1,6 +1,7 @@
 package com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities;
 
 import android.media.AudioManager;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -9,6 +10,7 @@ import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.Timer;
@@ -18,6 +20,7 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
     AppCompatButton _checkButton;
     private String TAG_CLASS = HeadPhoneTestActivity.class.getSimpleName();
     Timer timer;
+    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,12 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                voiceSpeak.speakVoice(getResources().getString(R.string.headphone_button));
+            }
+        },Constants.VOICE_DELAY);
     }
 
     /**
@@ -53,6 +62,7 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
     private void initializeViews() {
         _checkButton = findViewById(R.id.headPhoneCheckButton);
         timer = new Timer();
+        voiceSpeak=new VoiceSpeak(getApplicationContext());
     }
 
     /**

@@ -34,7 +34,10 @@ public class Constants {
     public static String TEST_STATUS_DIALOG_KEY = "testStatus";
     public static String TEST_IS_MANUAL = "isManual";
     public static String TEST_STATUS_KEY = "statusTestKey";
+
     public static int TEST_TIMER = 15000;
+    public static int VOICE_DELAY=900;
+
     public static int MICROPHONE_SPEAKER_CODE = 566;
     public static String SPEAKER_VOLUME_MSG = "Please make sure that your media volume is audible.";
 
@@ -62,8 +65,8 @@ public class Constants {
     public static void fillManualTestList() {
         manualTestList.add(new Test("Touch Screen", 0, R.drawable.ic_touch_screen));
         manualTestList.add(new Test("Speaker", 0, R.drawable.ic_speaker));
-        manualTestList.add(new Test("Volume Button Up", 0, R.drawable.ic_volume));
-        manualTestList.add(new Test("Volume Button Down", 0, R.drawable.ic_volume));
+        manualTestList.add(new Test("Volume Up", 0, R.drawable.ic_volume));
+        manualTestList.add(new Test("Volume Down", 0, R.drawable.ic_volume));
         manualTestList.add(new Test("Proximity", 0, R.drawable.ic_proximity));
         manualTestList.add(new Test("Rear Camera", 0, R.drawable.ic_back_camera));
         manualTestList.add(new Test("Front Camera", 0, R.drawable.ic_front_camera));
@@ -75,7 +78,7 @@ public class Constants {
         manualTestList.add(new Test("Headphone", 0, R.drawable.ic_headphone_jack));
         manualTestList.add(new Test("RGB", 0, R.drawable.ic_rgb));
         manualTestList.add(new Test("MicroPhone", 0, R.drawable.ic_timer));
-        manualTestList.add(new Test("Screen Brightness", 0, R.drawable.ic_screen_brightness));
+        manualTestList.add(new Test("Brightness", 0, R.drawable.ic_screen_brightness));
         manualTestList.add(new Test("Fingerprint", 0, R.drawable.ic_finger_print));
         //Keeping a copy of Manual Test List.
         manualTestListBackUP = new ArrayList<>(Constants.manualTestList);

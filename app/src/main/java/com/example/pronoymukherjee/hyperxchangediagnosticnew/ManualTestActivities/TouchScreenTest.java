@@ -4,17 +4,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.net.Uri;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -22,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestHelper.PixelGridView;
 
 import java.util.ArrayList;
@@ -50,6 +48,7 @@ public class TouchScreenTest extends Activity {
     float mX;
     float mY;
     Canvas mCanvas;
+    VoiceSpeak voiceSpeak;
 
     public ArrayList<Path> pointerPath = new ArrayList<>();
     public ArrayList<Paint> pointerPaint = new ArrayList<>();
@@ -76,6 +75,7 @@ public class TouchScreenTest extends Activity {
 
                     }
                 });
+        voiceSpeak=new VoiceSpeak(getApplicationContext());
 
         //Creating dialog box
         alert = builder.create();
@@ -83,9 +83,16 @@ public class TouchScreenTest extends Activity {
         alert.setTitle("TouchScreen Test");
         try {
             alert.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    voiceSpeak.speakVoice("Please swipe the entire screen with you " +
+                            "finger to change the color");
+                }
+            }, Constants.VOICE_DELAY);
         } catch (Exception e) {
             alert.dismiss();
-            Log.d(TouchScreenTest.class.getSimpleName(), e.toString());
+            Message.logMessage(TouchScreenTest.class.getSimpleName(), e.toString());
         }
 
         PixelGridView pixelGrid = new PixelGridView(this);
@@ -93,21 +100,6 @@ public class TouchScreenTest extends Activity {
         pixelGrid.setNumRows(6);
 
         setContentView(pixelGrid);
-
-        /*Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent data = new Intent();
-                String text = "Result to be returned....";
-                //---set the data to pass back---
-                data.setData(Uri.parse(String.valueOf(score)));
-                data.putExtra("id", 2);
-                setResult(RESULT_OK, data);
-                //---close the activity---
-                finish();
-            }
-        }, 9500);*/
     }
 
     private void resetTextFields() {
