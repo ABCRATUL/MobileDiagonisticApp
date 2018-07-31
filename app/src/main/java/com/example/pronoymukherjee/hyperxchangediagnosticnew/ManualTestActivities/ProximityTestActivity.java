@@ -4,6 +4,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
@@ -11,6 +12,7 @@ import android.view.KeyEvent;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.Timer;
@@ -22,6 +24,7 @@ public class ProximityTestActivity extends AppCompatActivity implements SensorEv
     SensorManager sensorManager;
     Timer timer;
     private String TAG_CLASS = ProximityTestActivity.class.getSimpleName();
+    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,12 @@ public class ProximityTestActivity extends AppCompatActivity implements SensorEv
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                voiceSpeak.speakVoice(getResources().getString(R.string.proximity_neg_msg));
+            }
+        },Constants.VOICE_DELAY);
     }
 
     /**
@@ -48,12 +57,13 @@ public class ProximityTestActivity extends AppCompatActivity implements SensorEv
      */
     private void initializeViews() {
         _textView = findViewById(R.id.proximityText);
+        voiceSpeak=new VoiceSpeak(getApplicationContext());
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.values[0] == 0) {
-            _textView.setText(R.string.proximty_msg);
+            _textView.setText(R.string.proximity_msg);
             completeActivity(true);
         } else {
             _textView.setText(R.string.proximity_neg_msg);

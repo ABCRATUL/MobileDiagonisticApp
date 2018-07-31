@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
     private String TAG_CLASS = MicroPhoneTestActivity.class.getSimpleName();
     int generatedNumber;
     Timer timer;
-    TextToSpeech textToSpeech;
+    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,6 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_micro_phone_test);
         setTitle("");
         initializeViews();
-        initializeTextToSpeech();
         this.setFinishOnTouchOutside(false);
         generatedNumber = generateRandomNumber();
         _numberShow.setText(String.valueOf(generatedNumber));
@@ -52,12 +52,19 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                voiceSpeak.speakVoice(getResources().getString(R.string.microphone_msg));
+            }
+        },Constants.VOICE_DELAY);
     }
 
     private void initializeViews() {
         _speakButton = findViewById(R.id.voiceButton);
         _numberShow = findViewById(R.id.numberShowMicro);
         timer = new Timer();
+        voiceSpeak=new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -85,7 +92,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
             /*new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    textToSpeech.speak(String.valueOf(generatedNumber),TextToSpeech.QUEUE_FLUSH,null);
+                    voiceSpeak.speakVoice(String.valueOf(generatedNumber));
                 }
             },1700);*/
         } catch (ActivityNotFoundException e) {
@@ -135,16 +142,5 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    private void initializeTextToSpeech() {
-        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    textToSpeech.setLanguage(Locale.getDefault());
-                }
-            }
-        });
     }
 }

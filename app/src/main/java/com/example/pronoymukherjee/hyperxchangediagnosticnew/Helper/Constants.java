@@ -34,7 +34,10 @@ public class Constants {
     public static String TEST_STATUS_DIALOG_KEY = "testStatus";
     public static String TEST_IS_MANUAL = "isManual";
     public static String TEST_STATUS_KEY = "statusTestKey";
+
     public static int TEST_TIMER = 15000;
+    public static int VOICE_DELAY=900;
+
     public static int MICROPHONE_SPEAKER_CODE = 566;
     public static String SPEAKER_VOLUME_MSG = "Please make sure that your media volume is audible.";
 

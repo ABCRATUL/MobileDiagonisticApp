@@ -2,6 +2,7 @@ package com.example.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActiviti
 
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.KeyEvent;
 
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.example.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.example.pronoymukherjee.hyperxchangediagnosticnew.R;
 import com.multidots.fingerprintauth.FingerPrintAuthCallback;
 import com.multidots.fingerprintauth.FingerPrintAuthHelper;
@@ -22,12 +24,14 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
     private String TAG_CLASS = FingerprintManager.class.getSimpleName();
     FingerPrintAuthHelper fingerPrintAuthHelper;
     Timer timer;
+    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint_test);
         setTitle("");
+        voiceSpeak=new VoiceSpeak(getApplicationContext());
         fingerPrintAuthHelper = FingerPrintAuthHelper.getHelper(this, this);
         fingerPrintAuthHelper.startAuth();
         timer = new Timer();
@@ -37,6 +41,12 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                voiceSpeak.speakVoice(getResources().getString(R.string.finger_print_msg));
+            }
+        },Constants.VOICE_DELAY);
     }
 
     @Override
