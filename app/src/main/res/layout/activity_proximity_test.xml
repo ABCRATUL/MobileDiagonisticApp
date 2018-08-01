@@ -6,7 +6,7 @@
     android:layout_height="200dp"
     android:layout_gravity="center"
     style="@style/dialog"
-    tools:context=".ManualTestActivities.ProximityTestActivity">
+    tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ProximityTestActivity">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/appCompatImageView5"

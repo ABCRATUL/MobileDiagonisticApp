@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="300dp"
-    tools:context=".ManualTestActivities.ScreenBrightnessTest">
+    tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.ScreenBrightnessTest">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView2"

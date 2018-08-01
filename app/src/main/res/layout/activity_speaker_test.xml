@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:layout_height="wrap_content"
     style="@style/Animation.AppCompat.Dialog"
-    tools:context=".ManualTestActivities.SpeakerTest">
+    tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.SpeakerTest">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/appCompatTextView"

@@ -5,7 +5,7 @@
     android:layout_width="300dp"
     android:layout_height="230dp"
     android:layout_gravity="center"
-    tools:context=".ManualTestActivities.BackButtonTestActivity">
+    tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.BackButtonTestActivity">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/appCompatImageView"

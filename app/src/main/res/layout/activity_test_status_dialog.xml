@@ -6,7 +6,7 @@
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    tools:context=".Activities.TestStatusDialogActivity">
+    tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities.TestStatusDialogActivity">
 
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/testStatusDialogClose"

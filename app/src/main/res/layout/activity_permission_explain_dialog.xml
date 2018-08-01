@@ -5,7 +5,7 @@
     android:layout_width="300dp"
     android:layout_gravity="center"
     android:layout_height="200dp"
-    tools:context=".Activities.PermissionExplainDialog">
+    tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities.PermissionExplainDialog">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/permissionDialogTextView"
