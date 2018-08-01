@@ -15,9 +15,13 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.nfc.NfcAdapter;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 public class TestApi {
     static int score = 0;
@@ -26,9 +30,12 @@ public class TestApi {
         ActivityManager activityManager = (ActivityManager) context
                 .getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+        assert activityManager != null;
         activityManager.getMemoryInfo(memoryInfo);
         long availMemory = memoryInfo.availMem;
         long totalMemory = memoryInfo.totalMem;
+        activityManager = null;
+        memoryInfo = null;
         if ((availMemory / totalMemory) * 100 <= 60)
             return 5;
         return 10;
@@ -41,13 +48,20 @@ public class TestApi {
             @Override
             public void onReceive(Context context, Intent intent) {
                 int status = intent.getIntExtra(BatteryManager.EXTRA_HEALTH, -1);
-                if (status == BatteryManager.BATTERY_HEALTH_GOOD)
-                    score = 10;
-                else if (status == BatteryManager.BATTERY_HEALTH_COLD)
-                    score = 10;
-                else if (status == BatteryManager.BATTERY_HEALTH_DEAD)
-                    score = 1;
-                else score = 1;
+                switch (status) {
+                    case BatteryManager.BATTERY_HEALTH_GOOD:
+                        score = 10;
+                        break;
+                    case BatteryManager.BATTERY_HEALTH_COLD:
+                        score = 10;
+                        break;
+                    case BatteryManager.BATTERY_HEALTH_DEAD:
+                        score = 1;
+                        break;
+                    default:
+                        score = 1;
+                        break;
+                }
             }
         };
         broadcastReceiver.onReceive(context, batteryIntent);
@@ -101,6 +115,7 @@ public class TestApi {
         //Check if Connected to Internet
         ConnectivityManager cm = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         final boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
@@ -109,6 +124,7 @@ public class TestApi {
 
         boolean hasWifi = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI);
         if (hasWifi) {
+            assert wifiManager != null;
             boolean isWifiEnabled = wifiManager.isWifiEnabled();
             if (!isWifiEnabled) {
                 wasWifiOff = true;
@@ -122,25 +138,38 @@ public class TestApi {
             wifiManager.setWifiEnabled(false);
             Toast.makeText(context, "Wifi Disabled", Toast.LENGTH_SHORT).show();
         }
+        wifiManager = null;
+        cm = null;
+        activeNetwork = null;
         return score;
     }
-    public static int testAcclerometer(Context context){
-        SensorManager sensorManager= (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        Sensor accelerometerSensor=sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        if(accelerometerSensor!=null)
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static int testAcclerometer(Context context) {
+        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        assert sensorManager != null;
+        Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if (accelerometerSensor != null) {
+            accelerometerSensor = null;
+            sensorManager = null;
+            return 10;
+        }
+        return 0;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static int testGyroscope(Context context) {
+        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        assert sensorManager != null;
+        Sensor gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        if (gyroscopeSensor != null)
             return 10;
         return 0;
     }
-    public static int testGyroscope(Context context){
-        SensorManager sensorManager= (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        Sensor gyroscopeSensor=sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        if(gyroscopeSensor!=null)
-            return 10;
-        return 0;
-    }
-    public static int testExternalStorage(Context context){
-        String state= Environment.getExternalStorageState();
-        if(state.equals(Environment.MEDIA_MOUNTED))
+
+    public static int testExternalStorage(Context context) {
+        String state = Environment.getExternalStorageState();
+        if (state.equals(Environment.MEDIA_MOUNTED))
             return 10;
         return 0;
     }

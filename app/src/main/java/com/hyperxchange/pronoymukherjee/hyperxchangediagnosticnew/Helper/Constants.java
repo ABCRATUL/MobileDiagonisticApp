@@ -41,7 +41,6 @@ public class Constants {
     public static int MICROPHONE_SPEAKER_CODE = 566;
     public static String SPEAKER_VOLUME_MSG = "Please make sure that your media volume is audible.";
 
-
     /**
      * This is the method to fill the automated test list.
      */

@@ -22,9 +22,9 @@ public class BackButtonTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_back_button_test);
         setTitle("");
-        voiceSpeak = new VoiceSpeak(getApplicationContext());
         this.setFinishOnTouchOutside(false);
         timer = new Timer();
+        voiceSpeak=new VoiceSpeak(getApplicationContext());
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -56,10 +56,20 @@ public class BackButtonTestActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Message.toastMesage(getApplicationContext(), "Back Button Pressed.", "");
+            Message.toastMessage(getApplicationContext(), "Back Button Pressed.", "");
             completeActivity(true);
             return false;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (voiceSpeak != null)
+            voiceSpeak = null;
+        if (timer != null)
+            timer = null;
+        System.gc();
     }
 }

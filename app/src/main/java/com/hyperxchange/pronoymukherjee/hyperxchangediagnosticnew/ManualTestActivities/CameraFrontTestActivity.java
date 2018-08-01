@@ -19,8 +19,9 @@ public class CameraFrontTestActivity extends AppCompatActivity implements Surfac
 
     Camera camera;
     SurfaceView mPreview;
-    boolean testStatus=false;
+    boolean testStatus = false;
     Timer closeActivityTimer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +34,13 @@ public class CameraFrontTestActivity extends AppCompatActivity implements Surfac
         Camera.PreviewCallback previewCallback = new Camera.PreviewCallback() {
             @Override
             public void onPreviewFrame(byte[] bytes, Camera camera) {
-                testStatus=true;
+                testStatus = true;
                 completeActivity(true);
             }
         };
         camera.startPreview();
         camera.setPreviewCallback(previewCallback);
-        closeActivityTimer=new Timer();
+        closeActivityTimer = new Timer();
         closeActivityTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -69,30 +70,31 @@ public class CameraFrontTestActivity extends AppCompatActivity implements Surfac
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Timer timer=new Timer();
+        Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 camera.release();
                 //completeActivity(true);
             }
-        },2500);
+        }, 2500);
     }
-    private void completeActivity(boolean status){
-        if(status) {
+
+    private void completeActivity(boolean status) {
+        if (status) {
             closeActivityTimer.cancel();
             camera.release();
             setResult(RESULT_OK);
-        }
-        else
+        } else
             setResult(RESULT_CANCELED);
         finish();
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             return false;
         }
-        return super.onKeyDown(keyCode,event);
+        return super.onKeyDown(keyCode, event);
     }
 }

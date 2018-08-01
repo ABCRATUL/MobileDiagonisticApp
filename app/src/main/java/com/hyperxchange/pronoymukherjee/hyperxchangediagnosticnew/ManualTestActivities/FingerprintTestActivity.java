@@ -31,7 +31,7 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint_test);
         setTitle("");
-        voiceSpeak=new VoiceSpeak(getApplicationContext());
+        voiceSpeak = new VoiceSpeak(getApplicationContext());
         fingerPrintAuthHelper = FingerPrintAuthHelper.getHelper(this, this);
         fingerPrintAuthHelper.startAuth();
         timer = new Timer();
@@ -46,33 +46,42 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
             public void run() {
                 voiceSpeak.speakVoice(getResources().getString(R.string.finger_print_msg));
             }
-        },Constants.VOICE_DELAY);
+        }, Constants.VOICE_DELAY);
     }
 
     @Override
     public void onNoFingerPrintHardwareFound() {
         Message.logMessage(TAG_CLASS, "NO finger print hardware ");
+        Message.toastMessage(getApplicationContext(),
+                "Your device doesn't support fingerprint","");
+        completeActivity(false);
     }
 
     @Override
     public void onNoFingerPrintRegistered() {
         Message.logMessage(TAG_CLASS, "Please register some finger print.");
+        Message.toastMessage(getApplicationContext(),
+                "You will need to register some finger prints to test.","");
+        completeActivity(false);
     }
 
     @Override
     public void onBelowMarshmallow() {
         Message.logMessage(TAG_CLASS, "API Level doesn't support finger_print.");
+        Message.toastMessage(getApplicationContext(),
+                "Your device doesn't support fingerprint","");
+        completeActivity(false);
     }
 
     @Override
     public void onAuthSuccess(FingerprintManager.CryptoObject cryptoObject) {
-        Message.toastMesage(getApplicationContext(), "Finger print Checked.", "");
+        Message.toastMessage(getApplicationContext(), "Finger print Checked.", "");
         completeActivity(true);
     }
 
     @Override
     public void onAuthFailed(int errorCode, String errorMessage) {
-        Message.toastMesage(getApplicationContext(),
+        Message.toastMessage(getApplicationContext(),
                 "Finger Print Detected", "");
         completeActivity(true);
     }
@@ -99,5 +108,18 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (fingerPrintAuthHelper != null)
+            fingerPrintAuthHelper = null;
+        if (voiceSpeak != null) {
+            voiceSpeak = null;
+        }
+        if (timer != null)
+            timer = null;
+        Runtime.getRuntime().gc();
     }
 }

@@ -51,7 +51,7 @@ public class ChargerTestActivity extends AppCompatActivity {
             public void run() {
                 voiceSpeak.speakVoice(getResources().getString(R.string.charger_msg));
             }
-        },Constants.VOICE_DELAY);
+        }, Constants.VOICE_DELAY);
     }
 
     /**
@@ -61,7 +61,7 @@ public class ChargerTestActivity extends AppCompatActivity {
         _checkButton = findViewById(R.id.checkChargerButton);
         timer = new Timer();
         intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        voiceSpeak=new VoiceSpeak(getApplicationContext());
+        voiceSpeak = new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -92,17 +92,17 @@ public class ChargerTestActivity extends AppCompatActivity {
                 unregisterReceiver(receiver);
                 switch (status) {
                     case BatteryManager.BATTERY_PLUGGED_AC:
-                        Message.toastMesage(getApplicationContext(),
+                        Message.toastMessage(getApplicationContext(),
                                 "On AC Power.", "");
                         isSuccess = true;
                         break;
                     case BatteryManager.BATTERY_PLUGGED_USB:
-                        Message.toastMesage(getApplicationContext(),
+                        Message.toastMessage(getApplicationContext(),
                                 "On USB Power", "");
                         isSuccess = true;
                         break;
                     case 0:
-                        Message.toastMesage(getApplicationContext(),
+                        Message.toastMessage(getApplicationContext(),
                                 "On Battery Power", "");
                         isSuccess = false;
                         break;
@@ -119,5 +119,21 @@ public class ChargerTestActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (timer != null) {
+            timer = null;
+        }
+        if (_checkButton != null)
+            _checkButton = null;
+        if (voiceSpeak != null)
+            voiceSpeak = null;
+        if (receiver != null)
+            receiver = null;
+        if(intentFilter!=null)
+            intentFilter=null;
     }
 }

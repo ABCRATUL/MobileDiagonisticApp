@@ -19,44 +19,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/testStatusListBullet"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/ic_test_stop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.666"
-            tools:src="@mipmap/ic_launcher" />
-
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/testStatusListTestName"
             android:layout_width="166dp"
             android:layout_height="28dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
             android:singleLine="false"
             android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/testStatusListBullet"
+            app:layout_constraintEnd_toStartOf="@+id/testStatusListTestImage"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.466"
+            app:layout_constraintVertical_bias="0.333"
             tools:text="External Storage" />
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/testStatusListTestImage"
             android:layout_width="69dp"
             android:layout_height="63dp"
-            android:layout_marginEnd="56dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="36dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/testStatusListTestName"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@mipmap/ic_launcher_round" />
     </android.support.constraint.ConstraintLayout>
