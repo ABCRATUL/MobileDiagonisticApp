@@ -34,7 +34,7 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (audioManager.isWiredHeadsetOn()) {
-                    Message.toastMesage(getApplicationContext(),
+                    Message.toastMessage(getApplicationContext(),
                             "Headset is connected.", "");
                     completeActivity(true);
                 } else {
@@ -53,7 +53,7 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
             public void run() {
                 voiceSpeak.speakVoice(getResources().getString(R.string.headphone_button));
             }
-        },Constants.VOICE_DELAY);
+        }, Constants.VOICE_DELAY);
     }
 
     /**
@@ -62,7 +62,7 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
     private void initializeViews() {
         _checkButton = findViewById(R.id.headPhoneCheckButton);
         timer = new Timer();
-        voiceSpeak=new VoiceSpeak(getApplicationContext());
+        voiceSpeak = new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -71,7 +71,7 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
      * @param status: true if successful, else false.
      */
     private void completeActivity(boolean status) {
-        Message.logMessage(TAG_CLASS,status+"");
+        Message.logMessage(TAG_CLASS, status + "");
         if (status) {
             timer.cancel();
             setResult(RESULT_OK);
@@ -81,11 +81,24 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
         }
         finish();
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (_checkButton != null)
+            _checkButton = null;
+        if (voiceSpeak != null)
+            voiceSpeak = null;
+        if (timer != null)
+            timer = null;
+        Runtime.getRuntime().gc();
     }
 }

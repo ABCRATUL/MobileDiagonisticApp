@@ -61,7 +61,7 @@ public class SpeakerTest extends AppCompatActivity {
                         Message.logMessage(TAG_CLASS, "true");
                     }
                 } catch (NumberFormatException e) {
-                    Message.toastMesage(getApplicationContext(), "Please provide number only",
+                    Message.toastMessage(getApplicationContext(), "Please provide number only",
                             "");
                 }
             }
@@ -109,7 +109,7 @@ public class SpeakerTest extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 speakAndCheckNumber();
             } else {
-                Message.toastMesage(getApplicationContext(),
+                Message.toastMessage(getApplicationContext(),
                         "Please increase the Media volume.", "");
             }
         }

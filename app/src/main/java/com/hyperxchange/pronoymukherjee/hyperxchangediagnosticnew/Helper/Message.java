@@ -12,7 +12,7 @@ public class Message {
      * @param msg:     The Message to show.
      * @param length:  The duration of the toast. "" for SHORT or anything else for LONG.
      */
-    public static void toastMesage(Context context, String msg, String length) {
+    public static void toastMessage(Context context, String msg, String length) {
         if (length.equalsIgnoreCase("long")) {
             Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
         } else Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();

@@ -80,7 +80,7 @@ public class TestScoreScreen extends AppCompatActivity {
             public void onClick(View v) {
                 boolean isWrite = ExcelCreator.createExcel(getApplicationContext());
                 if (isWrite)
-                    Message.toastMesage(getApplicationContext(),
+                    Message.toastMessage(getApplicationContext(),
                             "You can find the report at: " +
                                     Environment.getExternalStorageDirectory()
                                     + Constants.HX_FOLDER_NAME + File.separator + Constants.HX_REPORT_FOLDER_NAME,

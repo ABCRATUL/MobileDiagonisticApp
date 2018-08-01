@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
@@ -13,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -25,15 +27,16 @@ import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class AutoTestScreen extends AppCompatActivity {
-    public String TAG_CLASS=AutoTestScreen.class.getSimpleName();
+    public String TAG_CLASS = AutoTestScreen.class.getSimpleName();
     RecyclerView testList;
     RecyclerView.LayoutManager layoutManager;
     ImageView _currentTestImage;
     AppCompatImageButton _exitApp;
     AppCompatImageView _successBucket, _failedBucket;
     CircularProgressBar _circularProgressBar;
+    ProgressBar _progressBar;
     Context context;
-    int score = 0;
+    int score = 0,progress=0;
     TestItemAdapter testItemAdapter;
 
     @Override
@@ -51,7 +54,7 @@ public class AutoTestScreen extends AppCompatActivity {
         _successBucket.setImageResource(R.drawable.ic_sucess_bucket);
         _failedBucket.setImageResource(R.drawable.ic_failed_bucket);
         _circularProgressBar.setProgress(0);
-        _circularProgressBar.setProgressWithAnimation(1,1500);
+        _circularProgressBar.setProgressWithAnimation(1, 1500);
         _exitApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +73,8 @@ public class AutoTestScreen extends AppCompatActivity {
         _exitApp = findViewById(R.id.exitAppButton);
         _successBucket = findViewById(R.id.successTest);
         _failedBucket = findViewById(R.id.failedTest);
-        _circularProgressBar =findViewById(R.id.circularProgressBar);
+        _circularProgressBar = findViewById(R.id.circularProgressBar);
+        _progressBar=findViewById(R.id.progressBar);
     }
 
     /**
@@ -78,12 +82,15 @@ public class AutoTestScreen extends AppCompatActivity {
      * This is a recursive method to perform all the automated tests.
      */
     private void performTest() {
-        score=0;
-        _circularProgressBar.setProgressWithAnimation(20,1500);
+        score = 0;
+        _circularProgressBar.setProgressWithAnimation(20, 1500);
         new Handler().postDelayed(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void run() {
                 if (Constants.automatedTestList.size() > 0) {
+                    _progressBar.setProgress(progress);
+                    progress+=11;
                     Test currentTest = Constants.automatedTestList.get(0);
                     _currentTestImage.setImageResource(currentTest.getTestIconID());
                     //YoYo.with(Techniques.Shake).duration(1500).playOn(_currentTestImage);
@@ -116,12 +123,12 @@ public class AutoTestScreen extends AppCompatActivity {
                             score = TestApi.testExternalStorage(context);
                             break;
                     }
-                    Message.logMessage(TAG_CLASS,score+"");
-                    _circularProgressBar.setProgressWithAnimation(90,1500);
+                    Message.logMessage(TAG_CLASS, score + "");
+                    _circularProgressBar.setProgressWithAnimation(90, 1500);
                     currentTest.setScore(score);
                     Constants.automatedTestList.remove(currentTest);
                     testItemAdapter.notifyDataSetChanged();
-                    _circularProgressBar.setProgressWithAnimation(100,1000);
+                    _circularProgressBar.setProgressWithAnimation(100, 1000);
                     if (score > 0) {
                         Constants.successTestList.add(currentTest);
                         YoYo.with(Techniques.Shake).duration(1500).playOn(_successBucket);
@@ -130,26 +137,26 @@ public class AutoTestScreen extends AppCompatActivity {
                         YoYo.with(Techniques.Shake).duration(1500).playOn(_failedBucket);
                     }
                     performTest();
-                }
-                else{
-                    Intent getResultIntent=new Intent(AutoTestScreen.this,
+                } else {
+                    Intent getResultIntent = new Intent(AutoTestScreen.this,
                             TestStatusActivity.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putBoolean(Constants.TEST_STATUS_KEY,true);
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean(Constants.TEST_STATUS_KEY, true);
                     getResultIntent.putExtras(bundle);
                     startActivity(getResultIntent);
                     finish();
                 }
                 //_circularProgressBar.setProgressWithAnimation(100,1000);
             }
-        },3000);
+        }, 3000);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                _circularProgressBar.setProgressWithAnimation(100,1000);
+                _circularProgressBar.setProgressWithAnimation(100, 1000);
             }
-        },2000);
+        }, 2000);
     }
+
     /**
      * This is the method to exit the app.
      */
@@ -162,5 +169,27 @@ public class AutoTestScreen extends AppCompatActivity {
         }
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (testList != null)
+            testList = null;
+        if (context != null)
+            context = null;
+        if (layoutManager != null)
+            layoutManager = null;
+        if (_currentTestImage != null)
+            _currentTestImage = null;
+        if (_circularProgressBar != null)
+            _circularProgressBar = null;
+        if (_failedBucket != null)
+            _failedBucket = null;
+        if (_successBucket != null)
+            _successBucket = null;
+        if (testItemAdapter != null)
+            testItemAdapter = null;
+        Runtime.getRuntime().gc();
     }
 }

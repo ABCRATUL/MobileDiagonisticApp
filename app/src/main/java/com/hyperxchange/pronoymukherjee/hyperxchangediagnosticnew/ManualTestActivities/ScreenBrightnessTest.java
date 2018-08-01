@@ -93,7 +93,7 @@ public class ScreenBrightnessTest extends AppCompatActivity {
                         Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
                 changeBrightness();
             } else {
-                Message.toastMesage(getApplicationContext(),
+                Message.toastMessage(getApplicationContext(),
                         "Please allow to modify system Settings",
                         "");
             }

@@ -86,11 +86,11 @@ public class StartTestScreen extends AppCompatActivity {
         _marketPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=getPackageManager()
+                Intent intent = getPackageManager()
                         .getLaunchIntentForPackage("com.hyperxchange.hyperxchange");
-                if(intent==null){
-                    intent=new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse("market://details?id="+"com.hyperxchange.hyperxchange"));
+                if (intent == null) {
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("market://details?id=" + "com.hyperxchange.hyperxchange"));
                 }
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -112,14 +112,15 @@ public class StartTestScreen extends AppCompatActivity {
             imeiNumber = telephonyManager.getDeviceId(0);
             _imeiNumber.setText(imeiNumber);
         }
-        if(!canWriteSettings()){
-            Intent intent=new Intent(StartTestScreen.this,
+        if (!canWriteSettings()) {
+            Intent intent = new Intent(StartTestScreen.this,
                     PermissionExplainDialog.class);
-            Bundle bundle=new Bundle();
-            bundle.putString(Constants.DIALOG_MSG,getResources()
+            Bundle bundle = new Bundle();
+            bundle.putString(Constants.DIALOG_MSG, getResources()
                     .getString(R.string.allow_system_settings));
             intent.putExtras(bundle);
-            startActivityForResult(intent,Constants.WRITE_SETTINGS_CODE);
+            telephonyManager=null;
+            startActivityForResult(intent, Constants.WRITE_SETTINGS_CODE);
         }
     }
 
@@ -153,7 +154,7 @@ public class StartTestScreen extends AppCompatActivity {
         if (phoneStatePermission != PackageManager.PERMISSION_GRANTED)
             permissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
         requestPermission(permissionsNeeded.toArray(new String[permissionsNeeded.size()]));
-
+        permissionsNeeded=null;
     }
 
 
@@ -174,8 +175,8 @@ public class StartTestScreen extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == Constants.PERMISSION_REQUEST_CODE) {
-            for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+            for (int grantResult : grantResults) {
+                if (grantResult == PackageManager.PERMISSION_DENIED) {
                     Intent explainIntent = new Intent(StartTestScreen.this,
                             PermissionExplainDialog.class);
                     startActivityForResult(explainIntent, Constants.PERMISSION_REQUEST_CODE);
@@ -233,5 +234,19 @@ public class StartTestScreen extends AppCompatActivity {
     private void changeWriteSettings() {
         Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
         startActivityForResult(intent, Constants.WRITE_SETTINGS_CODE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (_modelName != null)
+            _modelName = null;
+        if (_imeiNumber != null)
+            _imeiNumber = null;
+        if (_marketPlace != null)
+            _marketPlace = null;
+        if (_startTest != null)
+            _startTest = null;
+        Runtime.getRuntime().gc();
     }
 }

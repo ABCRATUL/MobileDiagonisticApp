@@ -33,11 +33,12 @@ public class CameraRearTestActivity extends AppCompatActivity implements Surface
         mPreview.getHolder().addCallback(CameraRearTestActivity.this);
         mPreview.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         final Camera.PictureCallback pictureCallback = new Camera.PictureCallback() {
+            @SuppressWarnings("ResultOfMethodCallIgnored")
             @Override
             public void onPictureTaken(byte[] bytes, Camera camera) {
                 File hyperXchangeDir = new File(Environment.getExternalStorageDirectory()
-                        + File.separator + Constants.HX_FOLDER_NAME+File.separator
-                        +Constants.HX_CAMERA_FOLDER);
+                        + File.separator + Constants.HX_FOLDER_NAME + File.separator
+                        + Constants.HX_CAMERA_FOLDER);
                 if (!hyperXchangeDir.exists()) {
                     hyperXchangeDir.mkdirs();
                 }
@@ -46,6 +47,9 @@ public class CameraRearTestActivity extends AppCompatActivity implements Surface
                         File rearImage = new File(hyperXchangeDir, Constants.HX_CAMERA_FILE_NAME);
                         FileOutputStream fileOutputStream = new FileOutputStream(rearImage);
                         fileOutputStream.write(bytes);
+                        fileOutputStream.close();
+                        hyperXchangeDir = null;
+                        rearImage = null;
                         completeActivity(true);
                         //camera.release();
                     } else {
@@ -138,9 +142,11 @@ public class CameraRearTestActivity extends AppCompatActivity implements Surface
                 camera.release();
                 camera = null;
             }
+            if (mPreview != null)
+                mPreview = null;
+        } catch (RuntimeException e) {
+            Message.logMessage(TAG_CLASS, e.toString());
         }
-        catch (RuntimeException e){
-            Message.logMessage(TAG_CLASS,e.toString());
-        }
+        Runtime.getRuntime().gc();
     }
 }

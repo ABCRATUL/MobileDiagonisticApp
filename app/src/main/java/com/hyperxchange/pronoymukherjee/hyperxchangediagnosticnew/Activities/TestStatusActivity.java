@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
+
+import java.util.ArrayList;
 
 public class TestStatusActivity extends AppCompatActivity {
     ImageView _statusIcon;
@@ -64,10 +67,12 @@ public class TestStatusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO:Go to Manual Test.
+                Constants.automatedTestList=new ArrayList<>();
                 Constants.fillAutomatedTestList();
                 Intent manualTestIntent = new Intent(TestStatusActivity.this,
                         ManualTestScreen.class);
                 startActivity(manualTestIntent);
+                finish();
             }
         });
     }
@@ -79,5 +84,12 @@ public class TestStatusActivity extends AppCompatActivity {
         _nextButton = findViewById(R.id.next);
         _successNumber =findViewById(R.id.passedNumber);
         _failedNumber=findViewById(R.id.failedNumber);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Constants.automatedTestList=null;
+        System.gc();
     }
 }

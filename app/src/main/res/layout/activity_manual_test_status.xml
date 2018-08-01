@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/background"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities.ManualTestStatusActivity">
 
     <pl.droidsonroids.gif.GifImageView
@@ -18,6 +18,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_test_complete" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/manualFailedNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/manualTestStatusImage"
+        tools:text="10" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/manualPassedNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toEndOf="@+id/manualFailedNumber"
+        app:layout_constraintTop_toBottomOf="@+id/manualTestStatusImage"
+        tools:text="20" />
 
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/failedManualTestButton"
@@ -43,19 +68,43 @@
         android:background="@drawable/ic_sucess_bucket"
         app:layout_constraintBottom_toTopOf="@+id/manualTestNextButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.793"
         app:layout_constraintStart_toEndOf="@+id/failedManualTestButton"
         app:layout_constraintTop_toBottomOf="@+id/manualTestStatusImage"
-        app:layout_constraintVertical_bias="0.101" />
+        app:layout_constraintVertical_bias="0.111" />
 
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/successText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/passed"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/successManualTestButton" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/failedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/failed"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintEnd_toStartOf="@+id/successText"
+        app:layout_constraintHorizontal_bias="0.271"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/failedManualTestButton" />
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/manualTestNextButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/ic_next"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:background="@drawable/ic_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

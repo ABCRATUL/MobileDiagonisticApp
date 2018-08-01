@@ -63,7 +63,7 @@ public class PowerButtonTestActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         if (!hasFocus) {
             Message.logMessage(TAG_CLASS, hasFocus + "");
-            Message.toastMesage(getApplicationContext(),
+            Message.toastMessage(getApplicationContext(),
                     "Press the back button now.", "");
             completeActivity(true);
         }
@@ -75,5 +75,15 @@ public class PowerButtonTestActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(voiceSpeak!=null)
+            voiceSpeak=null;
+        if(timer!=null)
+            timer=null;
+        Runtime.getRuntime().gc();
     }
 }

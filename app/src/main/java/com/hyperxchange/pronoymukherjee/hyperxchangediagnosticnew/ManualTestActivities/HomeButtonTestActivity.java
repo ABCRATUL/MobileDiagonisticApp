@@ -1,7 +1,6 @@
 package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities;
 
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,7 +10,6 @@ import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -62,7 +60,7 @@ public class HomeButtonTestActivity extends AppCompatActivity {
 
     @Override
     protected void onUserLeaveHint() {
-        Message.toastMesage(getApplicationContext(),
+        Message.toastMessage(getApplicationContext(),
                 "Home Button Pressed, now restore the app.",
                 "");
         completeActivity(true);
@@ -74,5 +72,16 @@ public class HomeButtonTestActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(timer!=null)
+            timer=null;
+        if(voiceSpeak!=null){
+            voiceSpeak=null;
+        }
+        Runtime.getRuntime().gc();
     }
 }

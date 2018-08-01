@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
-import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
@@ -112,7 +111,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
                         completeActivity(true);
                     }
                 } catch (NumberFormatException e) {
-                    Message.toastMesage(getApplicationContext(),
+                    Message.toastMessage(getApplicationContext(),
                             "Please speak Correctly", "");
                     generatedNumber = generateRandomNumber();
                     _numberShow.setText(String.valueOf(generatedNumber));
@@ -122,7 +121,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
     }
 
     /**
-     * Methdo to close the activity.
+     * Method to close the activity.
      *
      * @param status: True if completed successfully, else false.
      */
@@ -142,5 +141,19 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(_speakButton!=null)
+            _speakButton=null;
+        if(_numberShow!=null)
+            _numberShow=null;
+        if(timer!=null)
+            timer=null;
+        if(voiceSpeak!=null)
+            voiceSpeak=null;
+        Runtime.getRuntime().gc();
     }
 }

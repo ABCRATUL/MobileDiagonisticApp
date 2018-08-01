@@ -173,7 +173,6 @@ public class ExcelCreator {
                 }
                 row++;
             }
-            col = 5;
             row = 29;
             //Adding the Manual Tests.
             for (int i = 0; i < Constants.manualTestListBackUP.size(); i++) {

@@ -27,4 +27,10 @@ public class SplashScreen extends AppCompatActivity {
             }
         },1000);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Runtime.getRuntime().gc();
+    }
 }

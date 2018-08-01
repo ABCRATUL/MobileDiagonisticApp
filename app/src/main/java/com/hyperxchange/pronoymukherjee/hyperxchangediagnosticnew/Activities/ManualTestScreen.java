@@ -3,7 +3,6 @@ package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
-import android.nfc.Tag;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
@@ -92,7 +91,7 @@ public class ManualTestScreen extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void run() {
-                Intent intent = null;
+                Intent intent;
                 if (Constants.manualTestList.size() > 0) {
                     currentTest = Constants.manualTestList.get(0);
                     _currentTest.setImageResource(currentTest.getTestIconID());
@@ -178,21 +177,10 @@ public class ManualTestScreen extends AppCompatActivity {
                             startActivityForResult(intent, Constants.SCREEN_BRIGHTNESS_CODE);
                             break;
                         case "Fingerprint":
-                            FingerprintManager fingerprintManager = (FingerprintManager)
-                                    getSystemService(FINGERPRINT_SERVICE);
-                            if (fingerprintManager.isHardwareDetected()) {
-                                if (fingerprintManager.hasEnrolledFingerprints()) {
-                                    intent = new Intent(ManualTestScreen.this,
-                                            FingerprintTestActivity.class);
-                                    startActivityForResult(intent, Constants.FINGER_PRINT_CODE);
-                                } else {
-                                    Message.toastMesage(getApplicationContext(),
-                                            "Please enroll some finger prints. ", "");
-                                }
-                            } else {
-                                Message.toastMesage(getApplicationContext(),
-                                        "Your device doesn't support finger print.", "");
-                            }
+                            intent = new Intent(ManualTestScreen.this,
+                                    FingerprintTestActivity.class);
+                            startActivityForResult(intent, Constants.FINGER_PRINT_CODE);
+
                             break;
                     }
                     //Constants.manualTestList.remove(currentTest);
@@ -215,10 +203,10 @@ public class ManualTestScreen extends AppCompatActivity {
         if (requestCode == Constants.VOLUME_BUTTON_UP_CODE) {
             if (resultCode == RESULT_OK) {
                 Constants.successManualTestList.add(currentTest);
-                YoYo.with(Techniques.StandUp).duration(1500).playOn(_successBucket);
+                YoYo.with(Techniques.Shake).duration(1000).playOn(_successBucket);
             } else if (resultCode == RESULT_CANCELED) {
                 Constants.failedManualTestList.add(currentTest);
-                YoYo.with(Techniques.StandUp).duration(1500).playOn(_failedBucket);
+                YoYo.with(Techniques.Shake).duration(1000).playOn(_failedBucket);
             }
         }
         if (resultCode == RESULT_OK) {

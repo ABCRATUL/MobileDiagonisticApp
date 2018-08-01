@@ -65,7 +65,7 @@ public class VibrationTestActivity extends AppCompatActivity {
                         timer.cancel();
                     }
                 } catch (NumberFormatException e) {
-                    Message.toastMesage(getApplicationContext(),
+                    Message.toastMessage(getApplicationContext(),
                             "Please enter the number correctly.",
                             "");
                 }

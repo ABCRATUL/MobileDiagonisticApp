@@ -112,7 +112,7 @@ public class DeviceInformation {
     @SuppressLint("PrivateApi")
     public double getBatteryActualCapacity() {
         Object powerProfile;
-        double batteryCapacity = 0;
+        double batteryCapacity;
         String POWER = "com.android.internal.os.PowerProfile";
         try {
             powerProfile = Class.forName(POWER)
