@@ -1,6 +1,5 @@
 package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper;
 
-import android.hardware.fingerprint.FingerprintManager;
 
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Objects.Test;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
@@ -36,7 +35,7 @@ public class Constants {
     public static String TEST_STATUS_KEY = "statusTestKey";
 
     public static int TEST_TIMER = 15000;
-    public static int VOICE_DELAY=900;
+    public static int VOICE_DELAY = 900;
 
     public static int MICROPHONE_SPEAKER_CODE = 566;
     public static String SPEAKER_VOLUME_MSG = "Please make sure that your media volume is audible.";
@@ -127,14 +126,33 @@ public class Constants {
     public static int SCREEN_BRIGHTNESS_CODE = 16;
     public static int FINGER_PRINT_CODE = 17;
 
-    public static String HX_REPORT_FILE_NAME="HXDiagnosticReport.xls";
-    public static String HX_REPORT_SHEET="DiagnosticReport";
-    public static String HX_FOLDER_NAME="HyperXchange";
-    public static String HX_REPORT_FOLDER_NAME="HxReport";
-    public static String HX_CAMERA_FOLDER="HxCamera";
-    public static String HX_CAMERA_FILE_NAME="Rear.jpg";
+    /**
+     * Report Constants.
+     */
+    public static String HX_REPORT_FILE_NAME = "HXDiagnosticReport.xls";
+    public static String HX_REPORT_SHEET = "DiagnosticReport";
+    public static String HX_FOLDER_NAME = "HyperXchange";
+    public static String HX_REPORT_FOLDER_NAME = "HxReport";
+    public static String HX_CAMERA_FOLDER = "HxCamera";
+    public static String HX_CAMERA_FILE_NAME = "Rear.jpg";
 
-    public static String LEGAL_COMPANY_NAME ="YIBEAL TRADEX PVT. LTD. PUNE";
-    public static String COMPANY_NAME="HyperXchange";
+    public static String LEGAL_COMPANY_NAME = "YIBEAL TRADEX PVT. LTD. PUNE";
+    public static String COMPANY_NAME = "HyperXchange";
+
+    /**
+     * JSON Constants
+     */
+    public static String JSON_TYPE = "type";
+    public static String JSON_TABLE_NAME="tableName";
+    public static String PHONE_TABLE="phone_details";
+    public static String REPORT_TABLE="report_details";
+    public static String JSON_TYPE_INSERT = "INSERT";
+    public static String JSON_INSERT_VALUES="values";
+    public static String JSON_TYPE_SELECT = "SELECT";
+    public static String JSON_TYPE_UPDATE = "UPDATE";
+    public static String JSON_WHERE = "where";
+    public static String JSON_UPDATE_COL = "col";
+    public static String JSON_UPDATE_VALUE = "update";
 }
+
 
