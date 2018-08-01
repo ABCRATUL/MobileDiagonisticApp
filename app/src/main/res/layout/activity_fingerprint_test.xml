@@ -5,7 +5,7 @@
     android:layout_gravity="center_horizontal"
     android:layout_width="350dp"
     android:layout_height="350dp"
-    tools:context=".ManualTestActivities.FingerprintTestActivity">
+    tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.FingerprintTestActivity">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/appCompatTextView4"

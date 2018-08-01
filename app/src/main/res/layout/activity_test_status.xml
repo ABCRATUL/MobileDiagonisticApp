@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/background"
     android:layout_height="match_parent"
-    tools:context=".Activities.TestStatusActivity">
+    tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities.TestStatusActivity">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/testStatusIcon"

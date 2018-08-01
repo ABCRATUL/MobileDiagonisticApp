@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:id="@+id/rgbLayout"
     android:layout_height="match_parent"
-    tools:context=".ManualTestActivities.RGBTestActivity">
+    tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.RGBTestActivity">
 
 </android.support.constraint.ConstraintLayout>

@@ -6,7 +6,7 @@
     android:layout_width="300dp"
     android:layout_height="150dp"
     style="@style/Base.Theme.AppCompat.Light.Dialog"
-    tools:context=".ManualTestActivities.VolumeButtonUpTest">
+    tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.VolumeButtonUpTest">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/appCompatImageView2"
