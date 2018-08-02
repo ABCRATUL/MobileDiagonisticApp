@@ -76,7 +76,7 @@ public class Constants {
         manualTestList.add(new Test("Charger", 0, R.drawable.ic_charger));
         manualTestList.add(new Test("Headphone", 0, R.drawable.ic_headphone_jack));
         manualTestList.add(new Test("RGB", 0, R.drawable.ic_rgb));
-        manualTestList.add(new Test("MicroPhone", 0, R.drawable.ic_timer));
+        manualTestList.add(new Test("MicroPhone", 0, R.drawable.ic_microphone));
         manualTestList.add(new Test("Brightness", 0, R.drawable.ic_screen_brightness));
         manualTestList.add(new Test("Fingerprint", 0, R.drawable.ic_finger_print));
         //Keeping a copy of Manual Test List.

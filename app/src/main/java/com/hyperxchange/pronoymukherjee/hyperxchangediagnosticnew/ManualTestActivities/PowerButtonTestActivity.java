@@ -50,13 +50,19 @@ public class PowerButtonTestActivity extends AppCompatActivity {
      * @param status: true if Successful else false.
      */
     private void completeActivity(boolean status) {
-        if (status) {
-            setResult(RESULT_OK);
-            timer.cancel();
-        } else {
-            setResult(RESULT_CANCELED);
+        try {
+            if (status) {
+                setResult(RESULT_OK);
+                timer.cancel();
+            } else {
+                setResult(RESULT_CANCELED);
+            }
+            finish();
         }
-        finish();
+        catch (Exception e){
+            setResult(RESULT_CANCELED);
+            finish();
+        }
     }
 
     @Override
