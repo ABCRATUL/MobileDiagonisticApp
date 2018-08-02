@@ -1,6 +1,7 @@
 package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Environment;
@@ -10,22 +11,35 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.ProgressBar;
 
+import com.android.volley.VolleyError;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.DeviceInformation;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.ExcelCreator;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.HTTPConnector;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.ParamsCreator;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Objects.Phone;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 
-public class TestScoreScreen extends AppCompatActivity {
+public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.ResponseListener {
     AppCompatImageView _sadFace, _okayFace, _happyFace;
     AppCompatTextView _sadText, _okayText, _happyText, _testScore, _priceValue;
     AppCompatButton _submitButton, _exitButton;
     CircularProgressBar _circularProgressBar;
     int basePrice = 12000;
     int physicalStatus;
+    private String TAG_CLASS = TestScoreScreen.class.getSimpleName();
+    boolean isInsertPhone = false, isInsertReport = false;
+    ProgressDialog _progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,15 +93,15 @@ public class TestScoreScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean isWrite = ExcelCreator.createExcel(getApplicationContext());
-                if (isWrite)
+                if (isWrite) {
                     Message.toastMessage(getApplicationContext(),
                             "You can find the report at: " +
                                     Environment.getExternalStorageDirectory()
                                     + Constants.HX_FOLDER_NAME + File.separator + Constants.HX_REPORT_FOLDER_NAME,
                             "long");
-                Intent intent = new Intent(TestScoreScreen.this, StartTestScreen.class);
-                startActivity(intent);
-                finish();
+                    checkDevice();
+                    //finish();
+                }
             }
         });
     }
@@ -107,6 +121,9 @@ public class TestScoreScreen extends AppCompatActivity {
         _exitButton = findViewById(R.id.exitAppButtonTestScore);
         _circularProgressBar = findViewById(R.id.testProgress);
         _priceValue = findViewById(R.id.priceValue);
+        _progressDialog=new ProgressDialog(this);
+        _progressDialog.setCancelable(false);
+        _progressDialog.setMessage(getString(R.string.loading_message));
     }
 
     /**
@@ -133,5 +150,88 @@ public class TestScoreScreen extends AppCompatActivity {
         }
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
+    }
+
+    private void checkDevice() {
+        DeviceInformation deviceInformation = new DeviceInformation(getApplicationContext());
+        HTTPConnector connector = new HTTPConnector(TAG_CLASS,
+                getApplicationContext(),
+                Constants.QUERY_URL, ParamsCreator
+                .createParamsForSelectPhone(deviceInformation.getIMEINumber(true)),
+                this);
+        connector.makeQuery(TAG_CLASS);
+        _progressDialog.show();
+        Message.logMessage(TAG_CLASS,"QUERY FOR CHECKING DEVICE");
+        deviceInformation = null;
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+        Message.logMessage(TAG_CLASS,response.toString());
+        _progressDialog.dismiss();
+        try {
+            if (!isInsertPhone) {
+                JSONArray array = response.getJSONArray(Constants.JSON_RESULT);
+                if (array.length() == 0) {
+                    isInsertPhone = true;
+                    uploadDataToServer();
+                } else {
+                    Message.logMessage(TAG_CLASS,"Will Upload Report");
+                    isInsertReport=true;
+                    isInsertPhone=true;
+                    uploadReportToServer();
+                }
+            } else if (isInsertPhone && !isInsertReport) {
+                JSONObject res=response.getJSONObject(Constants.JSON_RESULT);
+                int affectedRow = res.getInt(Constants.JSON_AFFECT_ROW);
+                if (affectedRow > 0) {
+                    uploadReportToServer();
+                }
+            } else if (isInsertReport) {
+                Intent intent = new Intent(TestScoreScreen.this, StartTestScreen.class);
+                startActivity(intent);
+                finish();
+            }
+        } catch (JSONException e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+        }
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Message.logMessage(TAG_CLASS, error.toString());
+        _progressDialog.dismiss();
+        Message.toastMessage(getApplicationContext(),
+                "Ops! Something went wrong.","");
+    }
+
+    private void uploadDataToServer() {
+        DeviceInformation deviceInformation = new DeviceInformation(getApplicationContext());
+        Phone phone = new Phone(deviceInformation.getDeviceManufacturer(),
+                deviceInformation.getDeviceModelName(),
+                deviceInformation.getSerialNumber(),
+                deviceInformation.getIMEINumber(true),
+                deviceInformation.getBSSID(),
+                deviceInformation.getRegion(),
+                deviceInformation.getUUID(),
+                String.valueOf(deviceInformation.getBatteryActualCapacity()));
+        HTTPConnector httpConnector = new HTTPConnector(TAG_CLASS, getApplicationContext(),
+                Constants.QUERY_URL, ParamsCreator.createParamsForInsertPhone(phone),
+                this);
+        httpConnector.makeQuery(TAG_CLASS);
+        _progressDialog.show();
+        deviceInformation = null;
+    }
+
+    private void uploadReportToServer() {
+        isInsertReport = true;
+        DeviceInformation deviceInformation = new DeviceInformation(getApplicationContext());
+        HTTPConnector connector=new HTTPConnector(TAG_CLASS,
+                getApplicationContext(),
+                Constants.QUERY_URL,ParamsCreator.createParamsForInsertReport(deviceInformation),
+                this);
+        connector.makeQuery(TAG_CLASS);
+        _progressDialog.show();
+        deviceInformation=null;
     }
 }
