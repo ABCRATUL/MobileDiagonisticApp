@@ -14,6 +14,7 @@ public class SingleTon {
 
     private SingleTon(Context context) {
         this.context = context;
+        requestQueue=getRequestQueue();
     }
 
     /**

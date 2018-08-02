@@ -204,9 +204,9 @@ public class ExcelCreator {
             row += 2;
             //Adding the Report UUID
             headingLabel = new Label(2, row, "Report UUID:", cellFormat);
-            String reportUUID = deviceInformation.getUUID() + Calendar
+            Constants.REPORT_UUID_VALUE = deviceInformation.getUUID() + Calendar
                     .getInstance().getTimeInMillis();
-            valueLabel = new Label(3, row, reportUUID, cellFormat);
+            valueLabel = new Label(3, row, Constants.REPORT_UUID_VALUE, cellFormat);
             sheet.addCell(headingLabel);
             sheet.addCell(valueLabel);
 
@@ -219,7 +219,7 @@ public class ExcelCreator {
             DateTime dateTime = new DateTime(3, row, currentDate, dateFormat);
             sheet.addCell(headingLabel);
             sheet.addCell(dateTime);
-
+            deviceInformation = null;
 
             workbook.write();
             workbook.close();
@@ -230,7 +230,14 @@ public class ExcelCreator {
         }
     }
 
-    private static boolean isPresent(Test test, boolean isManual) {
+    /**
+     * This is the method to check whether the test is successful or not.
+     *
+     * @param test:     The Test Object which is to be checked.
+     * @param isManual: if the Test is of Manual or not.
+     * @return true: if its successful else false.
+     */
+    public static boolean isPresent(Test test, boolean isManual) {
         if (!isManual) {
             for (int i = 0; i < Constants.successTestList.size(); i++) {
                 if (Constants.successTestList.get(i).getTestName().equals(test.getTestName()))
