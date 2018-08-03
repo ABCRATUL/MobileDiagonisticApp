@@ -10,6 +10,11 @@ import java.util.Map;
 
 public class Constants {
     private static String TAG_CLASS = Constants.class.getSimpleName();
+
+    public static String DEVICE_NAME="";
+    public static String DEVICE_STORAGE="";
+    public static String DEVICE_RAM="";
+
     public static String QUERY_URL="http://ec2-13-127-202-203.ap-south-1.compute.amazonaws.com/dig";
     public static int PERMISSION_REQUEST_CODE = 69;
     public static String DIALOG_MSG = "dialogMsg";
@@ -145,7 +150,6 @@ public class Constants {
      */
     public static String JSON_TYPE = "type";
     public static String JSON_TABLE_NAME="tableName";
-    public static String PHONE_TABLE="phone_details";
     public static String REPORT_TABLE="report_details";
     public static String JSON_TYPE_INSERT = "INSERT";
     public static String JSON_INSERT_VALUES="values";
@@ -163,6 +167,10 @@ public class Constants {
      */
     public static String IMEI_NUMBER="imei";
     public static String REPORT_UUID_VALUE;
+    public static String PHONE_MODEL_NAME="phoneModelName";
+
+    public static String PHONE_TABLE="phone_details";
+    public static String PHONE_MODEL_TABLE="buy_back_phone";
 }
 
 

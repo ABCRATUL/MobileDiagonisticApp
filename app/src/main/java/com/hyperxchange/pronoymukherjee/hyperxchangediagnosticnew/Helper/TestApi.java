@@ -25,7 +25,14 @@ import java.util.Objects;
 
 public class TestApi {
     static int score = 0;
+    private static String TAG_CLASS = TestApi.class.getSimpleName();
 
+    /**
+     * Method to test the Ram.
+     *
+     * @param context: The Context of the application.
+     * @return score: After the test.
+     */
     public static int testRam(Context context) {
         ActivityManager activityManager = (ActivityManager) context
                 .getSystemService(Context.ACTIVITY_SERVICE);
@@ -34,6 +41,7 @@ public class TestApi {
         activityManager.getMemoryInfo(memoryInfo);
         long availMemory = memoryInfo.availMem;
         long totalMemory = memoryInfo.totalMem;
+        Constants.DEVICE_RAM = String.valueOf(totalMemory / (1024 * 1024 * 1024) + 1);
         activityManager = null;
         memoryInfo = null;
         if ((availMemory / totalMemory) * 100 <= 60)
@@ -41,6 +49,12 @@ public class TestApi {
         return 10;
     }
 
+    /**
+     * Method to test Battery.
+     *
+     * @param context: The Application Response.
+     * @return score: The Score.
+     */
     public static int testBattery(Context context) {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryIntent = context.registerReceiver(null, intentFilter);
@@ -68,13 +82,27 @@ public class TestApi {
         return score;
     }
 
+    /**
+     * The Method to test the Bluetooth and get the User-friendly device name.
+     *
+     * @param context: The application Context.
+     * @return score: The Score of the test.
+     */
     public static int testBluetooth(Context context) {
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        if (adapter == null)
-            return 0;
-        return 10;
+        if (adapter != null) {
+            Constants.DEVICE_NAME = adapter.getName();
+            return 10;
+        }
+        return 0;
     }
 
+    /**
+     * Method to test the NFC Device.
+     *
+     * @param context: The Application Context.
+     * @return score: The Score.
+     */
     public static int testNFC(Context context) {
         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(context);
         if (adapter == null)
@@ -82,6 +110,12 @@ public class TestApi {
         return 10;
     }
 
+    /**
+     * Method to test the FLASH.
+     *
+     * @param context: The Application Context.
+     * @return score: The Score.
+     */
     public static int testFlashAvailability(Context context) {
         score = 0;
         Boolean flashAvailable = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
@@ -109,6 +143,12 @@ public class TestApi {
         return score;
     }
 
+    /**
+     * Method to test the Wifi.
+     *
+     * @param context: The Application Context.
+     * @return score: The Score.
+     */
     public static int testNetwork(Context context) {
         score = 0;
         boolean wasWifiOff = false;
@@ -144,6 +184,12 @@ public class TestApi {
         return score;
     }
 
+    /**
+     * Method to test Acclerometer.
+     *
+     * @param context: The Application Context.
+     * @return score: The Score.
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static int testAcclerometer(Context context) {
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -157,6 +203,12 @@ public class TestApi {
         return 0;
     }
 
+    /**
+     * Method to test Gyroscope.
+     *
+     * @param context: The Application Context.
+     * @return score: The Score.
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static int testGyroscope(Context context) {
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -167,6 +219,12 @@ public class TestApi {
         return 0;
     }
 
+    /**
+     * Method to test External Storage.
+     *
+     * @param context: The Application Context.
+     * @return score: The Score.
+     */
     public static int testExternalStorage(Context context) {
         String state = Environment.getExternalStorageState();
         if (state.equals(Environment.MEDIA_MOUNTED))

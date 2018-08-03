@@ -10,6 +10,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.os.StatFs;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -57,11 +59,9 @@ public class StartTestScreen extends AppCompatActivity {
         initializeViews();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermissions();
-            /*if (!canWriteSettings()) {
-                changeWriteSettings();
-            }*/
         }
         _startTest.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
             @Override
             public void onClick(View v) {
                 if (isNetworkAvailable()) {
@@ -72,6 +72,10 @@ public class StartTestScreen extends AppCompatActivity {
                     Intent startTestIntent = new Intent(StartTestScreen.this,
                             AutoTestScreen.class);
                     startActivity(startTestIntent);
+                    //Getting the Storage Data of the Device.
+                    StatFs statFs = new StatFs(Environment.getExternalStorageDirectory().getPath());
+                    long bytes = (long) statFs.getBlockSize() * (long) statFs.getBlockCount();
+                    Constants.DEVICE_STORAGE = String.valueOf(bytes / 1000000000);
                     finish();
                 } else {
                     Bundle bundle = new Bundle();
@@ -119,11 +123,14 @@ public class StartTestScreen extends AppCompatActivity {
             bundle.putString(Constants.DIALOG_MSG, getResources()
                     .getString(R.string.allow_system_settings));
             intent.putExtras(bundle);
-            telephonyManager=null;
+            telephonyManager = null;
             startActivityForResult(intent, Constants.WRITE_SETTINGS_CODE);
         }
     }
 
+    /**
+     * Method to initialize the Views.
+     */
     private void initializeViews() {
         _modelName = findViewById(R.id.modelName);
         _imeiNumber = findViewById(R.id.imeiNumber);
@@ -154,7 +161,7 @@ public class StartTestScreen extends AppCompatActivity {
         if (phoneStatePermission != PackageManager.PERMISSION_GRANTED)
             permissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
         requestPermission(permissionsNeeded.toArray(new String[permissionsNeeded.size()]));
-        permissionsNeeded=null;
+        permissionsNeeded = null;
     }
 
 
@@ -249,4 +256,24 @@ public class StartTestScreen extends AppCompatActivity {
             _startTest = null;
         Runtime.getRuntime().gc();
     }
+    /*private String formatSize(long size){
+        String suffix=null;
+        if(size>=1024){
+            suffix="KB";
+            size/=1024;
+            if(size>=1024){
+                suffix="MB";
+                size/=1024;
+            }
+        }
+        StringBuilder result=new StringBuilder(Long.toString(size));
+        int commaOffset=result.length()-3;
+        while(commaOffset>0){
+            result.insert(commaOffset,',');
+            commaOffset-=3;
+        }
+        if(suffix!=null)
+            result.append(suffix);
+        return result.toString();
+    }*/
 }

@@ -40,6 +40,8 @@ public class ExcelCreator {
             WritableSheet sheet = workbook.createSheet(Constants.HX_REPORT_SHEET, 0);
             WritableFont font15 = new WritableFont(WritableFont.ARIAL, 20, WritableFont.BOLD);
             WritableCellFormat cellFormat = new WritableCellFormat(font15);
+
+            //Adding the Company Name.
             Label label = new Label(3, 2, Constants.LEGAL_COMPANY_NAME, cellFormat);
             sheet.addCell(label);
             WritableFont font17 = new WritableFont(WritableFont.ARIAL, 17, WritableFont.BOLD, true);

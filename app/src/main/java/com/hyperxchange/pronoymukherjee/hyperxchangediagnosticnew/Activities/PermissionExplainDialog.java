@@ -70,4 +70,10 @@ public class PermissionExplainDialog extends AppCompatActivity {
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Runtime.getRuntime().gc();
+    }
 }

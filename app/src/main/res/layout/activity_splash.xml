@@ -6,14 +6,26 @@
     android:layout_gravity="center"
     android:layout_height="match_parent"
     style="@style/splash"
+    android:background="@color/background"
     tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities.SplashScreen">
+
     <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/hxLogoImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:foregroundGravity="center_horizontal"
         android:src="@drawable/splashscreen_logo"
-        android:id="@+id/hxLogoImage"/>
-    <android.support.v7.widget.AppCompatImageView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461" />
+    <!--<android.support.v7.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:visibility="gone"
         android:layout_height="140dp"
@@ -23,5 +35,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:id="@+id/gifImg"/>
+        android:id="@+id/gifImg"/>-->
 </android.support.constraint.ConstraintLayout>
