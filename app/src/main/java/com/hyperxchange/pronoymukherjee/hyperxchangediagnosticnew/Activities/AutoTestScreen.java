@@ -36,7 +36,7 @@ public class AutoTestScreen extends AppCompatActivity {
     CircularProgressBar _circularProgressBar;
     ProgressBar _progressBar;
     Context context;
-    int score = 0,progress=0;
+    int score = 0, progress = 0;
     TestItemAdapter testItemAdapter;
 
     @Override
@@ -61,6 +61,26 @@ public class AutoTestScreen extends AppCompatActivity {
                 exitApp();
             }
         });
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long storage = Long.parseLong(Constants.DEVICE_STORAGE);
+                if (storage >= 4 && storage <= 8)
+                    storage = 8;
+                else if (storage >= 10 && storage <= 15)
+                    storage = 16;
+                else if (storage >= 20 && storage <= 30)
+                    storage = 32;
+                else if (storage >= 40 && storage <= 64)
+                    storage = 64;
+                else if (storage >= 70 && storage <= 128)
+                    storage = 128;
+                else storage = 256;
+                Constants.DEVICE_STORAGE = String.valueOf(storage);
+                Message.logMessage(TAG_CLASS, "STORAGE: " + Constants.DEVICE_STORAGE);
+            }
+        });
+        thread.start();
         performTest();
     }
 
@@ -74,7 +94,7 @@ public class AutoTestScreen extends AppCompatActivity {
         _successBucket = findViewById(R.id.successTest);
         _failedBucket = findViewById(R.id.failedTest);
         _circularProgressBar = findViewById(R.id.circularProgressBar);
-        _progressBar=findViewById(R.id.progressBar);
+        _progressBar = findViewById(R.id.progressBar);
     }
 
     /**
@@ -90,13 +110,14 @@ public class AutoTestScreen extends AppCompatActivity {
             public void run() {
                 if (Constants.automatedTestList.size() > 0) {
                     _progressBar.setProgress(progress);
-                    progress+=11;
+                    progress += 11;
                     Test currentTest = Constants.automatedTestList.get(0);
                     _currentTestImage.setImageResource(currentTest.getTestIconID());
                     //YoYo.with(Techniques.Shake).duration(1500).playOn(_currentTestImage);
                     switch (currentTest.getTestName()) {
                         case "Ram":
                             score = TestApi.testRam(context);
+                            Message.logMessage(TAG_CLASS,"RAM: "+Constants.DEVICE_RAM);
                             break;
                         case "Battery":
                             score = TestApi.testBattery(context);

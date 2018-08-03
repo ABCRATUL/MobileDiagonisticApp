@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class TestStatusActivity extends AppCompatActivity {
     ImageView _statusIcon;
     AppCompatImageButton _successBucket, _failedBucket, _nextButton;
-    AppCompatTextView _successNumber,_failedNumber;
+    AppCompatTextView _successNumber, _failedNumber;
     int statusIconID;
 
     @Override
@@ -46,7 +46,7 @@ public class TestStatusActivity extends AppCompatActivity {
                         TestStatusDialogActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putBoolean(Constants.TEST_STATUS_DIALOG_KEY, true);
-                bundle.putBoolean(Constants.TEST_IS_MANUAL,false);
+                bundle.putBoolean(Constants.TEST_IS_MANUAL, false);
                 openDialogIntent.putExtras(bundle);
                 startActivity(openDialogIntent);
             }
@@ -58,7 +58,7 @@ public class TestStatusActivity extends AppCompatActivity {
                         TestStatusDialogActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putBoolean(Constants.TEST_STATUS_DIALOG_KEY, false);
-                bundle.putBoolean(Constants.TEST_IS_MANUAL,false);
+                bundle.putBoolean(Constants.TEST_IS_MANUAL, false);
                 openDialogIntent.putExtras(bundle);
                 startActivity(openDialogIntent);
             }
@@ -67,7 +67,7 @@ public class TestStatusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO:Go to Manual Test.
-                Constants.automatedTestList=new ArrayList<>();
+                Constants.automatedTestList = new ArrayList<>();
                 Constants.fillAutomatedTestList();
                 Intent manualTestIntent = new Intent(TestStatusActivity.this,
                         ManualTestScreen.class);
@@ -77,19 +77,22 @@ public class TestStatusActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method to initialize the Views.
+     */
     private void initializeViews() {
         _statusIcon = findViewById(R.id.testStatusIcon);
         _successBucket = findViewById(R.id.successTestSet);
         _failedBucket = findViewById(R.id.failedTestSet);
         _nextButton = findViewById(R.id.next);
-        _successNumber =findViewById(R.id.passedNumber);
-        _failedNumber=findViewById(R.id.failedNumber);
+        _successNumber = findViewById(R.id.passedNumber);
+        _failedNumber = findViewById(R.id.failedNumber);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Constants.automatedTestList=null;
-        System.gc();
+        Constants.automatedTestList = null;
+        Runtime.getRuntime().gc();
     }
 }

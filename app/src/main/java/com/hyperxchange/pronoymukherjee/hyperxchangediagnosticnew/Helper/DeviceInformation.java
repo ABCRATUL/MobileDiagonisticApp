@@ -13,7 +13,7 @@ import java.util.Map;
 
 
 public class DeviceInformation {
-    Context context;
+    private Context context;
     private String TAG_CLASS = DeviceInformation.class.getSimpleName();
 
     public DeviceInformation(Context context) {

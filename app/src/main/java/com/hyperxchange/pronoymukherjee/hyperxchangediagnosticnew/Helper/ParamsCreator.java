@@ -36,6 +36,12 @@ public class ParamsCreator {
         return params;
     }
 
+    /**
+     * This the method to create the Params for selecting the Phones.
+     *
+     * @param imei: The IMEI Number of the Phone to be selected.
+     * @return params: The Params which contains the key and the value.
+     */
     public static Map<String, String> createParamsForSelectPhone(String imei) {
         Map<String, String> params = new HashMap<>();
         try {
@@ -50,6 +56,12 @@ public class ParamsCreator {
         return params;
     }
 
+    /**
+     * This is the method to create the Params for inserting the report.
+     *
+     * @param deviceInformation: The Device information from which the details of the phone are fetched.
+     * @return params: For inserting the Report.
+     */
     public static Map<String, String> createParamsForInsertReport(DeviceInformation deviceInformation) {
         Map<String, String> params = new HashMap<>();
         boolean overall = true;
@@ -80,12 +92,25 @@ public class ParamsCreator {
             else values.append("'unsuccessful',");
 
             values.append("'").append(Constants.REPORT_UUID_VALUE).append("',");
-            String time=String.valueOf(Calendar.getInstance().getTimeInMillis());
+            String time = String.valueOf(Calendar.getInstance().getTimeInMillis());
             values.append("'").append(time).append("'");
             params.put(Constants.JSON_INSERT_VALUES, values.toString());
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());
             return params;
+        }
+        return params;
+    }
+    public static Map<String,String> createParamsForPhonePrice(){
+        Map<String,String> params=new HashMap<>();
+        try{
+            params.put(Constants.JSON_TYPE,Constants.JSON_TYPE_SELECT);
+            params.put(Constants.JSON_TABLE_NAME,Constants.PHONE_MODEL_TABLE);
+            String where=Constants.PHONE_MODEL_NAME+" LIKE '"+Constants.DEVICE_NAME+"'";
+            params.put(Constants.JSON_WHERE,where);
+        }
+        catch (Exception e){
+            Message.logMessage(TAG_CLASS,e.toString());
         }
         return params;
     }

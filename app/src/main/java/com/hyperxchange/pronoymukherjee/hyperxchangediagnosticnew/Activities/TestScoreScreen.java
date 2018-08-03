@@ -11,7 +11,6 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-import android.widget.ProgressBar;
 
 import com.android.volley.VolleyError;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
@@ -52,6 +51,7 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
         _testScore.setText(String.valueOf(Constants.successManualTestList.size()
                 + Constants.successTestList.size()));
         //TODO:Get the Price.
+
         _priceValue.setText(String.valueOf(basePrice));
         _sadText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +99,11 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
                                     Environment.getExternalStorageDirectory()
                                     + Constants.HX_FOLDER_NAME + File.separator + Constants.HX_REPORT_FOLDER_NAME,
                             "long");
+                    //Uploading the data to the server.
                     checkDevice();
-                    //finish();
+                }else {
+                    Message.toastMessage(getApplicationContext(),
+                            "Sorry, we couldn't generate the report.","long");
                 }
             }
         });
@@ -121,7 +124,7 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
         _exitButton = findViewById(R.id.exitAppButtonTestScore);
         _circularProgressBar = findViewById(R.id.testProgress);
         _priceValue = findViewById(R.id.priceValue);
-        _progressDialog=new ProgressDialog(this);
+        _progressDialog = new ProgressDialog(this);
         _progressDialog.setCancelable(false);
         _progressDialog.setMessage(getString(R.string.loading_message));
     }
@@ -161,28 +164,28 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
                 this);
         connector.makeQuery(TAG_CLASS);
         _progressDialog.show();
-        Message.logMessage(TAG_CLASS,"QUERY FOR CHECKING DEVICE");
+        Message.logMessage(TAG_CLASS, "QUERY FOR CHECKING DEVICE");
         deviceInformation = null;
     }
 
     @Override
     public void onResponse(JSONObject response) {
-        Message.logMessage(TAG_CLASS,response.toString());
+        Message.logMessage(TAG_CLASS, response.toString());
         _progressDialog.dismiss();
         try {
             if (!isInsertPhone) {
                 JSONArray array = response.getJSONArray(Constants.JSON_RESULT);
                 if (array.length() == 0) {
                     isInsertPhone = true;
-                    uploadDataToServer();
+                    uploadPhoneToServer();
                 } else {
-                    Message.logMessage(TAG_CLASS,"Will Upload Report");
-                    isInsertReport=true;
-                    isInsertPhone=true;
+                    Message.logMessage(TAG_CLASS, "Will Upload Report");
+                    isInsertReport = true;
+                    isInsertPhone = true;
                     uploadReportToServer();
                 }
             } else if (isInsertPhone && !isInsertReport) {
-                JSONObject res=response.getJSONObject(Constants.JSON_RESULT);
+                JSONObject res = response.getJSONObject(Constants.JSON_RESULT);
                 int affectedRow = res.getInt(Constants.JSON_AFFECT_ROW);
                 if (affectedRow > 0) {
                     uploadReportToServer();
@@ -202,10 +205,13 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
         Message.logMessage(TAG_CLASS, error.toString());
         _progressDialog.dismiss();
         Message.toastMessage(getApplicationContext(),
-                "Ops! Something went wrong.","");
+                "Ops! Something went wrong.", "");
     }
 
-    private void uploadDataToServer() {
+    /**
+     * Method to upload the Phone Details to the server if not present.
+     */
+    private void uploadPhoneToServer() {
         DeviceInformation deviceInformation = new DeviceInformation(getApplicationContext());
         Phone phone = new Phone(deviceInformation.getDeviceManufacturer(),
                 deviceInformation.getDeviceModelName(),
@@ -223,15 +229,32 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
         deviceInformation = null;
     }
 
+    /**
+     * Method to upload the Report data to the Server.
+     */
     private void uploadReportToServer() {
         isInsertReport = true;
         DeviceInformation deviceInformation = new DeviceInformation(getApplicationContext());
-        HTTPConnector connector=new HTTPConnector(TAG_CLASS,
+        HTTPConnector connector = new HTTPConnector(TAG_CLASS,
                 getApplicationContext(),
-                Constants.QUERY_URL,ParamsCreator.createParamsForInsertReport(deviceInformation),
+                Constants.QUERY_URL, ParamsCreator.createParamsForInsertReport(deviceInformation),
                 this);
         connector.makeQuery(TAG_CLASS);
         _progressDialog.show();
-        deviceInformation=null;
+        deviceInformation = null;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (_sadFace != null)
+            _sadFace = null;
+        if (_okayFace != null)
+            _okayFace = null;
+        if (_happyFace != null)
+            _happyFace = null;
+        if(_submitButton!=null)
+            _submitButton=null;
+        Runtime.getRuntime().gc();
     }
 }
