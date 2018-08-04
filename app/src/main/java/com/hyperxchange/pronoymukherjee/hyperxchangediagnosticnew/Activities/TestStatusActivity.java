@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.PriceGetter;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 
@@ -75,6 +76,14 @@ public class TestStatusActivity extends AppCompatActivity {
                 finish();
             }
         });
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                PriceGetter priceGetter=new PriceGetter(getApplicationContext());
+                priceGetter.getPhoneId();
+            }
+        });
+        thread.start();
     }
 
     /**

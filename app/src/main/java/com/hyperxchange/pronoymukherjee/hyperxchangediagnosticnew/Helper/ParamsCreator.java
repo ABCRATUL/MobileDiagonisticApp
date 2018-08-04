@@ -101,16 +101,46 @@ public class ParamsCreator {
         }
         return params;
     }
-    public static Map<String,String> createParamsForPhonePrice(){
-        Map<String,String> params=new HashMap<>();
-        try{
-            params.put(Constants.JSON_TYPE,Constants.JSON_TYPE_SELECT);
-            params.put(Constants.JSON_TABLE_NAME,Constants.PHONE_MODEL_TABLE);
-            String where=Constants.PHONE_MODEL_NAME+" LIKE '"+Constants.DEVICE_NAME+"'";
-            params.put(Constants.JSON_WHERE,where);
+
+    /**
+     * Method to get the Params for the Phone Price.
+     *
+     * @return params: The Params to get the Phone Price.
+     */
+    public static Map<String, String> createParamsForPhoneID(String deviceName) {
+        Map<String, String> params = new HashMap<>();
+        try {
+            params.put(Constants.JSON_TYPE, Constants.JSON_TYPE_SELECT);
+            params.put(Constants.JSON_TABLE_NAME, Constants.PHONE_MODEL_TABLE);
+            String where = Constants.PHONE_MODEL_NAME + " LIKE '"
+                    + deviceName + "'";
+            params.put(Constants.JSON_WHERE, where);
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
         }
-        catch (Exception e){
-            Message.logMessage(TAG_CLASS,e.toString());
+        return params;
+    }
+
+    /**
+     * Method to create the params for the Phone Price.
+     *
+     * @param id:      The Phone ID.
+     * @param ram:     The Ram of the Phone.
+     * @param storage: The Storage of the Device.
+     * @return params: Params with the following conditions.
+     */
+    public static Map<String, String> createParamsForPhonePrice(int id, int ram, int storage) {
+        Map<String, String> params = new HashMap<>();
+        try {
+            params.put(Constants.JSON_TYPE, Constants.JSON_TYPE_SELECT);
+            params.put(Constants.JSON_TABLE_NAME, Constants.PHONE_PRICE_TABLE);
+            String where = Constants.PRICE_PHONE_ID + " = " + id + " AND " +
+                    Constants.PHONE_RAM + " = " + ram +" AND "+
+                    Constants.PHONE_STORAGE + " = " + storage;
+            params.put(Constants.JSON_WHERE, where);
+            Message.logMessage(TAG_CLASS,params.toString());
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
         }
         return params;
     }

@@ -2,7 +2,6 @@ package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
@@ -19,6 +18,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Adapters.ManualGridAdapter;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.PriceGetter;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.BackButtonTestActivity;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.CameraFrontTestActivity;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.CameraRearTestActivity;
