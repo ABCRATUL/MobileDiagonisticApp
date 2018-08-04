@@ -50,7 +50,7 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
                         Constants.successTestList.size());
         _testScore.setText(String.valueOf(Constants.successManualTestList.size()
                 + Constants.successTestList.size()));
-        //TODO:Get the Price.
+        basePrice= Integer.parseInt(Constants.DEVICE_PRICE);
 
         _priceValue.setText(String.valueOf(basePrice));
         _sadText.setOnClickListener(new View.OnClickListener() {

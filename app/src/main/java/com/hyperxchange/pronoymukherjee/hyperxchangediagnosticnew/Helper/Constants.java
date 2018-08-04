@@ -11,11 +11,12 @@ import java.util.Map;
 public class Constants {
     private static String TAG_CLASS = Constants.class.getSimpleName();
 
-    public static String DEVICE_NAME="";
-    public static String DEVICE_STORAGE="";
-    public static String DEVICE_RAM="";
+    public static String DEVICE_NAME = "";
+    public static String DEVICE_STORAGE = "";
+    public static String DEVICE_RAM = "";
+    public static String DEVICE_PRICE="";
 
-    public static String QUERY_URL="http://ec2-13-127-202-203.ap-south-1.compute.amazonaws.com/dig";
+    public static String QUERY_URL = "http://ec2-13-127-202-203.ap-south-1.compute.amazonaws.com/dig";
     public static int PERMISSION_REQUEST_CODE = 69;
     public static String DIALOG_MSG = "dialogMsg";
     public static int DIALOG_INTERNET_CODE = 169;
@@ -149,28 +150,34 @@ public class Constants {
      * JSON Constants
      */
     public static String JSON_TYPE = "type";
-    public static String JSON_TABLE_NAME="tableName";
-    public static String REPORT_TABLE="report_details";
+    public static String JSON_TABLE_NAME = "tableName";
+    public static String REPORT_TABLE = "report_details";
     public static String JSON_TYPE_INSERT = "INSERT";
-    public static String JSON_INSERT_VALUES="values";
+    public static String JSON_INSERT_VALUES = "values";
     public static String JSON_TYPE_SELECT = "SELECT";
     public static String JSON_TYPE_UPDATE = "UPDATE";
     public static String JSON_WHERE = "where";
     public static String JSON_UPDATE_COL = "col";
     public static String JSON_UPDATE_VALUE = "update";
-    public static String JSON_RESULT="res";
-    public static String JSON_RESULT_STATUS="status";
-    public static String JSON_AFFECT_ROW="affectedRows";
+    public static String JSON_RESULT = "res";
+    public static String JSON_RESULT_STATUS = "status";
+    public static String JSON_AFFECT_ROW = "affectedRows";
 
     /**
      * Column Constants
      */
-    public static String IMEI_NUMBER="imei";
+    public static String IMEI_NUMBER = "imei";
     public static String REPORT_UUID_VALUE;
-    public static String PHONE_MODEL_NAME="phoneModelName";
+    public static String PHONE_MODEL_NAME = "phoneModelName";
+    public static String PHONE_ID = "id";
+    public static String PHONE_STORAGE = "storage";
+    public static String PHONE_RAM = "ram";
+    public static String PRICE_PHONE_ID = "phoneId";
+    public static String PHONE_PRICE = "price";
 
-    public static String PHONE_TABLE="phone_details";
-    public static String PHONE_MODEL_TABLE="buy_back_phone";
+    public static String PHONE_TABLE = "phone_details";
+    public static String PHONE_MODEL_TABLE = "buy_back_phone";
+    public static String PHONE_PRICE_TABLE="buy_back_phone_price";
 }
 
 

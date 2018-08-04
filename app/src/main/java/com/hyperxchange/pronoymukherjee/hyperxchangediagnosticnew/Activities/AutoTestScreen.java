@@ -21,6 +21,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Adapters.TestItemAdapter;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.PriceGetter;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.TestApi;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Objects.Test;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
@@ -117,7 +118,7 @@ public class AutoTestScreen extends AppCompatActivity {
                     switch (currentTest.getTestName()) {
                         case "Ram":
                             score = TestApi.testRam(context);
-                            Message.logMessage(TAG_CLASS,"RAM: "+Constants.DEVICE_RAM);
+                            Message.logMessage(TAG_CLASS, "RAM: " + Constants.DEVICE_RAM);
                             break;
                         case "Battery":
                             score = TestApi.testBattery(context);
