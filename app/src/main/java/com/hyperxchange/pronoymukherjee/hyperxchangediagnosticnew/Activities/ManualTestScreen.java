@@ -87,131 +87,140 @@ public class ManualTestScreen extends AppCompatActivity {
      * This method is called from Activity Result after completing one test.
      */
     private void performTest() {
-        new Handler().postDelayed(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void run() {
-                Intent intent;
-                if (Constants.manualTestList.size() > 0) {
-                    currentTest = Constants.manualTestList.get(0);
-                    _currentTest.setImageResource(currentTest.getTestIconID());
-                    switch (currentTest.getTestName()) {
-                        case "Touch Screen":
-                            intent = new Intent(ManualTestScreen.this,
-                                    TouchScreenTest.class);
-                            startActivityForResult(intent, Constants.TOUCH_SCREEN_CODE);
-                            break;
-                        case "Speaker":
-                            intent = new Intent(ManualTestScreen.this,
-                                    SpeakerTest.class);
-                            startActivityForResult(intent, Constants.SPEAKER_CODE);
-                            break;
-                        case "Volume Up":
-                            intent = new Intent(ManualTestScreen.this,
-                                    VolumeButtonUpTest.class);
-                            startActivityForResult(intent, Constants.VOLUME_BUTTON_UP_CODE);
-                            break;
-                        case "Volume Down":
-                            intent = new Intent(ManualTestScreen.this,
-                                    VolumeButtonDownTest.class);
-                            startActivityForResult(intent, Constants.VOLUME_BUTTON_DOWN_CODE);
-                            break;
-                        case "Proximity":
-                            intent = new Intent(ManualTestScreen.this,
-                                    ProximityTestActivity.class);
-                            startActivityForResult(intent, Constants.PROXIMITY_CODE);
-                            break;
-                        case "Rear Camera":
-                            intent = new Intent(ManualTestScreen.this,
-                                    CameraRearTestActivity.class);
-                            startActivityForResult(intent, Constants.REAR_CAMERA_CODE);
-                            break;
-                        case "Front Camera":
-                            intent = new Intent(ManualTestScreen.this,
-                                    CameraFrontTestActivity.class);
-                            startActivityForResult(intent, Constants.FRONT_CAMERA_CODE);
-                            break;
-                        case "Back Button":
-                            intent = new Intent(ManualTestScreen.this,
-                                    BackButtonTestActivity.class);
-                            startActivityForResult(intent, Constants.BACK_BUTTON_CODE);
-                            break;
-                        case "Home Button":
-                            intent = new Intent(ManualTestScreen.this,
-                                    HomeButtonTestActivity.class);
-                            startActivityForResult(intent, Constants.HOME_BUTTON_CODE);
-                            break;
-                        case "Power Button":
-                            intent = new Intent(ManualTestScreen.this,
-                                    PowerButtonTestActivity.class);
-                            startActivityForResult(intent, Constants.POWER_BUTTON_CODE);
-                            break;
-                        case "Vibration":
-                            intent = new Intent(ManualTestScreen.this,
-                                    VibrationTestActivity.class);
-                            startActivityForResult(intent, Constants.VIBRATION_CODE);
-                            break;
-                        case "Charger":
-                            intent = new Intent(ManualTestScreen.this,
-                                    ChargerTestActivity.class);
-                            startActivityForResult(intent, Constants.CHARGER_CODE);
-                            break;
-                        case "Headphone":
-                            intent = new Intent(ManualTestScreen.this,
-                                    HeadPhoneTestActivity.class);
-                            startActivityForResult(intent, Constants.HEADPHONE_CODE);
-                            break;
-                        case "RGB":
-                            intent = new Intent(ManualTestScreen.this,
-                                    RGBTestActivity.class);
-                            startActivityForResult(intent, Constants.RGB_CODE);
-                            break;
-                        case "MicroPhone":
-                            intent = new Intent(ManualTestScreen.this,
-                                    MicroPhoneTestActivity.class);
-                            startActivityForResult(intent, Constants.MICROPHONE_CODE);
-                            break;
-                        case "Brightness":
-                            intent = new Intent(ManualTestScreen.this,
-                                    ScreenBrightnessTest.class);
-                            startActivityForResult(intent, Constants.SCREEN_BRIGHTNESS_CODE);
-                            break;
-                        case "Fingerprint":
-                            intent = new Intent(ManualTestScreen.this,
-                                    FingerprintTestActivity.class);
-                            startActivityForResult(intent, Constants.FINGER_PRINT_CODE);
+        try {
+            new Handler().postDelayed(new Runnable() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public void run() {
+                    Intent intent;
+                    if (Constants.manualTestList.size() > 0) {
+                        currentTest = Constants.manualTestList.get(0);
+                        _currentTest.setImageResource(currentTest.getTestIconID());
+                        switch (currentTest.getTestName()) {
+                            case "Touch Screen":
+                                intent = new Intent(ManualTestScreen.this,
+                                        TouchScreenTest.class);
+                                startActivityForResult(intent, Constants.TOUCH_SCREEN_CODE);
+                                break;
+                            case "Speaker":
+                                intent = new Intent(ManualTestScreen.this,
+                                        SpeakerTest.class);
+                                startActivityForResult(intent, Constants.SPEAKER_CODE);
+                                break;
+                            case "Volume Up":
+                                intent = new Intent(ManualTestScreen.this,
+                                        VolumeButtonUpTest.class);
+                                startActivityForResult(intent, Constants.VOLUME_BUTTON_UP_CODE);
+                                break;
+                            case "Volume Down":
+                                intent = new Intent(ManualTestScreen.this,
+                                        VolumeButtonDownTest.class);
+                                startActivityForResult(intent, Constants.VOLUME_BUTTON_DOWN_CODE);
+                                break;
+                            case "Proximity":
+                                intent = new Intent(ManualTestScreen.this,
+                                        ProximityTestActivity.class);
+                                startActivityForResult(intent, Constants.PROXIMITY_CODE);
+                                break;
+                            case "Rear Camera":
+                                intent = new Intent(ManualTestScreen.this,
+                                        CameraRearTestActivity.class);
+                                startActivityForResult(intent, Constants.REAR_CAMERA_CODE);
+                                break;
+                            case "Front Camera":
+                                intent = new Intent(ManualTestScreen.this,
+                                        CameraFrontTestActivity.class);
+                                startActivityForResult(intent, Constants.FRONT_CAMERA_CODE);
+                                break;
+                            case "Back Button":
+                                intent = new Intent(ManualTestScreen.this,
+                                        BackButtonTestActivity.class);
+                                startActivityForResult(intent, Constants.BACK_BUTTON_CODE);
+                                break;
+                            case "Home Button":
+                                intent = new Intent(ManualTestScreen.this,
+                                        HomeButtonTestActivity.class);
+                                startActivityForResult(intent, Constants.HOME_BUTTON_CODE);
+                                break;
+                            case "Power Button":
+                                intent = new Intent(ManualTestScreen.this,
+                                        PowerButtonTestActivity.class);
+                                startActivityForResult(intent, Constants.POWER_BUTTON_CODE);
+                                break;
+                            case "Vibration":
+                                intent = new Intent(ManualTestScreen.this,
+                                        VibrationTestActivity.class);
+                                startActivityForResult(intent, Constants.VIBRATION_CODE);
+                                break;
+                            case "Charger":
+                                intent = new Intent(ManualTestScreen.this,
+                                        ChargerTestActivity.class);
+                                startActivityForResult(intent, Constants.CHARGER_CODE);
+                                break;
+                            case "Headphone":
+                                intent = new Intent(ManualTestScreen.this,
+                                        HeadPhoneTestActivity.class);
+                                startActivityForResult(intent, Constants.HEADPHONE_CODE);
+                                break;
+                            case "RGB":
+                                intent = new Intent(ManualTestScreen.this,
+                                        RGBTestActivity.class);
+                                startActivityForResult(intent, Constants.RGB_CODE);
+                                break;
+                            case "MicroPhone":
+                                intent = new Intent(ManualTestScreen.this,
+                                        MicroPhoneTestActivity.class);
+                                startActivityForResult(intent, Constants.MICROPHONE_CODE);
+                                break;
+                            case "Brightness":
+                                intent = new Intent(ManualTestScreen.this,
+                                        ScreenBrightnessTest.class);
+                                startActivityForResult(intent, Constants.SCREEN_BRIGHTNESS_CODE);
+                                break;
+                            case "Fingerprint":
+                                intent = new Intent(ManualTestScreen.this,
+                                        FingerprintTestActivity.class);
+                                startActivityForResult(intent, Constants.FINGER_PRINT_CODE);
 
-                            break;
+                                break;
+                        }
+                        //Constants.manualTestList.remove(currentTest);
+                        gridAdapter.notifyDataSetChanged();
+                    } else {
+                        goToTestStatus(true);
                     }
-                    //Constants.manualTestList.remove(currentTest);
-                    gridAdapter.notifyDataSetChanged();
-                } else {
-                    Intent statusIntent = new Intent(ManualTestScreen.this,
-                            ManualTestStatusActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putBoolean(Constants.TEST_STATUS_KEY, true);
-                    statusIntent.putExtras(bundle);
-                    startActivity(statusIntent);
-                    finish();
                 }
-            }
-        }, 2000);
+            }, 2000);
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+            Message.toastMessage(getApplicationContext(),
+                    "Something went Wrong.", "");
+            goToTestStatus(false);
+        }
+    }
+
+    /**
+     * Method to go to Test Status Screen.
+     *
+     * @param status: The Status of the test, true if successful, else false.
+     */
+    private void goToTestStatus(boolean status) {
+        Intent statusIntent = new Intent(ManualTestScreen.this,
+                ManualTestStatusActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(Constants.TEST_STATUS_KEY, status);
+        statusIntent.putExtras(bundle);
+        startActivity(statusIntent);
+        finish();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constants.VOLUME_BUTTON_UP_CODE) {
-            if (resultCode == RESULT_OK) {
-                Constants.successManualTestList.add(currentTest);
-                YoYo.with(Techniques.Shake).duration(1000).playOn(_successBucket);
-            } else if (resultCode == RESULT_CANCELED) {
-                Constants.failedManualTestList.add(currentTest);
-                YoYo.with(Techniques.Shake).duration(1000).playOn(_failedBucket);
-            }
-        }
         if (resultCode == RESULT_OK) {
             Constants.successManualTestList.add(currentTest);
+            YoYo.with(Techniques.Shake).duration(1000).playOn(_successBucket);
         } else if (resultCode == RESULT_CANCELED) {
+            YoYo.with(Techniques.Shake).duration(1000).playOn(_failedBucket);
             Constants.failedManualTestList.add(currentTest);
         }
         Constants.manualTestList.remove(currentTest);
@@ -223,13 +232,7 @@ public class ManualTestScreen extends AppCompatActivity {
             gridAdapter.notifyDataSetChanged();
             performTest();
         } else {
-            Intent statusIntent = new Intent(ManualTestScreen.this,
-                    ManualTestStatusActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putBoolean(Constants.TEST_STATUS_KEY, true);
-            statusIntent.putExtras(bundle);
-            startActivity(statusIntent);
-            finish();
+            goToTestStatus(true);
         }
     }
 

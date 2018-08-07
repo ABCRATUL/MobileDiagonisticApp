@@ -15,7 +15,8 @@ import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 public class PermissionExplainDialog extends AppCompatActivity {
     AppCompatButton _okayButton, _exitButton;
     AppCompatTextView _textView;
-    private String TAG_CLASS=PermissionExplainDialog.class.getSimpleName();
+    private String TAG_CLASS = PermissionExplainDialog.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,17 +24,15 @@ public class PermissionExplainDialog extends AppCompatActivity {
         initializeViews();
         this.setFinishOnTouchOutside(false);
         setTitle("");
-        Intent intent=getIntent();
-        Bundle bundle=intent.getExtras();
-        String msg="";
-        try{
-            msg=bundle.getString(Constants.DIALOG_MSG);
-        }
-        catch (NullPointerException e){
-            Message.logMessage(TAG_CLASS,e.toString());
-        }
-        if(msg.length()>0){
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        String msg = "";
+        try {
+            msg = bundle.getString(Constants.DIALOG_MSG);
             _textView.setText(msg);
+
+        } catch (NullPointerException e) {
+            Message.logMessage(TAG_CLASS, e.toString());
         }
         _okayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +53,7 @@ public class PermissionExplainDialog extends AppCompatActivity {
 
     private void initializeViews() {
         _okayButton = findViewById(R.id.permissionDialogButton);
-        _textView=findViewById(R.id.permissionDialogTextView);
+        _textView = findViewById(R.id.permissionDialogTextView);
         _exitButton = findViewById(R.id.permissionDialogButtonExit);
     }
 

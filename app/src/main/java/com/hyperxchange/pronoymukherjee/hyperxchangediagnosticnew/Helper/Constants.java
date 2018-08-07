@@ -70,8 +70,8 @@ public class Constants {
     public static void fillManualTestList() {
         manualTestList.add(new Test("Touch Screen", 0, R.drawable.ic_touch_screen));
         manualTestList.add(new Test("Speaker", 0, R.drawable.ic_speaker));
-        manualTestList.add(new Test("Volume Up", 0, R.drawable.ic_volume));
-        manualTestList.add(new Test("Volume Down", 0, R.drawable.ic_volume));
+        manualTestList.add(new Test("Volume Up", 0, R.drawable.ic_volume_up));
+        manualTestList.add(new Test("Volume Down", 0, R.drawable.ic_volume_down));
         manualTestList.add(new Test("Proximity", 0, R.drawable.ic_proximity));
         manualTestList.add(new Test("Rear Camera", 0, R.drawable.ic_back_camera));
         manualTestList.add(new Test("Front Camera", 0, R.drawable.ic_front_camera));

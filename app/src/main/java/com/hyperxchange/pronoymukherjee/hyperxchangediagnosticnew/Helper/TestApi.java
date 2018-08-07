@@ -118,28 +118,34 @@ public class TestApi {
      */
     public static int testFlashAvailability(Context context) {
         score = 0;
-        Boolean flashAvailable = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-        final Camera cam = Camera.open();
-        android.hardware.Camera.Parameters p = cam.getParameters();
-        p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        cam.setParameters(p);
-        cam.startPreview();
+        try {
+            Boolean flashAvailable = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+            final Camera cam = Camera.open();
+            android.hardware.Camera.Parameters p = cam.getParameters();
+            p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            cam.setParameters(p);
+            cam.startPreview();
 
-        if (flashAvailable) {
-            score = 6;
-        } else {
-            score = 0;
-        }
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                cam.stopPreview();
-                cam.release();
+            if (flashAvailable) {
+                score = 6;
+            } else {
+                score = 0;
             }
-        }, 3000);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    cam.stopPreview();
+                    cam.release();
+                }
+            }, 3000);
         /*cam.stopPreview();
         cam.release();*/
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+            Message.toastMessage(context,
+                    "Couldn't test Flash", "");
+        }
         return score;
     }
 
@@ -192,13 +198,18 @@ public class TestApi {
      */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static int testAcclerometer(Context context) {
-        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        assert sensorManager != null;
-        Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        if (accelerometerSensor != null) {
-            accelerometerSensor = null;
-            sensorManager = null;
-            return 10;
+        try {
+            SensorManager sensorManager = (SensorManager) context
+                    .getSystemService(Context.SENSOR_SERVICE);
+            assert sensorManager != null;
+            Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            if (accelerometerSensor != null) {
+                accelerometerSensor = null;
+                sensorManager = null;
+                return 10;
+            }
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
         }
         return 0;
     }
@@ -226,9 +237,13 @@ public class TestApi {
      * @return score: The Score.
      */
     public static int testExternalStorage(Context context) {
-        String state = Environment.getExternalStorageState();
-        if (state.equals(Environment.MEDIA_MOUNTED))
-            return 10;
+        try {
+            String state = Environment.getExternalStorageState();
+            if (state.equals(Environment.MEDIA_MOUNTED))
+                return 10;
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+        }
         return 0;
     }
 }
