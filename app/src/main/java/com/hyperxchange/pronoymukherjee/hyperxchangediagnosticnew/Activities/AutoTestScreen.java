@@ -12,6 +12,7 @@ import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -229,5 +230,15 @@ public class AutoTestScreen extends AppCompatActivity {
         if (testItemAdapter != null)
             testItemAdapter = null;
         Runtime.getRuntime().gc();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Message.toastMessage(getApplicationContext(),
+                    "Please wait while we are performing the diagnostics", "");
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

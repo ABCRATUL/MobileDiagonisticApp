@@ -13,7 +13,7 @@
     <string name="volume_down_msg">Please press the Volume down Button</string>
     <string name="volume_up_test">Please press the Volume Up Button</string>
     <string name="proximity_msg">You are covering the Proximity Sensor.</string>
-    <string name="proximity_neg_msg">Please move your hand over the Screen.</string>
+    <string name="proximity_neg_msg">Please move your hand over the Proximity.</string>
     <string name="back_button_msg">Please press the back Button.</string>
     <string name="microphone_msg">Tap the Button and please say the number in words.</string>
     <string name="screen_brightness_msg">Screen Brightness</string>

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -248,5 +249,15 @@ public class ManualTestScreen extends AppCompatActivity {
         }
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Message.toastMessage(getApplicationContext(),
+                    "Please wait while we perform the diagnostics.", "");
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
