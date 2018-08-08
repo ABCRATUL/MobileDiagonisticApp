@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.TestApi;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.List;
@@ -29,24 +30,30 @@ public class CameraFrontTestActivity extends AppCompatActivity implements Surfac
         mPreview = findViewById(R.id.cameraSurface);
         mPreview.getHolder().addCallback(CameraFrontTestActivity.this);
         mPreview.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-        camera = Camera.open(1);
-        camera.setDisplayOrientation(90);
-        Camera.PreviewCallback previewCallback = new Camera.PreviewCallback() {
-            @Override
-            public void onPreviewFrame(byte[] bytes, Camera camera) {
-                testStatus = true;
-                completeActivity(true);
-            }
-        };
-        camera.startPreview();
-        camera.setPreviewCallback(previewCallback);
-        closeActivityTimer = new Timer();
-        closeActivityTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                completeActivity(false);
-            }
-        }, Constants.TEST_TIMER);
+        try {
+            camera = Camera.open(1);
+
+            camera.setDisplayOrientation(90);
+            Camera.PreviewCallback previewCallback = new Camera.PreviewCallback() {
+                @Override
+                public void onPreviewFrame(byte[] bytes, Camera camera) {
+                    testStatus = true;
+                    completeActivity(true);
+                }
+            };
+            camera.startPreview();
+            camera.setPreviewCallback(previewCallback);
+            closeActivityTimer = new Timer();
+            closeActivityTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    completeActivity(false);
+                }
+            }, Constants.TEST_TIMER);
+        } catch (RuntimeException e) {
+            Message.logMessage(CameraFrontTestActivity.class.getSimpleName(), e.toString());
+            completeActivity(false);
+        }
     }
 
     @Override

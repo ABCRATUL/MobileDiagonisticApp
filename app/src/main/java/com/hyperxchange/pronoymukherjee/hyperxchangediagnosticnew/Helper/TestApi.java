@@ -34,19 +34,28 @@ public class TestApi {
      * @return score: After the test.
      */
     public static int testRam(Context context) {
-        ActivityManager activityManager = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-        assert activityManager != null;
-        activityManager.getMemoryInfo(memoryInfo);
-        long availMemory = memoryInfo.availMem;
-        long totalMemory = memoryInfo.totalMem;
-        Constants.DEVICE_RAM = String.valueOf(totalMemory / (1024 * 1024 * 1024) + 1);
-        activityManager = null;
-        memoryInfo = null;
-        if ((availMemory / totalMemory) * 100 <= 60)
-            return 5;
-        return 10;
+        try {
+            ActivityManager activityManager = (ActivityManager) context
+                    .getSystemService(Context.ACTIVITY_SERVICE);
+            ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+
+            assert activityManager != null;
+            activityManager.getMemoryInfo(memoryInfo);
+            long availMemory = memoryInfo.availMem;
+            long totalMemory = memoryInfo.totalMem;
+            int ram = (int) (totalMemory / (1024 * 1024 * 1024));
+            if (ram >= 1)
+                ram += 1;
+            Constants.DEVICE_RAM = String.valueOf(ram);
+            activityManager = null;
+            memoryInfo = null;
+            if ((availMemory / totalMemory) * 100 <= 60)
+                return 5;
+            return 10;
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+            return 0;
+        }
     }
 
     /**
@@ -104,10 +113,15 @@ public class TestApi {
      * @return score: The Score.
      */
     public static int testNFC(Context context) {
-        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(context);
-        if (adapter == null)
+        try {
+            NfcAdapter adapter = NfcAdapter.getDefaultAdapter(context);
+            if (adapter == null)
+                return 0;
+            return 10;
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
             return 0;
-        return 10;
+        }
     }
 
     /**

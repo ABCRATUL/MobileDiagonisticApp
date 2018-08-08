@@ -9,8 +9,8 @@
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/displayTextVibration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="278dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"

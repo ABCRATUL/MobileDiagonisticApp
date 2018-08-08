@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.provider.Settings;
+import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
@@ -51,6 +52,7 @@ public class StartTestScreen extends AppCompatActivity {
     AppCompatButton _marketPlace, _startTest;
     boolean permissionGranted = false;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,9 @@ public class StartTestScreen extends AppCompatActivity {
         initializeViews();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermissions();
+        } else {
+            permissionGranted = true;
+            getTelephoneDetails();
         }
         _startTest.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -111,7 +116,11 @@ public class StartTestScreen extends AppCompatActivity {
         if (permissionGranted) {
             assert telephonyManager != null;
             try {
-                imeiNumber = telephonyManager.getDeviceId(0);
+                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT_WATCH) {
+                    imeiNumber = telephonyManager.getDeviceId(0);
+                }else {
+                    imeiNumber = telephonyManager.getDeviceId();
+                }
                 _imeiNumber.setText(imeiNumber);
             } catch (SecurityException e) {
                 Message.logMessage(TAG_CLASS, e.toString());
@@ -119,15 +128,17 @@ public class StartTestScreen extends AppCompatActivity {
                         "Couldn't get teh IMEI Number.", "");
             }
         }
-        if (!canWriteSettings()) {
-            Intent intent = new Intent(StartTestScreen.this,
-                    PermissionExplainDialog.class);
-            Bundle bundle = new Bundle();
-            bundle.putString(Constants.DIALOG_MSG, getResources()
-                    .getString(R.string.allow_system_settings));
-            intent.putExtras(bundle);
-            telephonyManager = null;
-            startActivityForResult(intent, Constants.WRITE_SETTINGS_CODE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!canWriteSettings()) {
+                Intent intent = new Intent(StartTestScreen.this,
+                        PermissionExplainDialog.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.DIALOG_MSG, getResources()
+                        .getString(R.string.allow_system_settings));
+                intent.putExtras(bundle);
+                telephonyManager = null;
+                startActivityForResult(intent, Constants.WRITE_SETTINGS_CODE);
+            }
         }
     }
 

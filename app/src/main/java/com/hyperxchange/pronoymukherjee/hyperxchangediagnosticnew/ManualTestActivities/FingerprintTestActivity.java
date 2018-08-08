@@ -21,7 +21,7 @@ import java.util.TimerTask;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerprintTestActivity extends AppCompatActivity implements FingerPrintAuthCallback {
-    private String TAG_CLASS = FingerprintManager.class.getSimpleName();
+    private String TAG_CLASS = FingerprintTestActivity.class.getSimpleName();
     FingerPrintAuthHelper fingerPrintAuthHelper;
     Timer timer;
     VoiceSpeak voiceSpeak;

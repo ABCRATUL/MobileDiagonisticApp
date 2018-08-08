@@ -67,7 +67,12 @@ public class AutoTestScreen extends AppCompatActivity {
             @Override
             public void run() {
                 long storage = Long.parseLong(Constants.DEVICE_STORAGE);
-                if (storage >= 4 && storage <= 8)
+                Message.logMessage(TAG_CLASS, "RAW STORAGE: " + storage);
+                if (storage >= 1 && storage <= 2)
+                    storage = 2;
+                else if (storage >= 3 && storage <= 4)
+                    storage = 4;
+                else if (storage >= 5 && storage <= 8)
                     storage = 8;
                 else if (storage >= 10 && storage <= 15)
                     storage = 16;
@@ -115,7 +120,11 @@ public class AutoTestScreen extends AppCompatActivity {
                         _progressBar.setProgress(progress);
                         progress += 12;
                         Test currentTest = Constants.automatedTestList.get(0);
-                        _currentTestImage.setImageResource(currentTest.getTestIconID());
+                        try {
+                            _currentTestImage.setImageResource(currentTest.getTestIconID());
+                        } catch (NullPointerException e) {
+                            Message.logMessage(TAG_CLASS, e.toString());
+                        }
                         //YoYo.with(Techniques.Shake).duration(1500).playOn(_currentTestImage);
                         switch (currentTest.getTestName()) {
                             case "Ram":
@@ -148,7 +157,11 @@ public class AutoTestScreen extends AppCompatActivity {
                                 break;
                         }
                         Message.logMessage(TAG_CLASS, score + "");
-                        _circularProgressBar.setProgressWithAnimation(90, 1500);
+                        try {
+                            _circularProgressBar.setProgressWithAnimation(90, 1500);
+                        } catch (NullPointerException e) {
+                            Message.logMessage(TAG_CLASS, e.toString());
+                        }
                         currentTest.setScore(score);
                         Constants.automatedTestList.remove(currentTest);
                         testItemAdapter.notifyDataSetChanged();
@@ -170,7 +183,11 @@ public class AutoTestScreen extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    _circularProgressBar.setProgressWithAnimation(100, 1000);
+                    try {
+                        _circularProgressBar.setProgressWithAnimation(100, 1000);
+                    } catch (NullPointerException e) {
+                        Message.logMessage(TAG_CLASS, e.toString());
+                    }
                 }
             }, 2000);
         } catch (Exception e) {
