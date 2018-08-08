@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 public class ManualTestStatusActivity extends AppCompatActivity {
@@ -65,10 +66,17 @@ public class ManualTestStatusActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        _passedNumber.setText(String.valueOf(Constants.successManualTestList.size()));
-        _failedNumber.setText(String.valueOf(Constants.failedManualTestList.size()));
+        try {
+            _passedNumber.setText(String.valueOf(Constants.successManualTestList.size()));
+            _failedNumber.setText(String.valueOf(Constants.failedManualTestList.size()));
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+        }
     }
 
+    /**
+     * Method to initialize the Views.
+     */
     private void initializeViews() {
         _successButton = findViewById(R.id.successManualTestButton);
         _failedButton = findViewById(R.id.failedManualTestButton);
@@ -95,6 +103,7 @@ public class ManualTestStatusActivity extends AppCompatActivity {
             _passedNumber = null;
         if (_failedNumber != null)
             _failedNumber = null;
+        Constants.manualTestList = null;
         Runtime.getRuntime().gc();
     }
 }

@@ -76,10 +76,10 @@ public class TestStatusActivity extends AppCompatActivity {
                 finish();
             }
         });
-        Thread thread=new Thread(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                PriceGetter priceGetter=new PriceGetter(getApplicationContext());
+                PriceGetter priceGetter = new PriceGetter(getApplicationContext());
                 priceGetter.getPhoneId();
             }
         });
@@ -102,6 +102,14 @@ public class TestStatusActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Constants.automatedTestList = null;
+        if (_statusIcon != null)
+            _statusIcon = null;
+        if (_successBucket != null)
+            _successBucket = null;
+        if (_failedBucket != null)
+            _failedBucket = null;
+        if (_nextButton != null)
+            _nextButton = null;
         Runtime.getRuntime().gc();
     }
 }

@@ -65,17 +65,14 @@ public class StartTestScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isNetworkAvailable()) {
-                    /*Intent startTestIntent = new Intent(StartTestScreen.this,
-                            AutoTestScreen.class);
-                    startActivity(startTestIntent);*/
                     //TODO: First start the Auto Test.
                     Intent startTestIntent = new Intent(StartTestScreen.this,
                             AutoTestScreen.class);
-                    startActivity(startTestIntent);
                     //Getting the Storage Data of the Device.
                     StatFs statFs = new StatFs(Environment.getExternalStorageDirectory().getPath());
                     long bytes = (long) statFs.getBlockSize() * (long) statFs.getBlockCount();
                     Constants.DEVICE_STORAGE = String.valueOf(bytes / 1000000000);
+                    startActivity(startTestIntent);
                     finish();
                 } else {
                     Bundle bundle = new Bundle();
@@ -108,13 +105,19 @@ public class StartTestScreen extends AppCompatActivity {
      */
     @SuppressLint("HardwareIds")
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private void getTelephoneDetails() throws SecurityException {
+    private void getTelephoneDetails() {
         TelephonyManager telephonyManager = (TelephonyManager)
                 getSystemService(Context.TELEPHONY_SERVICE);
         if (permissionGranted) {
             assert telephonyManager != null;
-            imeiNumber = telephonyManager.getDeviceId(0);
-            _imeiNumber.setText(imeiNumber);
+            try {
+                imeiNumber = telephonyManager.getDeviceId(0);
+                _imeiNumber.setText(imeiNumber);
+            } catch (SecurityException e) {
+                Message.logMessage(TAG_CLASS, e.toString());
+                Message.toastMessage(getApplicationContext(),
+                        "Couldn't get teh IMEI Number.", "");
+            }
         }
         if (!canWriteSettings()) {
             Intent intent = new Intent(StartTestScreen.this,
@@ -256,24 +259,4 @@ public class StartTestScreen extends AppCompatActivity {
             _startTest = null;
         Runtime.getRuntime().gc();
     }
-    /*private String formatSize(long size){
-        String suffix=null;
-        if(size>=1024){
-            suffix="KB";
-            size/=1024;
-            if(size>=1024){
-                suffix="MB";
-                size/=1024;
-            }
-        }
-        StringBuilder result=new StringBuilder(Long.toString(size));
-        int commaOffset=result.length()-3;
-        while(commaOffset>0){
-            result.insert(commaOffset,',');
-            commaOffset-=3;
-        }
-        if(suffix!=null)
-            result.append(suffix);
-        return result.toString();
-    }*/
 }

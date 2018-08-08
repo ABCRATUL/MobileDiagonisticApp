@@ -12,6 +12,7 @@ import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -105,78 +106,94 @@ public class AutoTestScreen extends AppCompatActivity {
     private void performTest() {
         score = 0;
         _circularProgressBar.setProgressWithAnimation(20, 1500);
-        new Handler().postDelayed(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void run() {
-                if (Constants.automatedTestList.size() > 0) {
-                    _progressBar.setProgress(progress);
-                    progress += 11;
-                    Test currentTest = Constants.automatedTestList.get(0);
-                    _currentTestImage.setImageResource(currentTest.getTestIconID());
-                    //YoYo.with(Techniques.Shake).duration(1500).playOn(_currentTestImage);
-                    switch (currentTest.getTestName()) {
-                        case "Ram":
-                            score = TestApi.testRam(context);
-                            Message.logMessage(TAG_CLASS, "RAM: " + Constants.DEVICE_RAM);
-                            break;
-                        case "Battery":
-                            score = TestApi.testBattery(context);
-                            break;
-                        case "Wifi":
-                            score = TestApi.testNetwork(context);
-                            break;
-                        case "Bluetooth":
-                            score = TestApi.testBluetooth(context);
-                            break;
-                        case "NFC":
-                            score = TestApi.testNFC(context);
-                            break;
-                        case "Flash":
-                            score = TestApi.testFlashAvailability(context);
-                            break;
-                        case "Accelerometer":
-                            score = TestApi.testAcclerometer(context);
-                            break;
-                        case "Gyroscope":
-                            score = TestApi.testGyroscope(context);
-                            break;
-                        case "External Storage":
-                            score = TestApi.testExternalStorage(context);
-                            break;
+        try {
+            new Handler().postDelayed(new Runnable() {
+                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                @Override
+                public void run() {
+                    if (Constants.automatedTestList.size() > 0) {
+                        _progressBar.setProgress(progress);
+                        progress += 12;
+                        Test currentTest = Constants.automatedTestList.get(0);
+                        _currentTestImage.setImageResource(currentTest.getTestIconID());
+                        //YoYo.with(Techniques.Shake).duration(1500).playOn(_currentTestImage);
+                        switch (currentTest.getTestName()) {
+                            case "Ram":
+                                score = TestApi.testRam(context);
+                                Message.logMessage(TAG_CLASS, "RAM: " + Constants.DEVICE_RAM);
+                                break;
+                            case "Battery":
+                                score = TestApi.testBattery(context);
+                                break;
+                            case "Wifi":
+                                score = TestApi.testNetwork(context);
+                                break;
+                            case "Bluetooth":
+                                score = TestApi.testBluetooth(context);
+                                break;
+                            case "NFC":
+                                score = TestApi.testNFC(context);
+                                break;
+                            case "Flash":
+                                score = TestApi.testFlashAvailability(context);
+                                break;
+                            case "Accelerometer":
+                                score = TestApi.testAcclerometer(context);
+                                break;
+                            case "Gyroscope":
+                                score = TestApi.testGyroscope(context);
+                                break;
+                            case "External Storage":
+                                score = TestApi.testExternalStorage(context);
+                                break;
+                        }
+                        Message.logMessage(TAG_CLASS, score + "");
+                        _circularProgressBar.setProgressWithAnimation(90, 1500);
+                        currentTest.setScore(score);
+                        Constants.automatedTestList.remove(currentTest);
+                        testItemAdapter.notifyDataSetChanged();
+                        _circularProgressBar.setProgressWithAnimation(100, 1000);
+                        if (score > 0) {
+                            Constants.successTestList.add(currentTest);
+                            YoYo.with(Techniques.Shake).duration(1500).playOn(_successBucket);
+                        } else if (score == 0) {
+                            Constants.failedTestList.add(currentTest);
+                            YoYo.with(Techniques.Shake).duration(1500).playOn(_failedBucket);
+                        }
+                        performTest();
+                    } else {
+                        goToManualTest(true);
                     }
-                    Message.logMessage(TAG_CLASS, score + "");
-                    _circularProgressBar.setProgressWithAnimation(90, 1500);
-                    currentTest.setScore(score);
-                    Constants.automatedTestList.remove(currentTest);
-                    testItemAdapter.notifyDataSetChanged();
-                    _circularProgressBar.setProgressWithAnimation(100, 1000);
-                    if (score > 0) {
-                        Constants.successTestList.add(currentTest);
-                        YoYo.with(Techniques.Shake).duration(1500).playOn(_successBucket);
-                    } else if (score == 0) {
-                        Constants.failedTestList.add(currentTest);
-                        YoYo.with(Techniques.Shake).duration(1500).playOn(_failedBucket);
-                    }
-                    performTest();
-                } else {
-                    Intent getResultIntent = new Intent(AutoTestScreen.this,
-                            TestStatusActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putBoolean(Constants.TEST_STATUS_KEY, true);
-                    getResultIntent.putExtras(bundle);
-                    startActivity(getResultIntent);
-                    finish();
+                    //_circularProgressBar.setProgressWithAnimation(100,1000);
                 }
-                //_circularProgressBar.setProgressWithAnimation(100,1000);
-            }
-        }, 3000);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                _circularProgressBar.setProgressWithAnimation(100, 1000);
-            }
-        }, 2000);
+            }, 3000);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    _circularProgressBar.setProgressWithAnimation(100, 1000);
+                }
+            }, 2000);
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+            Message.toastMessage(getApplicationContext(),
+                    "Something went Wrong.", "");
+            goToManualTest(false);
+        }
+    }
+
+    /**
+     * Method to go to Manual Test activity.
+     *
+     * @param status: true if successful, else false.
+     */
+    private void goToManualTest(boolean status) {
+        Intent getResultIntent = new Intent(AutoTestScreen.this,
+                TestStatusActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(Constants.TEST_STATUS_KEY, status);
+        getResultIntent.putExtras(bundle);
+        startActivity(getResultIntent);
+        finish();
     }
 
     /**
@@ -213,5 +230,15 @@ public class AutoTestScreen extends AppCompatActivity {
         if (testItemAdapter != null)
             testItemAdapter = null;
         Runtime.getRuntime().gc();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Message.toastMessage(getApplicationContext(),
+                    "Please wait while we are performing the diagnostics", "");
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

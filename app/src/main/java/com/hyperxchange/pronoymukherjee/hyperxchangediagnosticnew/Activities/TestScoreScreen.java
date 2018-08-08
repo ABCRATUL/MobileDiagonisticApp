@@ -35,7 +35,7 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
     AppCompatButton _submitButton, _exitButton;
     CircularProgressBar _circularProgressBar;
     int basePrice = 12000;
-    int physicalStatus;
+    int physicalStatus = -1;
     private String TAG_CLASS = TestScoreScreen.class.getSimpleName();
     boolean isInsertPhone = false, isInsertReport = false;
     ProgressDialog _progressDialog;
@@ -50,7 +50,11 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
                         Constants.successTestList.size());
         _testScore.setText(String.valueOf(Constants.successManualTestList.size()
                 + Constants.successTestList.size()));
-        basePrice= Integer.parseInt(Constants.DEVICE_PRICE);
+        try {
+            basePrice = Integer.parseInt(Constants.DEVICE_PRICE);
+        } catch (NumberFormatException e) {
+            basePrice = 12000;
+        }
 
         _priceValue.setText(String.valueOf(basePrice));
         _sadText.setOnClickListener(new View.OnClickListener() {
@@ -92,19 +96,23 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
         _submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isWrite = ExcelCreator.createExcel(getApplicationContext());
-                if (isWrite) {
+                if (physicalStatus != -1) {
+                    boolean isWrite = ExcelCreator.createExcel(getApplicationContext());
+                    if (isWrite) {
+                        Message.toastMessage(getApplicationContext(),
+                                "You can find the report at: " +
+                                        Environment.getExternalStorageDirectory()
+                                        + Constants.HX_FOLDER_NAME + File.separator + Constants.HX_REPORT_FOLDER_NAME,
+                                "long");
+                        //Uploading the data to the server.
+                        checkDevice();
+                    } else {
+                        Message.toastMessage(getApplicationContext(),
+                                "Sorry, we couldn't generate the report.", "long");
+                    }
+                } else
                     Message.toastMessage(getApplicationContext(),
-                            "You can find the report at: " +
-                                    Environment.getExternalStorageDirectory()
-                                    + Constants.HX_FOLDER_NAME + File.separator + Constants.HX_REPORT_FOLDER_NAME,
-                            "long");
-                    //Uploading the data to the server.
-                    checkDevice();
-                }else {
-                    Message.toastMessage(getApplicationContext(),
-                            "Sorry, we couldn't generate the report.","long");
-                }
+                            "Please select a condition of the device.", "");
             }
         });
     }
@@ -155,6 +163,9 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
         System.exit(1);
     }
 
+    /**
+     * Method to check whether this device has already be tested or not.
+     */
     private void checkDevice() {
         DeviceInformation deviceInformation = new DeviceInformation(getApplicationContext());
         HTTPConnector connector = new HTTPConnector(TAG_CLASS,
@@ -253,8 +264,8 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
             _okayFace = null;
         if (_happyFace != null)
             _happyFace = null;
-        if(_submitButton!=null)
-            _submitButton=null;
+        if (_submitButton != null)
+            _submitButton = null;
         Runtime.getRuntime().gc();
     }
 }

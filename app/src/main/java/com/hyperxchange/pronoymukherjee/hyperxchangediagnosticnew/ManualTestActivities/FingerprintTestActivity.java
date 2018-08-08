@@ -25,6 +25,7 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
     FingerPrintAuthHelper fingerPrintAuthHelper;
     Timer timer;
     VoiceSpeak voiceSpeak;
+    boolean hasFingerPrint = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,9 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                voiceSpeak.speakVoice(getResources().getString(R.string.finger_print_msg));
+                if (hasFingerPrint) {
+                    voiceSpeak.speakVoice(getResources().getString(R.string.finger_print_msg));
+                }
             }
         }, Constants.VOICE_DELAY);
     }
@@ -53,7 +56,8 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
     public void onNoFingerPrintHardwareFound() {
         Message.logMessage(TAG_CLASS, "NO finger print hardware ");
         Message.toastMessage(getApplicationContext(),
-                "Your device doesn't support fingerprint","");
+                "Your device doesn't support fingerprint", "");
+        hasFingerPrint = false;
         completeActivity(false);
     }
 
@@ -61,7 +65,7 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
     public void onNoFingerPrintRegistered() {
         Message.logMessage(TAG_CLASS, "Please register some finger print.");
         Message.toastMessage(getApplicationContext(),
-                "You will need to register some finger prints to test.","");
+                "You will need to register some finger prints to test.", "");
         completeActivity(false);
     }
 
@@ -69,7 +73,7 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
     public void onBelowMarshmallow() {
         Message.logMessage(TAG_CLASS, "API Level doesn't support finger_print.");
         Message.toastMessage(getApplicationContext(),
-                "Your device doesn't support fingerprint","");
+                "Your device doesn't support fingerprint", "");
         completeActivity(false);
     }
 

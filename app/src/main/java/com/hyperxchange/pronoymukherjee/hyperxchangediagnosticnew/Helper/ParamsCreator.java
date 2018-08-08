@@ -49,6 +49,7 @@ public class ParamsCreator {
             params.put(Constants.JSON_TABLE_NAME, Constants.PHONE_TABLE);
             String where = Constants.IMEI_NUMBER + " LIKE '" + imei + "'";
             params.put(Constants.JSON_WHERE, where);
+            Message.logMessage(TAG_CLASS,params.toString());
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());
             return params;
@@ -115,6 +116,7 @@ public class ParamsCreator {
             String where = Constants.PHONE_MODEL_NAME + " LIKE '"
                     + deviceName + "'";
             params.put(Constants.JSON_WHERE, where);
+            Message.logMessage(TAG_CLASS,params.toString());
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());
         }

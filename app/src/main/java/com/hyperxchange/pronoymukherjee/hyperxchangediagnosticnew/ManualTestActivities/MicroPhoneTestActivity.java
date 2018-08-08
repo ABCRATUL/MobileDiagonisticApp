@@ -56,14 +56,14 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
             public void run() {
                 voiceSpeak.speakVoice(getResources().getString(R.string.microphone_msg));
             }
-        },Constants.VOICE_DELAY);
+        }, Constants.VOICE_DELAY);
     }
 
     private void initializeViews() {
         _speakButton = findViewById(R.id.voiceButton);
         _numberShow = findViewById(R.id.numberShowMicro);
         timer = new Timer();
-        voiceSpeak=new VoiceSpeak(getApplicationContext());
+        voiceSpeak = new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -107,7 +107,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
                 try {
                     int spokenNumber = Integer.parseInt(resultSet.get(0));
                     if (spokenNumber == generatedNumber) {
-                        Message.logMessage(TAG_CLASS,"True");
+                        Message.logMessage(TAG_CLASS, "True");
                         completeActivity(true);
                     }
                 } catch (NumberFormatException e) {
@@ -138,6 +138,8 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Message.toastMessage(getApplicationContext(), "Back Button is not allowed, " +
+                    "wait for the test to time out.", "");
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -146,14 +148,14 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(_speakButton!=null)
-            _speakButton=null;
-        if(_numberShow!=null)
-            _numberShow=null;
-        if(timer!=null)
-            timer=null;
-        if(voiceSpeak!=null)
-            voiceSpeak=null;
+        if (_speakButton != null)
+            _speakButton = null;
+        if (_numberShow != null)
+            _numberShow = null;
+        if (timer != null)
+            timer = null;
+        if (voiceSpeak != null)
+            voiceSpeak = null;
         Runtime.getRuntime().gc();
     }
 }
