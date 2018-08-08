@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.TestApi;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Objects.Test;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 
@@ -47,7 +49,12 @@ public class ManualGridAdapter extends BaseAdapter {
             AppCompatTextView textView=view.findViewById(R.id.testName);
             ImageView imageView=view.findViewById(R.id.imageTest);
             textView.setText(dataset.get(position).getTestName());
-            imageView.setImageResource(dataset.get(position).getTestIconID());
+            try {
+                imageView.setImageResource(dataset.get(position).getTestIconID());
+            }
+            catch (OutOfMemoryError e){
+                Message.logMessage(ManualGridAdapter.class.getSimpleName(),e.toString());
+            }
         }
         return view;
     }

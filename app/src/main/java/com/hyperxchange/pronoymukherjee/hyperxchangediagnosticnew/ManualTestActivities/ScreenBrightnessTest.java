@@ -31,23 +31,23 @@ public class ScreenBrightnessTest extends AppCompatActivity {
         this.setFinishOnTouchOutside(false);
         setTitle("");
         initializeViews();
-        if (!canWriteSettings()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!canWriteSettings()) {
                 changeWriteSettings();
+            } else {
+                try {
+                    getDefaultBrightnessState();
+                } catch (Settings.SettingNotFoundException e) {
+                    Message.logMessage(TAG_CLASS, e.toString());
+                }
+                changeBrightness();
             }
         } else {
             try {
-                defaultBrightnessMode = Settings.System.getInt(getContentResolver(),
-                        Settings.System.SCREEN_BRIGHTNESS_MODE);
-                if (defaultBrightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                    Settings.System.putInt(getContentResolver(),
-                            Settings.System.SCREEN_BRIGHTNESS_MODE,
-                            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-                }
+                getDefaultBrightnessState();
             } catch (Settings.SettingNotFoundException e) {
                 Message.logMessage(TAG_CLASS, e.toString());
             }
-            changeBrightness();
         }
         timer.schedule(new TimerTask() {
             @Override
@@ -55,6 +55,15 @@ public class ScreenBrightnessTest extends AppCompatActivity {
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
+    }
+
+    private void getDefaultBrightnessState() throws Settings.SettingNotFoundException {
+        defaultBrightnessMode = getDefaultBrightness();
+        if (defaultBrightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS_MODE,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+        }
     }
 
     /**
@@ -147,6 +156,7 @@ public class ScreenBrightnessTest extends AppCompatActivity {
     }
 
     private void completeActivity(boolean status) {
+        Message.logMessage(TAG_CLASS, status + "");
         if (status) {
             setResult(RESULT_OK);
             timer.cancel();

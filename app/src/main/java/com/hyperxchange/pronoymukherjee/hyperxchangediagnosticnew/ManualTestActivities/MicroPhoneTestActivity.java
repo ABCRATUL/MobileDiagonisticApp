@@ -58,7 +58,7 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
             }
         }, Constants.VOICE_DELAY);
     }
-
+    
     private void initializeViews() {
         _speakButton = findViewById(R.id.voiceButton);
         _numberShow = findViewById(R.id.numberShowMicro);

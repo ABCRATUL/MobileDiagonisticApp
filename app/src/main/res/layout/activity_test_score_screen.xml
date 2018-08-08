@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/background"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities.TestScoreScreen">
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
@@ -76,12 +76,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="84dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="52dp"
         android:text="@string/okay_msg"
         android:textAppearance="?android:attr/textAppearanceMedium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/okayFace"
         app:layout_constraintTop_toBottomOf="@+id/happyText" />
 
     <android.support.v7.widget.AppCompatImageView
@@ -115,12 +113,15 @@
         android:layout_marginBottom="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rectangle_rounded_shape"
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/exitAppButtonTestScore" />
+        app:layout_constraintStart_toEndOf="@+id/exitAppButtonTestScore"
+        app:layout_constraintTop_toBottomOf="@+id/priceValue"
+        app:layout_constraintVertical_bias="1.0" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/exitAppButtonTestScore"
@@ -128,16 +129,18 @@
         android:layout_height="50dp"
         android:layout_marginBottom="48dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rectangle_rounded_shape"
         android:text="@string/exit_app"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceShow"
+        app:layout_constraintVertical_bias="1.0" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/priceShow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="84dp"
         android:layout_marginTop="36dp"
@@ -145,26 +148,21 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/exitAppButtonTestScore"
         app:layout_constraintEnd_toStartOf="@+id/priceValue"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sadText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/sadText" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/priceValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="124dp"
         android:layout_marginTop="36dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/submitButtonTestScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sadText"
-        app:layout_constraintVertical_bias="0.0"
         tools:text="12000/-" />
 </android.support.constraint.ConstraintLayout>

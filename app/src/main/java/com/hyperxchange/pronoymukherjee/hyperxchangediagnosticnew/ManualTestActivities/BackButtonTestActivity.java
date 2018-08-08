@@ -16,27 +16,32 @@ import java.util.TimerTask;
 public class BackButtonTestActivity extends AppCompatActivity {
     Timer timer;
     VoiceSpeak voiceSpeak;
+    private String TAG_CLASS = BackButtonTestActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_back_button_test);
-        setTitle("");
-        this.setFinishOnTouchOutside(false);
-        timer = new Timer();
-        voiceSpeak=new VoiceSpeak(getApplicationContext());
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                voiceSpeak.speakVoice(getResources().getString(R.string.back_button_msg));
-            }
-        }, Constants.VOICE_DELAY);
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                completeActivity(false);
-            }
-        }, Constants.TEST_TIMER);
+        try {
+            setContentView(R.layout.activity_back_button_test);
+            setTitle("");
+            this.setFinishOnTouchOutside(false);
+            timer = new Timer();
+            voiceSpeak = new VoiceSpeak(getApplicationContext());
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    voiceSpeak.speakVoice(getResources().getString(R.string.back_button_msg));
+                }
+            }, Constants.VOICE_DELAY);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    completeActivity(false);
+                }
+            }, Constants.TEST_TIMER);
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+        }
     }
 
     /**
@@ -47,7 +52,11 @@ public class BackButtonTestActivity extends AppCompatActivity {
     private void completeActivity(boolean status) {
         if (status) {
             setResult(RESULT_OK);
-            timer.cancel();
+            try {
+                timer.cancel();
+            } catch (NullPointerException e) {
+                Message.logMessage(TAG_CLASS, e.toString());
+            }
         } else
             setResult(RESULT_CANCELED);
         finish();
