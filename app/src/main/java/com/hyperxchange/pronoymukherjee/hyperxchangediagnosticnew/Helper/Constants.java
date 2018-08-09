@@ -15,6 +15,7 @@ public class Constants {
     public static String DEVICE_STORAGE = "";
     public static String DEVICE_RAM = "";
     public static String DEVICE_PRICE="";
+    public static String DEVICE_RAM_USAGE="";
 
     public static String QUERY_URL = "http://ec2-13-127-202-203.ap-south-1.compute.amazonaws.com/dig";
     public static int PERMISSION_REQUEST_CODE = 69;

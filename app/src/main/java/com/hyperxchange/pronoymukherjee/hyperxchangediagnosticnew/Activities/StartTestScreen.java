@@ -25,8 +25,10 @@ import android.support.v7.widget.AppCompatTextView;
 import android.telephony.TelephonyManager;
 import android.view.View;
 
+import com.github.anastr.speedviewlib.SpeedView;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.TestApi;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.BackButtonTestActivity;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.CameraFrontTestActivity;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.CameraRearTestActivity;
@@ -51,6 +53,9 @@ public class StartTestScreen extends AppCompatActivity {
     AppCompatTextView _modelName, _imeiNumber;
     AppCompatButton _marketPlace, _startTest;
     boolean permissionGranted = false;
+    SpeedView _ramUsage;
+    Thread thread;
+    float percentage;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -103,6 +108,13 @@ public class StartTestScreen extends AppCompatActivity {
             }
         });
         _modelName.setText(modelName);
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setRamUsage();
+            }
+        });
+        thread.start();
     }
 
     /**
@@ -116,9 +128,9 @@ public class StartTestScreen extends AppCompatActivity {
         if (permissionGranted) {
             assert telephonyManager != null;
             try {
-                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT_WATCH) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
                     imeiNumber = telephonyManager.getDeviceId(0);
-                }else {
+                } else {
                     imeiNumber = telephonyManager.getDeviceId();
                 }
                 _imeiNumber.setText(imeiNumber);
@@ -150,6 +162,7 @@ public class StartTestScreen extends AppCompatActivity {
         _imeiNumber = findViewById(R.id.imeiNumber);
         _startTest = findViewById(R.id.startTestButton);
         _marketPlace = findViewById(R.id.marketPlaceButton);
+        _ramUsage = findViewById(R.id.ramUsage);
     }
 
     /**
@@ -269,5 +282,22 @@ public class StartTestScreen extends AppCompatActivity {
         if (_startTest != null)
             _startTest = null;
         Runtime.getRuntime().gc();
+    }
+
+    /**
+     * Method to calculate and show the RAM Usage.
+     */
+    private void setRamUsage() {
+        TestApi.testRam(getApplicationContext());
+        int totalRam = Integer.parseInt(Constants.DEVICE_RAM);
+        int availRam = Integer.parseInt(Constants.DEVICE_RAM_USAGE);
+        percentage = ((float) availRam) / ((float) totalRam);
+        percentage = percentage * 100;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                _ramUsage.speedTo(percentage, 3000);
+            }
+        });
     }
 }

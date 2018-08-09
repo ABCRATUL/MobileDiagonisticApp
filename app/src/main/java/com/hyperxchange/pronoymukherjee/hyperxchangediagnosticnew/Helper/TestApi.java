@@ -42,6 +42,7 @@ public class TestApi {
             assert activityManager != null;
             activityManager.getMemoryInfo(memoryInfo);
             long availMemory = memoryInfo.availMem;
+            Constants.DEVICE_RAM_USAGE = String.valueOf(availMemory / (1024 * 1024 * 1024));
             long totalMemory = memoryInfo.totalMem;
             int ram = (int) (totalMemory / (1024 * 1024 * 1024));
             if (ram >= 1)
