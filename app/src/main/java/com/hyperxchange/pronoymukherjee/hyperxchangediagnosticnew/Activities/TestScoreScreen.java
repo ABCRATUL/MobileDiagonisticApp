@@ -202,9 +202,12 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
                     uploadReportToServer();
                 }
             } else if (isInsertReport) {
-                Intent intent = new Intent(TestScoreScreen.this, SplashScreen.class);
+                /*Intent intent = new Intent(TestScoreScreen.this, SplashScreen.class);
                 startActivity(intent);
-                finish();
+                finish();*/
+                Message.toastMessage(getApplicationContext(),
+                        "Report Submitted Successfully.", "");
+                exitApp();
             }
         } catch (JSONException e) {
             Message.logMessage(TAG_CLASS, e.toString());
