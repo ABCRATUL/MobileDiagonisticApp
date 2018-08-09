@@ -41,6 +41,8 @@ public class BackButtonTestActivity extends AppCompatActivity {
             }, Constants.TEST_TIMER);
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());
+            Message.toastMessage(getApplicationContext(),
+                    "Couldn't Load images due to low memory", "");
         }
     }
 
