@@ -37,4 +37,5 @@
     <string name="failed">Failed</string>
     <string name="allow_system_settings">Please allow to modify system settings.</string>
     <string name="loading_message">Please wait while we are loading.</string>
+    <string name="ram_usage">Ram Usage</string>
 </resources>

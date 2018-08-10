@@ -72,6 +72,12 @@ public class TestApi {
             @Override
             public void onReceive(Context context, Intent intent) {
                 int status = intent.getIntExtra(BatteryManager.EXTRA_HEALTH, -1);
+                int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+                int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+                //calculating and storing the Battery percentage.
+                int percentage = (int) Math.floor(level / (float) scale);
+                percentage = percentage * 100;
+                Constants.DEVICE_BATTERY_PERCENTAGE = String.valueOf(percentage);
                 switch (status) {
                     case BatteryManager.BATTERY_HEALTH_GOOD:
                         score = 10;
