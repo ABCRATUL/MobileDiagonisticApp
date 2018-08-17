@@ -50,7 +50,7 @@ import java.util.List;
 public class StartTestScreen extends AppCompatActivity {
     public String TAG_CLASS = StartTestScreen.class.getSimpleName();
     String modelName, imeiNumber;
-    AppCompatTextView _modelName, _imeiNumber;
+    AppCompatTextView _modelName, _imeiNumber, _batteryPercentage;
     AppCompatButton _marketPlace, _startTest;
     boolean permissionGranted = false;
     SpeedView _ramUsage;
@@ -109,9 +109,12 @@ public class StartTestScreen extends AppCompatActivity {
         });
         _modelName.setText(modelName);
         thread = new Thread(new Runnable() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void run() {
                 setRamUsage();
+                TestApi.testBattery(getApplicationContext());
+                _batteryPercentage.setText(Constants.DEVICE_BATTERY_PERCENTAGE+"%");
             }
         });
         thread.start();
@@ -163,6 +166,7 @@ public class StartTestScreen extends AppCompatActivity {
         _startTest = findViewById(R.id.startTestButton);
         _marketPlace = findViewById(R.id.marketPlaceButton);
         _ramUsage = findViewById(R.id.ramUsage);
+        _batteryPercentage = findViewById(R.id.batteryPercentageShowValue);
     }
 
     /**

@@ -37,14 +37,15 @@ public class ScreenBrightnessTest extends AppCompatActivity {
             } else {
                 try {
                     getDefaultBrightnessState();
+                    changeBrightness();
                 } catch (Settings.SettingNotFoundException e) {
                     Message.logMessage(TAG_CLASS, e.toString());
                 }
-                changeBrightness();
             }
         } else {
             try {
                 getDefaultBrightnessState();
+                changeBrightness();
             } catch (Settings.SettingNotFoundException e) {
                 Message.logMessage(TAG_CLASS, e.toString());
             }
@@ -57,13 +58,21 @@ public class ScreenBrightnessTest extends AppCompatActivity {
         }, Constants.TEST_TIMER);
     }
 
+    /**
+     * This is the method to get the Brightness mode.
+     * <p>
+     * throws: Settings.SettingNotFoundException
+     */
     private void getDefaultBrightnessState() throws Settings.SettingNotFoundException {
-        defaultBrightnessMode = getDefaultBrightness();
+        defaultBrightnessMode = Settings.System.getInt(getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS_MODE);
         if (defaultBrightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.SCREEN_BRIGHTNESS_MODE,
                     Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-        }
+            defaultBrightness = 70;
+        } else
+            defaultBrightness = getDefaultBrightness();
     }
 
     /**
