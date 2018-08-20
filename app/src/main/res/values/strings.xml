@@ -38,4 +38,7 @@
     <string name="allow_system_settings">Please allow to modify system settings.</string>
     <string name="loading_message">Please wait while we are loading.</string>
     <string name="ram_usage">Ram Usage</string>
+    <string name="pin_msg">Enter the Pin to start Diagnostics</string>
+    <string name="enter_pin_here">Enter Pin here</string>
+    <string name="login">Login</string>
 </resources>

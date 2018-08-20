@@ -77,13 +77,13 @@ public class StartTestScreen extends AppCompatActivity {
                 if (isNetworkAvailable()) {
                     //TODO: First start the Auto Test.
                     Intent startTestIntent = new Intent(StartTestScreen.this,
-                            AutoTestScreen.class);
+                            PinCheckActivity.class);
                     //Getting the Storage Data of the Device.
                     StatFs statFs = new StatFs(Environment.getExternalStorageDirectory().getPath());
                     long bytes = (long) statFs.getBlockSize() * (long) statFs.getBlockCount();
                     Constants.DEVICE_STORAGE = String.valueOf(bytes / 1000000000);
                     startActivity(startTestIntent);
-                    finish();
+                    //finish();
                 } else {
                     Bundle bundle = new Bundle();
                     bundle.putString(Constants.DIALOG_MSG, "Please connect the device to the internet.");

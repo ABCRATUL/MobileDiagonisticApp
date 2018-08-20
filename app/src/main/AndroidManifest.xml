@@ -56,19 +56,20 @@
         <activity
             android:name=".Activities.TestStatusDialogActivity"
             android:theme="@style/dialog" />
-        <activity android:name=".Activities.StartTestScreen"
+        <activity
+            android:name=".Activities.StartTestScreen"
             android:screenOrientation="portrait"
-            android:theme="@style/splash"/>
+            android:theme="@style/splash" />
         <activity
             android:name=".Activities.PermissionExplainDialog"
             android:theme="@style/dialog" />
         <activity
             android:name=".Activities.ManualTestScreen"
-            android:theme="@style/splash"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".ManualTestActivities.TouchScreenTest"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/splash" />
+        <activity
+            android:name=".ManualTestActivities.TouchScreenTest"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ManualTestActivities.SpeakerTest"
             android:theme="@style/dialog" />
@@ -83,12 +84,12 @@
             android:theme="@style/dialog" />
         <activity
             android:name=".ManualTestActivities.CameraRearTestActivity"
-            android:theme="@style/splash"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/splash" />
         <activity
             android:name=".ManualTestActivities.CameraFrontTestActivity"
-            android:theme="@style/splash"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/splash" />
         <activity
             android:name=".ManualTestActivities.BackButtonTestActivity"
             android:theme="@style/dialog" />
@@ -100,8 +101,8 @@
             android:theme="@style/dialog" />
         <activity
             android:name=".ManualTestActivities.RGBTestActivity"
-            android:theme="@style/splash"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/splash" />
         <activity
             android:name=".ManualTestActivities.HomeButtonTestActivity"
             android:theme="@style/dialog" />
@@ -119,12 +120,13 @@
             android:theme="@style/dialog" />
         <activity
             android:name=".Activities.ManualTestStatusActivity"
-            android:theme="@style/splash"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/splash" />
         <activity
             android:name=".ManualTestActivities.FingerprintTestActivity"
             android:theme="@style/dialog" />
+        <activity android:name=".Activities.PinCheckActivity"
+            android:theme="@style/dialog"/>
     </application>
 
 </manifest>
