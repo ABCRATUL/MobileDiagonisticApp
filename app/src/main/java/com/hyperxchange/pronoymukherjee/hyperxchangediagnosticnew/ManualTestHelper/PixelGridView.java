@@ -116,7 +116,7 @@ public class PixelGridView extends View {
             }
         }
 
-        if (completed == true) {
+        if (completed) {
             //Toast.makeText(getContext(), "Touchscreen OK", Toast.LENGTH_SHORT).show();
 
             score = 1;
