@@ -180,6 +180,7 @@ public class Constants {
     public static String PHONE_TABLE = "phone_details";
     public static String PHONE_MODEL_TABLE = "buy_back_phone";
     public static String PHONE_PRICE_TABLE = "buy_back_phone_price";
+    public static String LOGIN_PIN_TABLE="login_pin";
 }
 
 
