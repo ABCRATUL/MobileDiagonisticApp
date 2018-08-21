@@ -36,49 +36,76 @@
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView6" />
 
     <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/pinEnter"
-        android:layout_width="200dp"
+        android:id="@+id/pin1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
-        android:gravity="center"
-        android:hint="@string/enter_pin_here"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toStartOf="@+id/pin2"
+        app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" >
+        <requestFocus/>
+    </android.support.v7.widget.AppCompatEditText>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/pin2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toStartOf="@+id/pin3"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/pin3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toStartOf="@+id/pin4"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/pin4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="104dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/submitPin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/login"
+        android:layout_marginBottom="64dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rectangle_rounded_shape"
+        android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pinEnter"
-        app:layout_constraintVertical_bias="0.136" />
+        app:layout_constraintTop_toBottomOf="@+id/pin3"
+        app:layout_constraintVertical_bias="0.871" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/exitAppPin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="64dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rectangle_rounded_shape"
         android:text="@string/exit_app"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/submitPin"
-        app:layout_constraintHorizontal_bias="0.183"
+        app:layout_constraintHorizontal_bias="0.265"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pinEnter"
-        app:layout_constraintVertical_bias="0.09" />
+        app:layout_constraintTop_toBottomOf="@+id/pin2"
+        app:layout_constraintVertical_bias="0.871" />
 </android.support.constraint.ConstraintLayout>
 
 
