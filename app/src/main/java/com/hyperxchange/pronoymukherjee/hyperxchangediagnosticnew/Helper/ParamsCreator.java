@@ -49,7 +49,7 @@ public class ParamsCreator {
             params.put(Constants.JSON_TABLE_NAME, Constants.PHONE_TABLE);
             String where = Constants.IMEI_NUMBER + " LIKE '" + imei + "'";
             params.put(Constants.JSON_WHERE, where);
-            Message.logMessage(TAG_CLASS,params.toString());
+            Message.logMessage(TAG_CLASS, params.toString());
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());
             return params;
@@ -117,7 +117,7 @@ public class ParamsCreator {
             String where = Constants.PHONE_MODEL_NAME + " LIKE '"
                     + deviceName + "'";
             params.put(Constants.JSON_WHERE, where);
-            Message.logMessage(TAG_CLASS,params.toString());
+            Message.logMessage(TAG_CLASS, params.toString());
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());
         }
@@ -138,10 +138,28 @@ public class ParamsCreator {
             params.put(Constants.JSON_TYPE, Constants.JSON_TYPE_SELECT);
             params.put(Constants.JSON_TABLE_NAME, Constants.PHONE_PRICE_TABLE);
             String where = Constants.PRICE_PHONE_ID + " = " + id + " AND " +
-                    Constants.PHONE_RAM + " = " + ram +" AND "+
+                    Constants.PHONE_RAM + " = " + ram + " AND " +
                     Constants.PHONE_STORAGE + " = " + storage;
             params.put(Constants.JSON_WHERE, where);
-            Message.logMessage(TAG_CLASS,params.toString());
+        } catch (Exception e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+        }
+        return params;
+    }
+
+    /**
+     * Method to create the params for selecting the Pin.
+     *
+     * @param pin: The Passcode entered by the engineer.
+     * @return params: Params with the passcode select.
+     */
+    public static Map<String, String> createParamsForLoginPin(String pin) {
+        Map<String, String> params = new HashMap<>();
+        try {
+            params.put(Constants.JSON_TYPE, Constants.JSON_TYPE_SELECT);
+            params.put(Constants.JSON_TABLE_NAME, Constants.LOGIN_PIN_TABLE);
+            String where = Constants.LOGIN_PASSCODE + " LIKE '" + pin + "'";
+            params.put(Constants.JSON_WHERE, where);
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());
         }

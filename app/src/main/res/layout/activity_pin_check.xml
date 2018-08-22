@@ -2,8 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="400dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     tools:context="com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities.PinCheckActivity">
 
@@ -13,7 +13,7 @@
         android:layout_height="79dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="44dp"
         android:src="@drawable/user_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +37,7 @@
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/pin1"
+        android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -51,6 +52,7 @@
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/pin2"
+        android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
@@ -60,6 +62,7 @@
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/pin3"
+        android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
@@ -69,6 +72,7 @@
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/pin4"
+        android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="104dp"
@@ -81,14 +85,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="48dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rectangle_rounded_shape"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pin3"
-        app:layout_constraintVertical_bias="0.871" />
+        app:layout_constraintVertical_bias="0.34" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/exitAppPin"
@@ -102,10 +106,10 @@
         android:text="@string/exit_app"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/submitPin"
-        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pin2"
-        app:layout_constraintVertical_bias="0.871" />
+        app:layout_constraintVertical_bias="0.336" />
 </android.support.constraint.ConstraintLayout>
 
 
