@@ -48,7 +48,6 @@ public class TouchScreenTest extends Activity {
     float mX;
     float mY;
     Canvas mCanvas;
-    VoiceSpeak voiceSpeak;
 
     public ArrayList<Path> pointerPath = new ArrayList<>();
     public ArrayList<Paint> pointerPaint = new ArrayList<>();
@@ -75,7 +74,6 @@ public class TouchScreenTest extends Activity {
 
                     }
                 });
-        voiceSpeak=new VoiceSpeak(getApplicationContext());
 
         //Creating dialog box
         alert = builder.create();
@@ -83,13 +81,6 @@ public class TouchScreenTest extends Activity {
         alert.setTitle("TouchScreen Test");
         try {
             alert.show();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    voiceSpeak.speakVoice("Please swipe the entire screen with you " +
-                            "finger to change the color");
-                }
-            }, Constants.VOICE_DELAY);
         } catch (Exception e) {
             alert.dismiss();
             Message.logMessage(TouchScreenTest.class.getSimpleName(), e.toString());

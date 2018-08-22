@@ -24,7 +24,6 @@ public class ProximityTestActivity extends AppCompatActivity implements SensorEv
     SensorManager sensorManager;
     Timer timer;
     private String TAG_CLASS = ProximityTestActivity.class.getSimpleName();
-    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +43,6 @@ public class ProximityTestActivity extends AppCompatActivity implements SensorEv
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                voiceSpeak.speakVoice(getResources().getString(R.string.proximity_neg_msg));
-            }
-        },Constants.VOICE_DELAY);
     }
 
     /**
@@ -57,7 +50,6 @@ public class ProximityTestActivity extends AppCompatActivity implements SensorEv
      */
     private void initializeViews() {
         _textView = findViewById(R.id.proximityText);
-        voiceSpeak=new VoiceSpeak(getApplicationContext());
     }
 
     @Override

@@ -20,7 +20,6 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
     AppCompatButton _checkButton;
     private String TAG_CLASS = HeadPhoneTestActivity.class.getSimpleName();
     Timer timer;
-    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +47,6 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                voiceSpeak.speakVoice(getResources().getString(R.string.headphone_button));
-            }
-        }, Constants.VOICE_DELAY);
     }
 
     /**
@@ -62,7 +55,6 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
     private void initializeViews() {
         _checkButton = findViewById(R.id.headPhoneCheckButton);
         timer = new Timer();
-        voiceSpeak = new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -95,8 +87,6 @@ public class HeadPhoneTestActivity extends AppCompatActivity {
         super.onStop();
         if (_checkButton != null)
             _checkButton = null;
-        if (voiceSpeak != null)
-            voiceSpeak = null;
         if (timer != null)
             timer = null;
         Runtime.getRuntime().gc();

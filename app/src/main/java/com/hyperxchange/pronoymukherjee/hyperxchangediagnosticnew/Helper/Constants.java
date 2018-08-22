@@ -17,6 +17,7 @@ public class Constants {
     public static String DEVICE_PRICE = "";
     public static String DEVICE_RAM_USAGE = "";
     public static String DEVICE_BATTERY_PERCENTAGE = "";
+    public static String ENGINEER_EMAIL = "";
 
     public static String QUERY_URL = "http://ec2-13-127-202-203.ap-south-1.compute.amazonaws.com/dig";
     public static int PERMISSION_REQUEST_CODE = 69;
@@ -176,12 +177,12 @@ public class Constants {
     public static String PHONE_RAM = "ram";
     public static String PRICE_PHONE_ID = "phoneId";
     public static String PHONE_PRICE = "price";
-    public static String LOGIN_PASSCODE="passcode";
+    public static String LOGIN_PASSCODE = "passcode";
 
     public static String PHONE_TABLE = "phone_details";
     public static String PHONE_MODEL_TABLE = "buy_back_phone";
     public static String PHONE_PRICE_TABLE = "buy_back_phone_price";
-    public static String LOGIN_PIN_TABLE="login_pin";
+    public static String LOGIN_PIN_TABLE = "login_pin";
 }
 
 

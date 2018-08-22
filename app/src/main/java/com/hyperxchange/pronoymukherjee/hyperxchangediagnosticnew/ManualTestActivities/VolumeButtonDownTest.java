@@ -15,14 +15,12 @@ import java.util.TimerTask;
 
 public class VolumeButtonDownTest extends AppCompatActivity {
     Timer timer;
-    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volume_button_down_test);
         this.setFinishOnTouchOutside(false);
-        initializeViews();
         setTitle("");
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -31,12 +29,6 @@ public class VolumeButtonDownTest extends AppCompatActivity {
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                voiceSpeak.speakVoice(getResources().getString(R.string.volume_down_msg));
-            }
-        }, Constants.VOICE_DELAY);
     }
 
     /**
@@ -53,12 +45,6 @@ public class VolumeButtonDownTest extends AppCompatActivity {
         finish();
     }
 
-    /**
-     * Method to initialize Views.
-     */
-    private void initializeViews() {
-        voiceSpeak = new VoiceSpeak(getApplicationContext());
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

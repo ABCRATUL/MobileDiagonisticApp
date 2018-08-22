@@ -25,7 +25,6 @@ public class ChargerTestActivity extends AppCompatActivity {
     Timer timer;
     BroadcastReceiver receiver;
     IntentFilter intentFilter;
-    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +45,6 @@ public class ChargerTestActivity extends AppCompatActivity {
                 checkCharger();
             }
         });
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                voiceSpeak.speakVoice(getResources().getString(R.string.charger_msg));
-            }
-        }, Constants.VOICE_DELAY);
     }
 
     /**
@@ -61,7 +54,6 @@ public class ChargerTestActivity extends AppCompatActivity {
         _checkButton = findViewById(R.id.checkChargerButton);
         timer = new Timer();
         intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        voiceSpeak = new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -129,11 +121,9 @@ public class ChargerTestActivity extends AppCompatActivity {
         }
         if (_checkButton != null)
             _checkButton = null;
-        if (voiceSpeak != null)
-            voiceSpeak = null;
         if (receiver != null)
             receiver = null;
-        if(intentFilter!=null)
-            intentFilter=null;
+        if (intentFilter != null)
+            intentFilter = null;
     }
 }

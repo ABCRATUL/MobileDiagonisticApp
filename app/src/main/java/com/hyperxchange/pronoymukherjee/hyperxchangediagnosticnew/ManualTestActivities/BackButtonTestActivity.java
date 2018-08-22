@@ -1,13 +1,11 @@
 package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities;
 
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
-import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.Timer;
@@ -15,7 +13,7 @@ import java.util.TimerTask;
 
 public class BackButtonTestActivity extends AppCompatActivity {
     Timer timer;
-    VoiceSpeak voiceSpeak;
+
     private String TAG_CLASS = BackButtonTestActivity.class.getSimpleName();
 
     @Override
@@ -26,13 +24,6 @@ public class BackButtonTestActivity extends AppCompatActivity {
             setTitle("");
             this.setFinishOnTouchOutside(false);
             timer = new Timer();
-            voiceSpeak = new VoiceSpeak(getApplicationContext());
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    voiceSpeak.speakVoice(getResources().getString(R.string.back_button_msg));
-                }
-            }, Constants.VOICE_DELAY);
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -77,8 +68,6 @@ public class BackButtonTestActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (voiceSpeak != null)
-            voiceSpeak = null;
         if (timer != null)
             timer = null;
         System.gc();

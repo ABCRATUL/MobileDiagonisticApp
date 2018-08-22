@@ -24,7 +24,6 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
     private String TAG_CLASS = FingerprintTestActivity.class.getSimpleName();
     FingerPrintAuthHelper fingerPrintAuthHelper;
     Timer timer;
-    VoiceSpeak voiceSpeak;
     boolean hasFingerPrint = true;
 
     @Override
@@ -32,7 +31,6 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint_test);
         setTitle("");
-        voiceSpeak = new VoiceSpeak(getApplicationContext());
         fingerPrintAuthHelper = FingerPrintAuthHelper.getHelper(this, this);
         fingerPrintAuthHelper.startAuth();
         timer = new Timer();
@@ -42,14 +40,6 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (hasFingerPrint) {
-                    voiceSpeak.speakVoice(getResources().getString(R.string.finger_print_msg));
-                }
-            }
-        }, Constants.VOICE_DELAY);
     }
 
     @Override
@@ -119,9 +109,6 @@ public class FingerprintTestActivity extends AppCompatActivity implements Finger
         super.onStop();
         if (fingerPrintAuthHelper != null)
             fingerPrintAuthHelper = null;
-        if (voiceSpeak != null) {
-            voiceSpeak = null;
-        }
         if (timer != null)
             timer = null;
         Runtime.getRuntime().gc();

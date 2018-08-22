@@ -28,7 +28,6 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
     private String TAG_CLASS = MicroPhoneTestActivity.class.getSimpleName();
     int generatedNumber;
     Timer timer;
-    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +50,12 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                voiceSpeak.speakVoice(getResources().getString(R.string.microphone_msg));
-            }
-        }, Constants.VOICE_DELAY);
     }
-    
+
     private void initializeViews() {
         _speakButton = findViewById(R.id.voiceButton);
         _numberShow = findViewById(R.id.numberShowMicro);
         timer = new Timer();
-        voiceSpeak = new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -154,8 +146,6 @@ public class MicroPhoneTestActivity extends AppCompatActivity {
             _numberShow = null;
         if (timer != null)
             timer = null;
-        if (voiceSpeak != null)
-            voiceSpeak = null;
         Runtime.getRuntime().gc();
     }
 }

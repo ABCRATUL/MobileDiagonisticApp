@@ -16,7 +16,6 @@ import java.util.TimerTask;
 public class PowerButtonTestActivity extends AppCompatActivity {
     Timer timer;
     private String TAG_CLASS = PowerButtonTestActivity.class.getSimpleName();
-    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +30,10 @@ public class PowerButtonTestActivity extends AppCompatActivity {
                 completeActivity(false);
             }
         }, Constants.TEST_TIMER);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                voiceSpeak.speakVoice(getResources().getString(R.string.power_button_msg));
-            }
-        }, Constants.VOICE_DELAY);
     }
 
     private void initializeViews() {
         timer = new Timer();
-        voiceSpeak = new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -86,8 +78,6 @@ public class PowerButtonTestActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (voiceSpeak != null)
-            voiceSpeak = null;
         if (timer != null)
             timer = null;
         Runtime.getRuntime().gc();

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
+import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities.VibrationTestActivity;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 public class SplashScreen extends AppCompatActivity {

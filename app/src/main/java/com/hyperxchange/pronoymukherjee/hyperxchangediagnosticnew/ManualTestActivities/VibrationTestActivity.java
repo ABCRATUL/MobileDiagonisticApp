@@ -21,14 +21,13 @@ import java.util.TimerTask;
 public class VibrationTestActivity extends AppCompatActivity {
     AppCompatEditText _numberVibration;
     AppCompatButton _vibrateButton, _submitButton;
-    long pattern1[] = {0, 300, 200, 300, 200};
-    long pattern2[] = {0, 300, 200, 300, 200, 300, 500};
-    long pattern3[] = {0, 300, 200, 300, 200, 300, 200, 300, 500};
+    long pattern1[] = {0, 300, 200};
+    long pattern2[] = {0, 300, 200, 300, 200};
+    long pattern3[] = {0, 300, 200, 300, 200, 300, 200};
     Vibrator vibrator;
     int generatedPattern;
     Timer timer;
-    private String TAG_CLASS=VibrationTestActivity.class.getSimpleName();
-    VoiceSpeak voiceSpeak;
+    private String TAG_CLASS = VibrationTestActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class VibrationTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Random random = new Random();
-                generatedPattern = random.nextInt(2+1) + 1;
+                generatedPattern = random.nextInt(2 + 1) + 1;
                 playVibration(generatedPattern);
             }
         });
@@ -58,9 +57,9 @@ public class VibrationTestActivity extends AppCompatActivity {
                 try {
                     int inputPattern = Integer.parseInt(_numberVibration.getText().toString());
                     if (inputPattern == generatedPattern) {
-                        Message.logMessage(TAG_CLASS,"true");
+                        Message.logMessage(TAG_CLASS, "true");
                         completeActivity(true);
-                    }else{
+                    } else {
                         completeActivity(false);
                         timer.cancel();
                     }
@@ -71,12 +70,6 @@ public class VibrationTestActivity extends AppCompatActivity {
                 }
             }
         });
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                voiceSpeak.speakVoice(getResources().getString(R.string.vibrate_msg));
-            }
-        },Constants.VOICE_DELAY);
     }
 
     /**
@@ -87,7 +80,6 @@ public class VibrationTestActivity extends AppCompatActivity {
         _vibrateButton = findViewById(R.id.vibrateButton);
         _submitButton = findViewById(R.id.submitVibration);
         timer = new Timer();
-        voiceSpeak=new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -96,7 +88,7 @@ public class VibrationTestActivity extends AppCompatActivity {
      * @param pattern: The vibration pattern.
      */
     private void playVibration(int pattern) {
-        Message.logMessage(TAG_CLASS,pattern+"");
+        Message.logMessage(TAG_CLASS, pattern + "");
         switch (pattern) {
             case 1:
                 vibrator.vibrate(pattern1, -1);
@@ -123,10 +115,11 @@ public class VibrationTestActivity extends AppCompatActivity {
             timer.cancel();
         } else {
             setResult(RESULT_CANCELED);
-            Message.logMessage(TAG_CLASS,"FALSE");
+            Message.logMessage(TAG_CLASS, "FALSE");
         }
         finish();
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

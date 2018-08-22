@@ -95,7 +95,7 @@ public class ParamsCreator {
             values.append("'").append(Constants.REPORT_UUID_VALUE).append("',");
             String time = String.valueOf(Calendar.getInstance().getTimeInMillis());
             values.append("'").append(time).append("',");
-            values.append("'',''");
+            values.append("'").append(Constants.ENGINEER_EMAIL).append("',''");
             params.put(Constants.JSON_INSERT_VALUES, values.toString());
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());

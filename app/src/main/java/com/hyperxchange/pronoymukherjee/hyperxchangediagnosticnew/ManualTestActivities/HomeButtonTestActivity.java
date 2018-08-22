@@ -1,13 +1,11 @@
 package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities;
 
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Constants;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message;
-import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.VoiceSpeak;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 
 import java.util.Timer;
@@ -15,7 +13,6 @@ import java.util.TimerTask;
 
 public class HomeButtonTestActivity extends AppCompatActivity {
     Timer timer;
-    VoiceSpeak voiceSpeak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +21,6 @@ public class HomeButtonTestActivity extends AppCompatActivity {
         setTitle("");
         initializeViews();
         this.setFinishOnTouchOutside(false);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                voiceSpeak.speakVoice(getResources().getString(R.string.home_button_test_msg));
-            }
-        },Constants.VOICE_DELAY);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -40,7 +31,6 @@ public class HomeButtonTestActivity extends AppCompatActivity {
 
     private void initializeViews() {
         timer = new Timer();
-        voiceSpeak=new VoiceSpeak(getApplicationContext());
     }
 
     /**
@@ -77,11 +67,8 @@ public class HomeButtonTestActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(timer!=null)
-            timer=null;
-        if(voiceSpeak!=null){
-            voiceSpeak=null;
-        }
+        if (timer != null)
+            timer = null;
         Runtime.getRuntime().gc();
     }
 }

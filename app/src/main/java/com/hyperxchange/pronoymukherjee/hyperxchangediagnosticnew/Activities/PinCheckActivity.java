@@ -1,12 +1,14 @@
 package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.android.volley.VolleyError;
@@ -58,7 +60,6 @@ public class PinCheckActivity extends AppCompatActivity implements HTTPConnector
         _pin2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -68,18 +69,19 @@ public class PinCheckActivity extends AppCompatActivity implements HTTPConnector
                     _pin3.requestFocus();
                     inputMethodManager.showSoftInput(_pin3, InputMethodManager.SHOW_IMPLICIT);
                     pinNumber.append(s);
+                } else if (s.length() == 0) {
+                    _pin2.clearFocus();
+                    _pin1.requestFocus();
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
         _pin3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -89,36 +91,62 @@ public class PinCheckActivity extends AppCompatActivity implements HTTPConnector
                     _pin4.requestFocus();
                     inputMethodManager.showSoftInput(_pin4, InputMethodManager.SHOW_IMPLICIT);
                     pinNumber.append(s);
+                } else if (s.length() == 0) {
+                    _pin2.requestFocus();
+                    _pin3.clearFocus();
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
         _pin4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 1) {
-                    _pin4.clearFocus();
                     pinNumber.append(s);
                     checkPin();
+                } else if (s.length() == 0) {
+                    _pin4.clearFocus();
+                    _pin3.requestFocus();
+                } else if (s.length() > 1) {
+                    String string = s.toString().substring(0, 1);
+                    _pin4.setText(string);
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+            }
+        });
+        _loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (pinNumber.length() == 4)
+                    checkPin();
+                else {
+                    Message.toastMessage(getApplicationContext(),
+                            "Please enter a valid pin.", "");
+                    clearTexts();
+                }
+            }
+        });
+        _exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exitApp();
             }
         });
     }
 
+    /**
+     * Method to initialize the views.
+     */
     private void initializeViews() {
         _pin1 = findViewById(R.id.pin1);
         _pin2 = findViewById(R.id.pin2);
@@ -131,6 +159,9 @@ public class PinCheckActivity extends AppCompatActivity implements HTTPConnector
         _progressDialog.setMessage(getResources().getString(R.string.loading_message));
     }
 
+    /**
+     * Method to make the network call and validate the pin.
+     */
     private void checkPin() {
         HTTPConnector connector = new HTTPConnector(TAG_CLASS,
                 getApplicationContext(), Constants.QUERY_URL, ParamsCreator
@@ -154,11 +185,27 @@ public class PinCheckActivity extends AppCompatActivity implements HTTPConnector
         clearTexts();
     }
 
+    /**
+     * Method to clear the Text Fields.
+     */
     private void clearTexts() {
         _pin1.getText().clear();
         _pin2.getText().clear();
         _pin3.getText().clear();
         _pin4.getText().clear();
         _pin1.requestFocus();
+    }
+
+    /**
+     * This is the method to exit the app.
+     */
+    private void exitApp() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            this.finishAffinity();
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.finishAndRemoveTask();
+        }
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
     }
 }

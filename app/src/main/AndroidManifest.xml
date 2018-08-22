@@ -125,7 +125,8 @@
         <activity
             android:name=".ManualTestActivities.FingerprintTestActivity"
             android:theme="@style/dialog" />
-        <activity android:name=".Activities.PinCheckActivity" />
+        <activity android:name=".Activities.PinCheckActivity"
+            android:theme="@style/splash"/>
     </application>
 
 </manifest>
