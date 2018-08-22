@@ -178,6 +178,7 @@ public class Constants {
     public static String PRICE_PHONE_ID = "phoneId";
     public static String PHONE_PRICE = "price";
     public static String LOGIN_PASSCODE = "passcode";
+    public static String LOGIN_EMAIL = "email";
 
     public static String PHONE_TABLE = "phone_details";
     public static String PHONE_MODEL_TABLE = "buy_back_phone";

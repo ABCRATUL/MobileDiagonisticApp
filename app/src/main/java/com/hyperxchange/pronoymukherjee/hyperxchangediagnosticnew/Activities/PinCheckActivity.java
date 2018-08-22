@@ -1,6 +1,7 @@
 package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.Message
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Helper.ParamsCreator;
 import com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PinCheckActivity extends AppCompatActivity implements HTTPConnector.ResponseListener {
@@ -175,6 +178,26 @@ public class PinCheckActivity extends AppCompatActivity implements HTTPConnector
     public void onResponse(JSONObject response) {
         _progressDialog.dismiss();
         Message.logMessage(TAG_CLASS, response.toString());
+        try {
+            JSONArray array = response.getJSONArray(Constants.JSON_RESULT);
+            JSONObject oneObject = array.getJSONObject(0);
+            String passcode = oneObject.getString(Constants.LOGIN_PASSCODE);
+            if (passcode.equals(pinNumber.toString())) {
+                Constants.ENGINEER_EMAIL = oneObject.getString(Constants.LOGIN_EMAIL);
+                Intent intent = new Intent(PinCheckActivity.this, StartTestScreen.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Message.toastMessage(getApplicationContext(),
+                        "Please enter a valid passcode.", "");
+                clearTexts();
+            }
+        } catch (JSONException e) {
+            Message.logMessage(TAG_CLASS, e.toString());
+            Message.toastMessage(getApplicationContext(),
+                    "Please enter a valid passcode.", "");
+            clearTexts();
+        }
     }
 
     @Override
