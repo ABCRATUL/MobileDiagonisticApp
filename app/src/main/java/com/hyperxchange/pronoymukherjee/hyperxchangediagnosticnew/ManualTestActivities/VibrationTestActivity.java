@@ -1,6 +1,5 @@
 package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.ManualTestActivities;
 
-import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

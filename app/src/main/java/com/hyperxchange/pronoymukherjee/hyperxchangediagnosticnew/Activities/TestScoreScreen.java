@@ -234,6 +234,7 @@ public class TestScoreScreen extends AppCompatActivity implements HTTPConnector.
                 deviceInformation.getBSSID(),
                 deviceInformation.getRegion(),
                 deviceInformation.getUUID(),
+                Integer.parseInt(Constants.DEVICE_STORAGE),
                 String.valueOf(deviceInformation.getBatteryActualCapacity()));
         HTTPConnector httpConnector = new HTTPConnector(TAG_CLASS, getApplicationContext(),
                 Constants.QUERY_URL, ParamsCreator.createParamsForInsertPhone(phone),

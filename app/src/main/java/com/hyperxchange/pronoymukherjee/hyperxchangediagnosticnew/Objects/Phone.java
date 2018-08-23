@@ -2,8 +2,9 @@ package com.hyperxchange.pronoymukherjee.hyperxchangediagnosticnew.Objects;
 
 public class Phone {
     private String manufacturer, model, serial, imei, bssid, region, uuid, actualCapacity;
+    int storage;
 
-    public Phone(String manufacturer, String model, String serial, String imei, String bssid, String region, String uuid, String actualCapacity) {
+    public Phone(String manufacturer, String model, String serial, String imei, String bssid, String region, String uuid, int storage, String actualCapacity) {
         this.manufacturer = manufacturer;
         this.model = model;
         this.serial = serial;
@@ -11,6 +12,7 @@ public class Phone {
         this.bssid = bssid;
         this.region = region;
         this.uuid = uuid;
+        this.storage = storage;
         this.actualCapacity = actualCapacity;
     }
 
@@ -68,6 +70,14 @@ public class Phone {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public int getStorage() {
+        return storage;
+    }
+
+    public void setStorage(int storage) {
+        this.storage = storage;
     }
 
     public String getActualCapacity() {

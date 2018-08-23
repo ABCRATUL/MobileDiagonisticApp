@@ -26,7 +26,7 @@ import org.json.JSONObject;
 public class PinCheckActivity extends AppCompatActivity implements HTTPConnector.ResponseListener {
     AppCompatEditText _pin1, _pin2, _pin3, _pin4;
     AppCompatButton _loginButton, _exitButton;
-    StringBuilder pinNumber = new StringBuilder();
+    StringBuilder pinNumber;
     ProgressDialog _progressDialog;
     InputMethodManager inputMethodManager;
     private String TAG_CLASS = PinCheckActivity.class.getSimpleName();
@@ -160,6 +160,7 @@ public class PinCheckActivity extends AppCompatActivity implements HTTPConnector
         _progressDialog = new ProgressDialog(this);
         _progressDialog.setCancelable(false);
         _progressDialog.setMessage(getResources().getString(R.string.loading_message));
+        pinNumber = new StringBuilder();
     }
 
     /**
@@ -230,5 +231,11 @@ public class PinCheckActivity extends AppCompatActivity implements HTTPConnector
         }
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Runtime.getRuntime().gc();
     }
 }

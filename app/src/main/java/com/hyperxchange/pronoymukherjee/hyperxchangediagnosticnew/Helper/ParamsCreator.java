@@ -28,6 +28,7 @@ public class ParamsCreator {
                     phone.getBssid() + "','" +
                     phone.getRegion() + "','" +
                     phone.getUuid() + "','" +
+                    phone.getStorage()+"','"+
                     phone.getActualCapacity() + "'";
             params.put(Constants.JSON_INSERT_VALUES, values);
         } catch (Exception e) {
