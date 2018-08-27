@@ -28,8 +28,9 @@ public class ParamsCreator {
                     phone.getBssid() + "','" +
                     phone.getRegion() + "','" +
                     phone.getUuid() + "','" +
-                    phone.getStorage()+"','"+
-                    phone.getActualCapacity() + "'";
+                    phone.getStorage() + "','" +
+                    phone.getActualCapacity() + "','" +
+                    "5','0'";
             params.put(Constants.JSON_INSERT_VALUES, values);
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());
@@ -96,8 +97,9 @@ public class ParamsCreator {
             values.append("'").append(Constants.REPORT_UUID_VALUE).append("',");
             String time = String.valueOf(Calendar.getInstance().getTimeInMillis());
             values.append("'").append(time).append("',");
-            values.append("'").append(Constants.ENGINEER_EMAIL).append("',''");
+            values.append("'").append(Constants.ENGINEER_EMAIL).append("'");
             params.put(Constants.JSON_INSERT_VALUES, values.toString());
+            Message.logMessage(TAG_CLASS,params.toString());
         } catch (Exception e) {
             Message.logMessage(TAG_CLASS, e.toString());
             return params;
