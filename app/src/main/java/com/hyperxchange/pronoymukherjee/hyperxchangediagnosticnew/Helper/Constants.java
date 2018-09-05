@@ -19,7 +19,7 @@ public class Constants {
     public static String DEVICE_BATTERY_PERCENTAGE = "";
     public static String ENGINEER_EMAIL = "";
 
-    public static String QUERY_URL = "http://ec2-13-127-202-203.ap-south-1.compute.amazonaws.com/dig";
+    public static String QUERY_URL = "http://ec2-35-154-219-101.ap-south-1.compute.amazonaws.com/dig";
     public static int PERMISSION_REQUEST_CODE = 69;
     public static String DIALOG_MSG = "dialogMsg";
     public static int DIALOG_INTERNET_CODE = 169;
